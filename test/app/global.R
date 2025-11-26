@@ -54,7 +54,6 @@ sia_df <- readRDS(here("test", "app", "data", "df_shiny_wi_subset.rds"))
 #sia_df_osf <- readRDS(here("test", "app", "data", "df_shiny_wi_osf.rds"))
 
 product_filter_cols <- c(
-  "device_id",
   "long_term_all_score",
   "short_term_all_score",
   "manufacturer",

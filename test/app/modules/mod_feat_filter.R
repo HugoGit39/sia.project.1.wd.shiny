@@ -494,7 +494,7 @@ mod_feat_fil_server <- function(id, data) {
     #   "icg_available", "ppg_available", "respiration_available", "skin_temperature_available",
     #   "int_storage_met_spec_boel_value", "server_data_storage_spec_boel_value",
     #   "raw_data_available_spec_boel_value",
-    #   "gdpr_compliance_spec_boel_value", "ce_marking_spec_boel_value", "fda_clearance_spec_boel_value"
+    #   "gdpr_compliance_spec_boel_value", "ce_marking_spec_boel_value", "fda_clearance_spec_boel_value", "other_signals_available"
     # )
     #
     # select_inputs <- c(
@@ -506,7 +506,7 @@ mod_feat_fil_server <- function(id, data) {
     # --- 1. Variable groups (reuse from global.R) ----
     range_vars   <- c(bar_vars, numeric_vars)
     checkbox_vars <- yn_vars
-    select_inputs <- intersect(names(sia_df), char_vars)
+    select_inputs <- setdiff(intersect(names(sia_df), char_vars), "release_year")
 
     # --- 2. Filter for dropdowns ----
     filtered_for_dropdowns <- reactive({
