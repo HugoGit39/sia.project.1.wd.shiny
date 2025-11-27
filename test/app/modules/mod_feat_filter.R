@@ -86,8 +86,8 @@ mod_feat_fil_ui <- function(id) {
               view = "years",
               minView = "years",
               dateFormat = "yyyy",
-              value = c(min(sia_df$release_year, na.rm = TRUE),
-                        max(sia_df$release_year, na.rm = TRUE))
+              value = c(min(df_sia_shiny_filters$release_year, na.rm = TRUE),
+                        max(df_sia_shiny_filters$release_year, na.rm = TRUE))
             ),
             selectInput(ns("market_status"), "Market Status", choices = NULL, multiple = TRUE),
             selectInput(ns("main_use"), "Main Use", choices = NULL, multiple = TRUE),
@@ -95,8 +95,8 @@ mod_feat_fil_ui <- function(id) {
               ns("device_cost"),
               label = "Device Cost (€)",
               min   = 0,
-              max   = max(sia_df$device_cost, na.rm = TRUE),
-              value = c(0, max(sia_df$device_cost, na.rm = TRUE)),
+              max   = max(df_sia_shiny_filters$device_cost, na.rm = TRUE),
+              value = c(0, max(df_sia_shiny_filters$device_cost, na.rm = TRUE)),
               step  = 1
             ),
             selectInput(ns("wearable_type"), "Type", choices = NULL, multiple = TRUE),
@@ -114,16 +114,16 @@ mod_feat_fil_ui <- function(id) {
               ns("battery_life_spec_num_value"),
               label = "Battery Life (hrs)",
               min   = 0,
-              max   = max(sia_df$battery_life_spec_num_value, na.rm = TRUE),
-              value = c(0, max(sia_df$battery_life_spec_num_value, na.rm = TRUE)),
+              max   = max(df_sia_shiny_filters$battery_life_spec_num_value, na.rm = TRUE),
+              value = c(0, max(df_sia_shiny_filters$battery_life_spec_num_value, na.rm = TRUE)),
               step  = 1
             ),
             sliderInput(
               ns("charging_duration_spec_num_value"),
               label = "Charging Duration (min)",
               min   = 0,
-              max   = max(sia_df$charging_duration_spec_num_value, na.rm = TRUE),
-              value = c(0, max(sia_df$charging_duration_spec_num_value, na.rm = TRUE)),
+              max   = max(df_sia_shiny_filters$charging_duration_spec_num_value, na.rm = TRUE),
+              value = c(0, max(df_sia_shiny_filters$charging_duration_spec_num_value, na.rm = TRUE)),
               step  = 1
             ),
             prettyCheckbox(ns("bio_cueing_spec_boel_value"), label = "Bio Cueing", icon = icon("check"), status = "primary"),
@@ -164,16 +164,16 @@ mod_feat_fil_ui <- function(id) {
               ns("dev_storage_cap_mb_spec_num_value"),
               label = "Storage Capacity (MB)",
               min   = 0,
-              max   = max(sia_df$dev_storage_cap_mb_spec_num_value, na.rm = TRUE),
-              value = c(0, max(sia_df$dev_storage_cap_mb_spec_num_value, na.rm = TRUE)),
+              max   = max(df_sia_shiny_filters$dev_storage_cap_mb_spec_num_value, na.rm = TRUE),
+              value = c(0, max(df_sia_shiny_filters$dev_storage_cap_mb_spec_num_value, na.rm = TRUE)),
               step  = 1
             ),
             sliderInput(
               ns("dev_storage_cap_hr_spec_num_value"),
               label = "Storage Capacity (hrs)",
               min   = 0,
-              max   = max(sia_df$dev_storage_cap_hr_spec_num_value, na.rm = TRUE),
-              value = c(0, max(sia_df$dev_storage_cap_hr_spec_num_value, na.rm = TRUE)),
+              max   = max(df_sia_shiny_filters$dev_storage_cap_hr_spec_num_value, na.rm = TRUE),
+              value = c(0, max(df_sia_shiny_filters$dev_storage_cap_hr_spec_num_value, na.rm = TRUE)),
               step  = 1
             ),
             prettyCheckbox(ns("gdpr_compliance_spec_boel_value"), label = "GDPR Compliant", icon = icon("check"), status = "primary"),
@@ -191,16 +191,16 @@ mod_feat_fil_ui <- function(id) {
               ns("usability_n_of_studies"),
               label = "# Usability Studies",
               min   = 0,
-              max   = max(sia_df$usability_n_of_studies, na.rm = TRUE),
-              value = c(0, max(sia_df$usability_n_of_studies, na.rm = TRUE)),
+              max   = max(df_sia_shiny_filters$usability_n_of_studies, na.rm = TRUE),
+              value = c(0, max(df_sia_shiny_filters$usability_n_of_studies, na.rm = TRUE)),
               step  = 1
             ),
             sliderInput(
               ns("validity_and_reliability_n_of_studies"),
               label = "# Validity & Reliability Studies",
               min   = 0,
-              max   = max(sia_df$validity_and_reliability_n_of_studies, na.rm = TRUE),
-              value = c(0, max(sia_df$validity_and_reliability_n_of_studies, na.rm = TRUE)),
+              max   = max(df_sia_shiny_filters$validity_and_reliability_n_of_studies, na.rm = TRUE),
+              value = c(0, max(df_sia_shiny_filters$validity_and_reliability_n_of_studies, na.rm = TRUE)),
               step  = 1
             ),
             selectInput(ns("usability_evidence_level"), "Usability Evidence Level", choices = NULL, multiple = TRUE),
@@ -255,7 +255,7 @@ mod_feat_fil_server <- function(id, data) {
     # --- 1. Variable groups (reuse from global.R) ----
     range_vars   <- setdiff(c(bar_vars, numeric_vars), "weight_gr")
     checkbox_vars <- yn_vars
-    select_inputs <- setdiff(intersect(names(sia_df), char_vars), c("release_year", "size_mm"))
+    select_inputs <- setdiff(intersect(names(df_sia_shiny_filters), char_vars), c("release_year", "size_mm"))
 
     # --- 2. Filter for dropdowns ----
     filtered_for_dropdowns <- reactive({
@@ -326,14 +326,14 @@ mod_feat_fil_server <- function(id, data) {
         if (var %in% c("long_term_all_score", "short_term_all_score")) {
           updateSliderInput(session, var, value = c(0, 10))
         } else {
-          updateSliderInput(session, var, value = c(0, max(sia_df[[var]], na.rm = TRUE)))
+          updateSliderInput(session, var, value = c(0, max(df_sia_shiny_filters[[var]], na.rm = TRUE)))
         }
       }
 
       updateAirDateInput(session, "release_year",
                          value = c(
-                           min(sia_df$release_year, na.rm = TRUE),
-                           max(sia_df$release_year, na.rm = TRUE)
+                           min(df_sia_shiny_filters$release_year, na.rm = TRUE),
+                           max(df_sia_shiny_filters$release_year, na.rm = TRUE)
                          ))
 
       lapply(checkbox_vars, function(id) updatePrettyCheckbox(session, id, value = FALSE))
@@ -345,16 +345,38 @@ mod_feat_fil_server <- function(id, data) {
     output$feat_filtered_table <- renderReactable({
       df <- filtered_data()
 
+      # Remove device_id (not for display)
+      df <- df %>% select(-device_id)
+
       # Format release year
-      if ("release_year" %in% names(df)) {
-        df$release_year <- format(df$release_year, "%Y")
-      }
+      df$release_year <- format(df$release_year, "%Y")
+
+      # Reorder columns: manufacturer & model first
+      front_cols <- c("manufacturer", "model")
+      other_cols <- setdiff(names(df), front_cols)
+      df <- df[, c(front_cols, other_cols)]
 
       # Create reactable column definitions
       bar_column_defs     <- func_bar_column_defs(df, bar_vars, rename_map)
       yn_column_defs      <- func_yn_column_defs(yn_vars, rename_map)
       numeric_column_defs <- func_numeric_column_defs(df, numeric_vars, rename_map, numeric_var_ranges)
       char_column_defs    <- func_char_column_defs(char_vars, rename_map)
+
+      # --- Add clickable website link ---
+      website_col <- list(
+        website = colDef(
+          name = "Website",
+          html = TRUE,
+          cell = function(value) {
+            if (!is.na(value) && nzchar(value)) {
+              tags$a(href = value, target = "_blank", "Visit website")
+            } else {
+              ""
+            }
+          },
+          minWidth = 160
+        )
+      )
 
       # Render table
       reactable(
@@ -376,6 +398,7 @@ mod_feat_fil_server <- function(id, data) {
               minWidth = 180
             )
           ),
+          website_col,              # ← clickable Website column
           bar_column_defs,
           yn_column_defs,
           numeric_column_defs,
@@ -395,19 +418,42 @@ mod_feat_fil_server <- function(id, data) {
 
     # --- 7. Download filtered data ----
     output$download_data <- downloadHandler(
-      filename = function() paste0("sia_feature_filter_data_", format(Sys.Date(), "%Y%m%d"), ".csv"),
+      filename = function() paste0("sia_feature_filter_data_", format(Sys.Date(), "%Y%m%d"), ".xlsx"),
       content = function(file) {
-        write.csv(filtered_data(), file, row.names = FALSE, na = "")
-        cat(
-          "\n# Citation terms.\n",
-          "# Thank you for using the Stress-in-Action Wearable Database!\n",
-          "# If you use the SiA-WD and/or this web app you must cite:\n",
-          "# Schoenmakers M, Saygin M, Sikora M, Vaessen T, Noordzij M, de Geus E. Stress in action wearables database: A database of noninvasive wearable monitors with systematic technical reliability validity and usability information. Behav Res Methods. 2025 May 13 57(6):171. doi: 10.3758/s13428-025-02685-4. PMID: 40360861 PMCID: PMC12075381.\n",
-          file = file, append = TRUE, sep = ""
+        # 1️⃣ Get selected device IDs from the filtered data
+        selected_ids <- filtered_data()$device_id
+
+        # 2️⃣ Match those IDs to the OSF dataset
+        export_df <- df_sia_osf %>%
+          dplyr::filter(device_id %in% selected_ids)
+
+        # 3️⃣ Write to Excel
+        writexl::write_xlsx(export_df, path = file)
+
+        # 4️⃣ Append citation footer as an extra sheet
+        # (optional; Excel-friendly way to include citation info)
+        tmp_file <- tempfile(fileext = ".xlsx")
+        writexl::write_xlsx(
+          list(
+            "Filtered Data" = export_df,
+            "Citation" = data.frame(
+              Citation = c(
+                "Thank you for using the Stress-in-Action Wearable Database!",
+                "If you use the SiA-WD and/or this web app you must cite:",
+                "Schoenmakers M, Saygin M, Sikora M, Vaessen T, Noordzij M, de Geus E.",
+                "Stress in action wearables database: A database of noninvasive wearable monitors with systematic technical, reliability, validity, and usability information.",
+                "Behav Res Methods. 2025 May 13;57(6):171.",
+                "doi: 10.3758/s13428-025-02685-4. PMID: 40360861; PMCID: PMC12075381.",
+                "[Shiny paper coming soon]"
+              )
+            )
+          ),
+          path = file
         )
       },
-      contentType = "text/csv"
+      contentType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
     )
+
 
     # --- 8. Download filter settings ----
     output$download_filter_settings <- downloadHandler(

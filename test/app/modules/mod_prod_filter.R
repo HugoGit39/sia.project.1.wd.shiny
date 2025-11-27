@@ -136,9 +136,7 @@ mod_prod_fil_server <- function(id, df_sia_shiny_filters) {
       df <- selected_products()
 
       # format release year if present
-      if ("release_year" %in% names(df)) {
-        df$release_year <- format(df$release_year, "%Y")
-      }
+      df$release_year <- format(df$release_year, "%Y")
 
       # 2) transpose to features-as-rows, models-as-columns
       df_t <- df %>%
@@ -158,7 +156,7 @@ mod_prod_fil_server <- function(id, df_sia_shiny_filters) {
       transposed_cols <- setdiff(names(df_t), c("Feature", "Feature_internal"))
 
       col_defs <- list(
-        Feature = colDef(name = "Feature", minWidth = 50, style = list(fontWeight = "bold"))
+        Feature = colDef(name = "Manufacturer - Model", minWidth = 50, style = list(fontWeight = "bold"))
       )
 
       # 3) per-column cell renderer (bars -> yes/no -> numeric heat -> plain)
@@ -169,7 +167,7 @@ mod_prod_fil_server <- function(id, df_sia_shiny_filters) {
             # --- special case: website row => clickable link ---
             if (df_t$Feature_internal[index] == "website" &&
                 !is.na(value) && nzchar(value)) {
-              return(htmltools::tags$a(href = value, target = "_blank", "Visit website"))
+              return(tags$a(href = value, target = "_blank", "Visit website"))
             }
 
             # bars
@@ -220,22 +218,42 @@ mod_prod_fil_server <- function(id, df_sia_shiny_filters) {
       disable("model3")
     })
 
-
     output$download_data <- downloadHandler(
-      filename = function() paste0("sia_product_filter_data_", format(Sys.Date(), "%Y%m%d"), ".csv"),
+      filename = function() {
+        paste0("sia_product_filter_data_", format(Sys.Date(), "%Y%m%d"), ".xlsx")
+      },
       content = function(file) {
-        write.csv(selected_products(), file, row.names = FALSE, na = "")
-        cat(
-          "\n# Citation terms.\n",
-          "# Thank you for using the Stress-in-Action Wearable Database!\n",
-          "# If you use the SiA-WD and/or this web app you must cite:\n",
-          "# Schoenmakers M Saygin M Sikora M Vaessen T Noordzij M de Geus E. Stress in action wearables database: A database of noninvasive wearable monitors with systematic technical reliability validity and usability information. Behav Res Methods. 2025 May 13 57(6):171. doi: 10.3758/s13428-025-02685-4. PMID: 40360861 PMCID: PMC12075381.\n",
-          "# [Shiny paper comming soon]\n",
-          file = file, append = TRUE, sep = ""
+        # 1️⃣ Filter OSF table based on selected device IDs
+        selected_ids <- selected_products()$device_id
+        export_df <- df_sia_osf %>%
+          filter(device_id %in% selected_ids) %>%
+          as.data.frame()
+
+        # 2️⃣ Create a small citation footer sheet
+        citation_text <- data.frame(
+          Citation = c(
+            "Thank you for using the Stress-in-Action Wearable Database!",
+            "If you use the SiA-WD and/or this web app you must cite:",
+            "Schoenmakers M, Saygin M, Sikora M, Vaessen T, Noordzij M, de Geus E.",
+            "Stress in action wearables database: A database of noninvasive wearable monitors with systematic technical, reliability, validity, and usability information.",
+            "Behav Res Methods. 2025 May 13;57(6):171.",
+            "doi: 10.3758/s13428-025-02685-4. PMID: 40360861; PMCID: PMC12075381.",
+            "[Shiny paper coming soon]"
+          )
+        )
+
+        # 3️⃣ Write both data + citation to Excel
+        writexl::write_xlsx(
+          list(
+            "Selected_Devices" = export_df,
+            "Citation" = citation_text
+          ),
+          path = file
         )
       },
-      contentType = "text/csv"
+      contentType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
     )
+
   })
 }
 
