@@ -455,53 +455,68 @@ mod_feat_fil_server <- function(id, data) {
     )
 
 
-    # --- 8. Download filter settings ----
+    # --- 8. Download filter settings (Excel, ";" separators) ----
     output$download_filter_settings <- downloadHandler(
-      filename = function() paste0("sia_filter_settings_", format(Sys.Date(), "%Y%m%d"), ".csv"),
+      filename = function() paste0("sia_filter_settings_", format(Sys.Date(), "%Y%m%d"), ".xlsx"),
       content = function(file) {
         settings <- list()
 
-        # Sliders
+        # Sliders: store "min;max"
         for (var in range_vars) {
           range_vals <- as.integer(round(input[[var]]))
-          settings[[var]] <- paste(range_vals[1], range_vals[2], sep = "|")
+          settings[[var]] <- paste(range_vals[1], range_vals[2], sep = ";")
         }
 
-        # Checkboxes
+        # Checkboxes: "YES" if selected, "YES;NO" if not (i.e., no restriction)
         for (var in checkbox_vars) {
-          settings[[var]] <- if (isTRUE(input[[var]])) "YES" else "YES|NO"
+          settings[[var]] <- if (isTRUE(input[[var]])) "YES" else "YES;NO"
         }
 
-        # SelectInputs
+        # SelectInputs: chosen values separated by ";"
         for (var in select_inputs) {
-          settings[[var]] <- paste(input[[var]], collapse = "|")
+          settings[[var]] <- paste(input[[var]], collapse = ";")
         }
 
-        # Date range
+        # Release year range (YYYY;YYYY)
         settings[["release_year"]] <- paste(
           format(input$release_year[1], "%Y"),
           format(input$release_year[2], "%Y"),
-          sep = "|"
+          sep = ";"
         )
 
-        # Exclude NA SiA
-        settings[["exclude_na_sia"]] <- if (isTRUE(input$exclude_na_sia)) "YES" else "YES|NO"
+        # Exclude NA SiA (same YES / YES;NO logic)
+        settings[["exclude_na_sia"]] <- if (isTRUE(input$exclude_na_sia)) "YES" else "YES;NO"
 
-        # Convert to data frame
-        df <- data.frame(t(unlist(settings)), check.names = FALSE)
-        names(df) <- names(settings)
+        # Convert list → one-row data.frame
+        df_settings <- data.frame(t(unlist(settings)), check.names = FALSE)
+        names(df_settings) <- names(settings)
 
-        write.table(df, file, sep = ",", row.names = FALSE, col.names = TRUE, quote = FALSE)
-        cat(
-          "\n# Citation terms.\n",
-          "# Thank you for using the SiA-WD!\n",
-          "# If you use the database and/or this web app, you must cite:\n",
-          "# Schoenmakers M, Saygin M, Sikora M, Vaessen T, Noordzij M, de Geus E. Stress in action wearables database: A database of noninvasive wearable monitors with systematic technical reliability, validity, and usability information. Behav Res Methods. 2025 May 13;57(6):171. doi: 10.3758/s13428-025-02685-4.\n",
-          file = file, append = TRUE, sep = ""
+        # Build a tiny citation sheet
+        citation_df <- data.frame(
+          Citation = c(
+            "Thank you for using the SiA-WD!",
+            "If you use the database and/or this web app, you must cite:",
+            "Schoenmakers M, Saygin M, Sikora M, Vaessen T, Noordzij M, de Geus E.",
+            "Stress in action wearables database: A database of noninvasive wearable monitors",
+            "with systematic technical, reliability, validity, and usability information.",
+            "Behav Res Methods. 2025 May 13;57(6):171.",
+            "doi: 10.3758/s13428-025-02685-4."
+          ),
+          check.names = FALSE
+        )
+
+        # Write to Excel (2 sheets)
+        writexl::write_xlsx(
+          list(
+            "Filter settings" = df_settings,
+            "Citation"        = citation_df
+          ),
+          path = file
         )
       },
-      contentType = "text/csv"
+      contentType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
     )
+
   })
 }
 
