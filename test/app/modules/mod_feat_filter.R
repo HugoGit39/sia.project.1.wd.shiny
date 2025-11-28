@@ -138,14 +138,14 @@ mod_feat_fil_ui <- function(id) {
             collapsible = FALSE,
             prettyCheckbox(ns("accelerometer_available"), label = "Accelerometer", icon = icon("check"), status = "primary"),
             prettyCheckbox(ns("bp_available"), label = "Blood Pressure", icon = icon("check"), status = "primary"),
-            prettyCheckbox(ns("ecg_available"), label = "Electrocardiogram (ECG)", icon = icon("check"), status = "primary"),
-            prettyCheckbox(ns("eda_available"), label = "Electrodermal Activity (EDA)", icon = icon("check"), status = "primary"),
-            prettyCheckbox(ns("eeg_available"), label = "Electroencephalography (EEG)", icon = icon("check"), status = "primary"),
-            prettyCheckbox(ns("emg_available"), label = "Electromyography (EMG)", icon = icon("check"), status = "primary"),
-            prettyCheckbox(ns("gps_available"), label = "Global Positioning System (GPS)", icon = icon("check"), status = "primary"),
+            prettyCheckbox(ns("ecg_available"), label = "ECG", icon = icon("check"), status = "primary"),
+            prettyCheckbox(ns("eda_available"), label = "EDA", icon = icon("check"), status = "primary"),
+            prettyCheckbox(ns("eeg_available"), label = "EEG", icon = icon("check"), status = "primary"),
+            prettyCheckbox(ns("emg_available"), label = "EMG", icon = icon("check"), status = "primary"),
+            prettyCheckbox(ns("gps_available"), label = "GPS", icon = icon("check"), status = "primary"),
             prettyCheckbox(ns("gyroscope_available"), label = "Gyroscope", icon = icon("check"), status = "primary"),
-            prettyCheckbox(ns("icg_available"), label = "Impedance Cardiography (ICG)", icon = icon("check"), status = "primary"),
-            prettyCheckbox(ns("ppg_available"), label = "Photoplethysmogram (PPG)", icon = icon("check"), status = "primary"),
+            prettyCheckbox(ns("icg_available"), label = "ICG", icon = icon("check"), status = "primary"),
+            prettyCheckbox(ns("ppg_available"), label = "PPGNo fuckface ", icon = icon("check"), status = "primary"),
             prettyCheckbox(ns("respiration_available"), label = "Respiration", icon = icon("check"), status = "primary"),
             prettyCheckbox(ns("skin_temperature_available"), label = "Skin Temperature", icon = icon("check"), status = "primary"),
             prettyCheckbox(ns("other_signals_available"), label = "Other Signals", icon = icon("check"), status = "primary")
@@ -212,36 +212,50 @@ mod_feat_fil_ui <- function(id) {
       # * Filtered results panel ----
       column(
         width = 9,
-        class = "feat-results-sticky",
-        bs4Card(
-          title = "Filtered Results",
-          status = "primary",
-          width = 12,
-          collapsible = FALSE,
-          solidHeader = TRUE,
-          div(
-            style = "text-align: center; margin-bottom: 10px;",
-            downloadButton(ns("download_data"), "Download Filtered Results")
-          ),
-          reactableOutput(ns("feat_filtered_table")) %>% withSpinner(),
-          footer = tags$div(
-            "Source: Schoenmakers M, Saygin M, Sikora M, Vaessen T, Noordzij M, de Geus E. ",
-            "Stress in action wearables database: A database of noninvasive wearable monitors with systematic technical, reliability, validity, and usability information. ",
-            tags$em("Behav Res Methods."),
-            " 2025 May 13;57(6):171. doi: ",
-            tags$a(href = "https://link.springer.com/article/10.3758/s13428-025-02685-4",
-                   target = "_blank", "10.3758/s13428-025-02685-4"),
-            "; PMID: 40360861; PMCID: ",
-            tags$a(href = "https://pmc.ncbi.nlm.nih.gov/articles/PMC12075381/",
-                   target = "_blank", "PMC12075381"),
-            style = "font-family: sans-serif; font-size: 10pt; color: #8C8C8C;"
+        div(
+          style = "
+      position: -webkit-sticky;
+      position: sticky;
+      top: 15px;
+      z-index: 10;
+    ",
+          bs4Card(
+            title = "Filtered Results",
+            status = "primary",
+            width = 12,
+            collapsible = FALSE,
+            solidHeader = TRUE,
+            div(
+              style = "display: flex; justify-content: center; gap: 10px; margin-bottom: 15px;",
+              actionButton(
+                inputId = ns("glossary_info"),
+                label = "Table Information",
+                icon = icon("info-circle"),
+                class = "btn btn-outline-secondary btn-sm glossary-info-btn",
+                style = "border-width: 2px;"
+              ),
+              downloadButton(ns("download_data"), "Download Filtered Results")
+            ),
+            reactableOutput(ns("feat_filtered_table")) %>% withSpinner(),
+            footer = tags$div(
+              "Source: Schoenmakers M, Saygin M, Sikora M, Vaessen T, Noordzij M, de Geus E. ",
+              "Stress in action wearables database: A database of noninvasive wearable monitors with systematic technical, reliability, validity, and usability information. ",
+              tags$em("Behav Res Methods."),
+              " 2025 May 13;57(6):171. doi: ",
+              tags$a(href = "https://link.springer.com/article/10.3758/s13428-025-02685-4",
+                     target = "_blank", "10.3758/s13428-025-02685-4"),
+              "; PMID: 40360861; PMCID: ",
+              tags$a(href = "https://pmc.ncbi.nlm.nih.gov/articles/PMC12075381/",
+                     target = "_blank", "PMC12075381"),
+              style = "font-family: sans-serif; font-size: 10pt; color: #8C8C8C;"
+            )
           )
         )
       )
+
     )
   )
 }
-
 
 ############################################################################################
 #
@@ -355,8 +369,7 @@ mod_feat_fil_server <- function(id, data) {
         left_join(df_sia_shiny_info, by = "device_id")
 
       # 3) Format release year if present
-        df$release_year <- format(df$release_year, "%Y")
-
+      df$release_year <- format(df$release_year, "%Y")
 
       # 4) Add the 'details' column for the button
       df$details <- NA_character_
@@ -369,7 +382,6 @@ mod_feat_fil_server <- function(id, data) {
         "short_term_all_score",
         "details"
       )
-
       other_cols <- setdiff(names(df), front_cols)
       df <- df[, c(front_cols, other_cols)]
 
@@ -383,7 +395,21 @@ mod_feat_fil_server <- function(id, data) {
       info_column_defs <- lapply(info_cols, function(x) colDef(show = FALSE))
       names(info_column_defs) <- info_cols
 
-      # Build JS array of info column names for the popup
+      # 8) Apply uniform global width (from global.R)
+      apply_uniform_min_width <- function(col_defs, width) {
+        lapply(col_defs, function(cd) {
+          cd$minWidth <- width
+          cd
+        })
+      }
+
+      bar_column_defs      <- apply_uniform_min_width(bar_column_defs,     min_width_global)
+      yn_column_defs       <- apply_uniform_min_width(yn_column_defs,      min_width_global)
+      numeric_column_defs  <- apply_uniform_min_width(numeric_column_defs, min_width_global)
+      char_column_defs     <- apply_uniform_min_width(char_column_defs,    min_width_global)
+      info_column_defs     <- apply_uniform_min_width(info_column_defs,    min_width_global)
+
+      # Build JS array of info column names for popup
       info_cols_js <- paste0("['", paste(info_cols, collapse = "','"), "']")
 
       reactable(
@@ -398,20 +424,20 @@ mod_feat_fil_server <- function(id, data) {
               sticky = "left",
               style = sticky_style,
               headerStyle = sticky_style,
-              minWidth = 180
+              minWidth = min_width_global
             ),
             model = colDef(
               name = "Model",
               sticky = "left",
               style = sticky_style,
               headerStyle = sticky_style,
-              minWidth = 180
+              minWidth = min_width_global
             ),
             details = colDef(
               name = "Details",
               sortable = FALSE,
               filterable = FALSE,
-              minWidth = 130,
+              minWidth = min_width_global,
               cell = function() htmltools::tags$button(
                 "More details",
                 class = "btn btn-sm btn-outline-primary"
@@ -420,7 +446,7 @@ mod_feat_fil_server <- function(id, data) {
             website = colDef(
               name = "Website",
               sortable = FALSE,
-              minWidth = 180,
+              minWidth = min_width_global,
               cell = function(value) {
                 if (!is.na(value) && nzchar(value)) {
                   htmltools::tags$a(
@@ -438,7 +464,7 @@ mod_feat_fil_server <- function(id, data) {
           yn_column_defs,
           numeric_column_defs,
           char_column_defs,
-          info_column_defs   # the info columns are here, but hidden
+          info_column_defs   # hidden info columns
         ),
         bordered      = TRUE,
         highlight     = TRUE,
@@ -450,73 +476,44 @@ mod_feat_fil_server <- function(id, data) {
         defaultSorted = "manufacturer",
         style         = list(maxHeight = "1000px", overflowY = "auto"),
 
-        # --- Custom click handler: now uses ALL cols from merged df ---
+        # --- Custom click handler for popup details ---
         onClick = JS(sprintf("
-          function(rowInfo, column) {
-            // Only handle clicks on the 'details' column
-            if (column.id !== 'details') return;
+      function(rowInfo, column) {
+        if (column.id !== 'details') return;
 
-            const values    = rowInfo.values;
-            const infoCols  = %s;  // R-injected list of info col names
-            let lines = [];
+        const values    = rowInfo.values;
+        const infoCols  = %s;
+        let lines = [];
 
-            infoCols.forEach(function(col) {
-              if (values[col] !== undefined && values[col] !== null && values[col] !== '') {
-                lines.push(col + ': ' + values[col]);
-              }
-            });
-
-            if (lines.length === 0) {
-              window.alert('No additional details available for this device.');
-            } else {
-              window.alert(
-                'Details for ' + (values.manufacturer || '') + ' – ' + (values.model || '') + ':\\n\\n' +
-                lines.join('\\n')
-              );
-            }
+        infoCols.forEach(function(col) {
+          if (values[col] !== undefined && values[col] !== null && values[col] !== '') {
+            lines.push(col + ': ' + values[col]);
           }
-        ", info_cols_js))
+        });
+
+        if (lines.length === 0) {
+          window.alert('No additional details available for this device.');
+        } else {
+          window.alert(
+            'Details for ' + (values.manufacturer || '') + ' – ' + (values.model || '') + ':\\n\\n' +
+            lines.join('\\n')
+          );
+        }
+      }
+    ", info_cols_js))
       )
     })
 
-
-    # --- 8. Download filter settings (Excel, ";" separators) ----
-    output$download_filter_settings <- downloadHandler(
-      filename = function() paste0("sia_filter_settings_", format(Sys.Date(), "%Y%m%d"), ".xlsx"),
+    # --- 9. Download filter settings (Excel, ";" separators) ----
+    # --- 10. Download filtered results (Excel) ----
+    output$download_data <- downloadHandler(
+      filename = function() paste0("sia_filtered_results_", format(Sys.Date(), "%Y%m%d"), ".xlsx"),
       content = function(file) {
-        settings <- list()
+        # Use the filtered data you display in the reactable
+        df_out <- filtered_data() %>%
+          left_join(df_sia_shiny_info, by = "device_id")
 
-        # Sliders: store "min;max"
-        for (var in range_vars) {
-          range_vals <- as.integer(round(input[[var]]))
-          settings[[var]] <- paste(range_vals[1], range_vals[2], sep = ";")
-        }
-
-        # Checkboxes: "YES" if selected, "YES;NO" if not (i.e., no restriction)
-        for (var in checkbox_vars) {
-          settings[[var]] <- if (isTRUE(input[[var]])) "YES" else "YES;NO"
-        }
-
-        # SelectInputs: chosen values separated by ";"
-        for (var in select_inputs) {
-          settings[[var]] <- paste(input[[var]], collapse = ";")
-        }
-
-        # Release year range (YYYY;YYYY)
-        settings[["release_year"]] <- paste(
-          format(input$release_year[1], "%Y"),
-          format(input$release_year[2], "%Y"),
-          sep = ";"
-        )
-
-        # Exclude NA SiA (same YES / YES;NO logic)
-        settings[["exclude_na_sia"]] <- if (isTRUE(input$exclude_na_sia)) "YES" else "YES;NO"
-
-        # Convert list → one-row data.frame
-        df_settings <- data.frame(t(unlist(settings)), check.names = FALSE)
-        names(df_settings) <- names(settings)
-
-        # Build a tiny citation sheet
+        # Create citation sheet
         citation_df <- data.frame(
           Citation = c(
             "Thank you for using the SiA-WD!",
@@ -530,17 +527,18 @@ mod_feat_fil_server <- function(id, data) {
           check.names = FALSE
         )
 
-        # Write to Excel (2 sheets)
+        # Write both sheets to Excel
         writexl::write_xlsx(
           list(
-            "Filter settings" = df_settings,
-            "Citation"        = citation_df
+            "Filtered results" = df_out,
+            "Citation"         = citation_df
           ),
           path = file
         )
       },
       contentType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
     )
+
 
   })
 }
