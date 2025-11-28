@@ -1,15 +1,15 @@
 ############################################################################################
 #
-#  Function module for product filter
+#  Function module for product filter (CLEAN VERSION)
 #
-#############################################################################################
+############################################################################################
 
-# Function to create the UI
 mod_prod_fil_ui <- function(id) {
   ns <- NS(id)
 
   tagList(
     fluidRow(
+      # ---------------- LEFT FILTER PANEL ----------------
       column(
         width = 3,
         bs4Card(
@@ -18,67 +18,89 @@ mod_prod_fil_ui <- function(id) {
           width = 12,
           collapsible = FALSE,
           solidHeader = TRUE,
-          selectInput(ns("product1"), "Product 1: Manufacturer",
-                      choices = sort(unique(df_sia_shiny_filters$manufacturer)),
-                      selected = "Apple", multiple = FALSE),
-          selectInput(ns("model1"), "Product 1: Model",
-                      choices = NULL, selected = NULL, multiple = FALSE),
 
-          selectInput(ns("product2"), "Product 2: Manufacturer",
-                      choices = sort(unique(df_sia_shiny_filters$manufacturer)),
-                      selected = "Vrije Universiteit van Amsterdam", multiple = FALSE),
-          selectInput(ns("model2"), "Product 2: Model",
-                      choices = NULL, selected = NULL, multiple = FALSE),
+          # --- Product 1 ---
+          selectInput(
+            ns("product1"), "Product 1: Manufacturer",
+            choices = sort(unique(df_sia_shiny_filters$manufacturer)),
+            selected = "Apple"
+          ),
+          selectInput(ns("model1"), "Product 1: Model", choices = NULL),
+
+          # --- Product 2 ---
+          selectInput(
+            ns("product2"), "Product 2: Manufacturer",
+            choices = sort(unique(df_sia_shiny_filters$manufacturer)),
+            selected = "Vrije Universiteit van Amsterdam"
+          ),
+          selectInput(ns("model2"), "Product 2: Model", choices = NULL),
+
+          # --- Reset Product 3 ---
           div(
             style = "text-align: center; margin-bottom: 10px;",
             actionButton(
               inputId = ns("reset_prod_filter"),
               label = "Reset Product 3",
-              status = "danger",
-              outline = TRUE,
-              size = "sm",
-              flat = TRUE,
-              icon = NULL,
-              block = TRUE,
-              width = "50%",
-              style = "border-width: 2px"
+              class = "btn btn-danger btn-sm",
+              style = "border-width: 2px;"
             )
           ),
-          selectInput(ns("product3"), "Product 3: Manufacturer",
-                      choices = c("Choose a product" = "", sort(unique(df_sia_shiny_filters$manufacturer))),
-                      selected = "", multiple = FALSE),
-          selectInput(ns("model3"), "Product 3: Model",
-                      choices = NULL, selected = NULL, multiple = FALSE)
+
+          # --- Product 3 ---
+          selectInput(
+            ns("product3"), "Product 3: Manufacturer",
+            choices = c("Choose a product" = "", sort(unique(df_sia_shiny_filters$manufacturer))),
+            selected = ""
+          ),
+          selectInput(ns("model3"), "Product 3: Model", choices = NULL)
         )
       ),
-      bs4Card(
-        title = "Comparison Table",
-        status = "primary",
+
+      # ---------------- RIGHT RESULTS PANEL ----------------
+      column(
         width = 9,
-        collapsible = FALSE,
-        solidHeader = TRUE,
-        div(
-          style = "text-align: center; margin-bottom: 10px;",
-          downloadButton(ns("download_data"), "Download Filtered Products")
-        ),
-        reactableOutput(ns("prod_filtered_table")) %>% withSpinner(),
-        footer = tags$div(
-          "Source: Schoenmakers M, Saygin M, Sikora M, Vaessen T, Noordzij M, de Geus E. ",
-          "Stress in action wearables database: A database of noninvasive wearable monitors with systematic technical, reliability, validity, and usability information. ",
-          tags$em("Behav Res Methods."),
-          " 2025 May 13;57(6):171. doi: ",
-          tags$a(
-            href = "https://link.springer.com/article/10.3758/s13428-025-02685-4",
-            target = "_blank",
-            "10.3758/s13428-025-02685-4"
+        bs4Card(
+          title = "Comparison Table",
+          status = "primary",
+          width = 12,
+          collapsible = FALSE,
+          solidHeader = TRUE,
+
+          # --- Glossary Info + Download Button ----
+          div(
+            style = "display: flex; justify-content: center; gap: 10px; margin-bottom: 15px;",
+            actionButton(
+              inputId = ns("glossary_info"),
+              label = "Table Information",
+              icon = icon("info-circle"),
+              class = "btn btn-outline-secondary btn-sm glossary-info-btn",  # important class for JS hook
+              style = "border-width: 2px;"
+            ),
+            downloadButton(ns("download_data"), "Download Filtered Products")
           ),
-          "; PMID: 40360861; PMCID: ",
-          tags$a(
-            href = "https://pmc.ncbi.nlm.nih.gov/articles/PMC12075381/",
-            target = "_blank",
-            "PMC12075381"
-          ),
-          style = "font-family: sans-serif; font-size: 10pt; color: #8C8C8C;"
+
+          # --- Table Output ----
+          reactableOutput(ns("prod_filtered_table")) %>% withSpinner(),
+
+          # --- Footer Citation ----
+          footer = tags$div(
+            "Source: Schoenmakers M, Saygin M, Sikora M, Vaessen T, Noordzij M, de Geus E. ",
+            "Stress in action wearables database: A database of noninvasive wearable monitors with systematic technical, reliability, validity, and usability information. ",
+            tags$em("Behav Res Methods."),
+            " 2025 May 13;57(6):171. doi: ",
+            tags$a(
+              href = "https://link.springer.com/article/10.3758/s13428-025-02685-4",
+              target = "_blank",
+              "10.3758/s13428-025-02685-4"
+            ),
+            "; PMID: 40360861; PMCID: ",
+            tags$a(
+              href = "https://pmc.ncbi.nlm.nih.gov/articles/PMC12075381/",
+              target = "_blank",
+              "PMC12075381"
+            ),
+            style = "font-family: sans-serif; font-size: 10pt; color: #8C8C8C;"
+          )
         )
       )
     )
@@ -87,7 +109,7 @@ mod_prod_fil_ui <- function(id) {
 
 #############################################################################################
 #
-# Function to create the Server logic
+#  Function module for product filter SERVER
 #
 #############################################################################################
 
@@ -97,14 +119,18 @@ mod_prod_fil_server <- function(id, df_sia_shiny_filters) {
 
     disable("model3")
 
+    # ---------------- OBSERVERS FOR MANUFACTURERS ----------------
+
     observeEvent(input$product1, {
       df <- df_sia_shiny_filters()
-      updateSelectInput(session, "model1", choices = sort(unique(df$model[df$manufacturer == input$product1])))
+      updateSelectInput(session, "model1",
+                        choices = sort(unique(df$model[df$manufacturer == input$product1])))
     })
 
     observeEvent(input$product2, {
       df <- df_sia_shiny_filters()
-      updateSelectInput(session, "model2", choices = sort(unique(df$model[df$manufacturer == input$product2])))
+      updateSelectInput(session, "model2",
+                        choices = sort(unique(df$model[df$manufacturer == input$product2])))
     })
 
     observeEvent(input$product3, {
@@ -114,10 +140,13 @@ mod_prod_fil_server <- function(id, df_sia_shiny_filters) {
         updateSelectInput(session, "model3", choices = character(0), selected = "")
       } else {
         enable("model3")
-        updateSelectInput(session, "model3", choices = c("Choose a model" = "", sort(unique(df$model[df$manufacturer == input$product3]))))
+        updateSelectInput(session, "model3",
+                          choices = c("Choose a model" = "",
+                                      sort(unique(df$model[df$manufacturer == input$product3]))))
       }
     })
 
+    # ---------------- REACTIVE SELECTED PRODUCTS ----------------
     selected_products <- reactive({
       df <- df_sia_shiny_filters()
 
@@ -128,62 +157,50 @@ mod_prod_fil_server <- function(id, df_sia_shiny_filters) {
 
       if (!is.null(input$model3) && nzchar(input$model3)) {
         rows <- c(rows,
-                  list(df %>% filter(manufacturer == input$product3,
-                                     model == input$model3)))
+                  list(df %>% filter(manufacturer == input$product3, model == input$model3)))
       }
 
-      bind_rows(rows) %>%
-        distinct(manufacturer, model, .keep_all = TRUE)   # <- NEW
+      bind_rows(rows) %>% distinct(manufacturer, model, .keep_all = TRUE)
     })
 
+    # ---------------- RENDER TABLE ----------------
     output$prod_filtered_table <- renderReactable({
-      # 1) get selected rows
       df <- selected_products()
-
-      # format release year if present
       df$release_year <- format(df$release_year, "%Y")
 
-      # 2) transpose to features-as-rows, models-as-columns
+      # Transpose: features as rows, models as columns
       df_t <- df %>%
         select(-manufacturer, -model, -device_id) %>%
         t() %>%
         as.data.frame(stringsAsFactors = FALSE)
 
       colnames(df_t) <- paste0(df$manufacturer, " – ", df$model)
-      # keep internal variable name BEFORE renaming
       df_t <- cbind(Feature_internal = rownames(df_t), df_t)
       rownames(df_t) <- NULL
-
-      # display name
       df_t$Feature <- rename_map[df_t$Feature_internal] %||% df_t$Feature_internal
 
-      # columns to render
       transposed_cols <- setdiff(names(df_t), c("Feature", "Feature_internal"))
 
       col_defs <- list(
-        Feature = colDef(name = "Manufacturer - Model", minWidth = 50, style = list(fontWeight = "bold"))
+        Feature = colDef(name = "Product - Model", minWidth = 50, style = list(fontWeight = "bold"))
       )
 
-      # 3) per-column cell renderer (bars -> yes/no -> numeric heat -> plain)
+      # Define rendering logic for each column
       for (col in transposed_cols) {
         col_defs[[col]] <- colDef(
           cell = function(value, index) {
-
-            # --- special case: website row => clickable link ---
+            # clickable website link
             if (df_t$Feature_internal[index] == "website" &&
                 !is.na(value) && nzchar(value)) {
               return(tags$a(href = value, target = "_blank", "Visit website"))
             }
 
-            # bars
             rendered <- func_bar_row_defs(value, index, df_t$Feature, bar_vars, rename_map)
             if (!identical(rendered, value)) return(rendered)
 
-            # yes/no
             rendered <- func_yn_row_defs(value, index, df_t$Feature, yn_vars, rename_map)
             if (!identical(rendered, value)) return(rendered)
 
-            # numeric heat
             rendered <- func_numeric_row_defs(
               value, index,
               feature_internal    = df_t$Feature_internal,
@@ -193,18 +210,16 @@ mod_prod_fil_server <- function(id, df_sia_shiny_filters) {
             )
             if (!identical(rendered, value)) return(rendered)
 
-            # fallback: plain text
             value
           }
         )
       }
 
-      # 4) render table
       reactable(
         df_t[, c("Feature", "Feature_internal", transposed_cols)],
         columns = c(
           col_defs,
-          list(Feature_internal = colDef(show = FALSE)) # hide helper column
+          list(Feature_internal = colDef(show = FALSE))
         ),
         height = (nrow(df_t) * 0.5) * 40,
         bordered = TRUE,
@@ -216,25 +231,24 @@ mod_prod_fil_server <- function(id, df_sia_shiny_filters) {
       )
     })
 
-    #reset option 3
+    # ---------------- RESET THIRD PRODUCT ----------------
     observeEvent(input$reset_prod_filter, {
       updateSelectInput(session, "product3", selected = "")
       updateSelectInput(session, "model3", choices = character(0), selected = "")
       disable("model3")
     })
 
+    # ---------------- DOWNLOAD HANDLER ----------------
     output$download_data <- downloadHandler(
       filename = function() {
         paste0("sia_product_filter_data_", format(Sys.Date(), "%Y%m%d"), ".xlsx")
       },
       content = function(file) {
-        # 1️⃣ Filter OSF table based on selected device IDs
         selected_ids <- selected_products()$device_id
         export_df <- df_sia_osf %>%
           filter(device_id %in% selected_ids) %>%
           as.data.frame()
 
-        # 2️⃣ Create a small citation footer sheet
         citation_text <- data.frame(
           Citation = c(
             "Thank you for using the Stress-in-Action Wearable Database!",
@@ -247,12 +261,8 @@ mod_prod_fil_server <- function(id, df_sia_shiny_filters) {
           )
         )
 
-        # 3️⃣ Write both data + citation to Excel
         writexl::write_xlsx(
-          list(
-            "Selected_Devices" = export_df,
-            "Citation" = citation_text
-          ),
+          list("Selected_Devices" = export_df, "Citation" = citation_text),
           path = file
         )
       },
@@ -261,4 +271,3 @@ mod_prod_fil_server <- function(id, df_sia_shiny_filters) {
 
   })
 }
-

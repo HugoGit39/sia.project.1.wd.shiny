@@ -68,7 +68,15 @@ html, body {
 
 /* 4.1 Product filter*/
 
-/* 4.2 Feauture filter*/
+/* 4.2 Feature filter*/
+
+/* Make entire results column sticky */
+.feat-results-sticky {
+  position: sticky;
+  top: 70px;
+  align-self: flex-start;
+  z-index: 1;
+}
 
 /* 5. Add data*/
 

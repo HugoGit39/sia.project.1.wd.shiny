@@ -390,10 +390,3 @@ disconnected <- tagList(
     "where you left off!", style = "font-size:16px")
 )
 
-
-
-
-
-
-
-

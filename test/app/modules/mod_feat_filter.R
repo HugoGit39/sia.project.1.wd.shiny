@@ -212,6 +212,7 @@ mod_feat_fil_ui <- function(id) {
       # * Filtered results panel ----
       column(
         width = 9,
+        class = "feat-results-sticky",
         bs4Card(
           title = "Filtered Results",
           status = "primary",
@@ -354,9 +355,8 @@ mod_feat_fil_server <- function(id, data) {
         left_join(df_sia_shiny_info, by = "device_id")
 
       # 3) Format release year if present
-      if ("release_year" %in% names(df)) {
         df$release_year <- format(df$release_year, "%Y")
-      }
+
 
       # 4) Add the 'details' column for the button
       df$details <- NA_character_
@@ -544,6 +544,8 @@ mod_feat_fil_server <- function(id, data) {
 
   })
 }
+
+
 
 
 
