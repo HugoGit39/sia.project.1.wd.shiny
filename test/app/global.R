@@ -129,6 +129,7 @@ fieldsMandatory_email <- c("name", "email", "message")
 rename_map <- c(
   "long_term_all_score" = "Long-Term SiA Score",
   "short_term_all_score" = "Short-Term SiA Score",
+  "details" = "Details",
   "manufacturer" = "Manufacturer",
   "model" = "Model",
   "website" = "Website",
@@ -377,26 +378,7 @@ GLOS <- list(
   Z = div(style = "font-size:16px", align = "justify", p(""))
 )
 
-#* 12 Calulate max col width table -----------------------------------------------
-
-# pick the dataset that has all possible columns (usually df_sia_shiny_filters)
-all_colnames <- names(df_sia_shiny_filters)
-
-# split column names into words (remove punctuation, parentheses, slashes, underscores)
-split_words <- unlist(strsplit(all_colnames, "[\\s_\\-\\(\\)\\/]+"))
-
-# remove any empty strings
-split_words <- split_words[nzchar(split_words)]
-
-# find longest word length
-longest_word_len <- max(nchar(split_words), na.rm = TRUE)
-
-# convert to pixel width (adjust these constants if needed)
-px_per_char <- 9
-padding <- 24
-min_width_global <- round(longest_word_len * px_per_char + padding)
-
-#  * 13 Time-out message -----------------------------------------------
+#  * 12 Time-out message -----------------------------------------------
 disconnected <- tagList(
   p(strong("Time Out!", style = "color: #1c75bc; font-size:30px")),
   p(tags$img(src = "favicon.ico", height = 100, width = 100)),

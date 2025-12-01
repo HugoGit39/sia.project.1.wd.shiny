@@ -9,16 +9,17 @@ func_bar_column_defs <- function(df, bar_vars, rename_map) {
   setNames(
     lapply(bar_vars, function(var) {
       colDef(
-        name = rename_map[[var]],
-        cell = data_bars(
+        name    = rename_map[[var]],
+        minWidth = 141,
+        cell    = data_bars(
           df,
-          fill_color = "#f15a29",
-          min_value = 0,
-          max_value = 10,
-          bar_height = 10,
+          fill_color   = "#f15a29",
+          min_value    = 0,
+          max_value    = 10,
+          bar_height   = 10,
           text_position = "outside-end",
-          text_size = 12,
-          background = "transparent"
+          text_size    = 12,
+          background   = "transparent"
         )
       )
     }),
@@ -26,18 +27,21 @@ func_bar_column_defs <- function(df, bar_vars, rename_map) {
   )
 }
 
+
 #yes/no
 func_yn_column_defs <- function(yn_vars, rename_map) {
   setNames(
     lapply(yn_vars, function(var) {
       colDef(
-        name = rename_map[[var]],
-        cell = cells_yes_no
+        name    = rename_map[[var]],
+        minWidth = 141,
+        cell    = cells_yes_no
       )
     }),
     yn_vars
   )
 }
+
 
 #numerical colors
 func_numeric_column_defs <- function(df, numeric_vars, rename_map, numeric_var_ranges) {
@@ -47,8 +51,9 @@ func_numeric_column_defs <- function(df, numeric_vars, rename_map, numeric_var_r
     lapply(numeric_vars, function(var) {
       var_range <- numeric_var_ranges[[var]]
       colDef(
-        name = rename_map[[var]],
-        style = function(value) {
+        name    = rename_map[[var]],
+        minWidth = 141,
+        style   = function(value) {
           if (!is.na(value)) {
             scaled_color <- map_to_colors(
               value,
@@ -67,8 +72,17 @@ func_numeric_column_defs <- function(df, numeric_vars, rename_map, numeric_var_r
 
 #char
 func_char_column_defs <- function(vars, rename_map) {
-  setNames(lapply(vars, function(var) colDef(name = rename_map[[var]])), vars)
+  setNames(
+    lapply(vars, function(var) {
+      colDef(
+        name    = rename_map[[var]],
+        minWidth = 141
+      )
+    }),
+    vars
+  )
 }
+
 
 
 

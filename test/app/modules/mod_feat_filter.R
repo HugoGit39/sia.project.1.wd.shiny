@@ -361,6 +361,7 @@ mod_feat_fil_server <- function(id, data) {
 
     # --- 6. Render filtered reactable ----
     output$feat_filtered_table <- renderReactable({
+
       # 1) Start from filtered filter-table data
       df <- filtered_data()
 
@@ -394,20 +395,6 @@ mod_feat_fil_server <- function(id, data) {
       # 7) Hide the info columns in the table (but keep them in rowInfo.values)
       info_column_defs <- lapply(info_cols, function(x) colDef(show = FALSE))
       names(info_column_defs) <- info_cols
-
-      # 8) Apply uniform global width (from global.R)
-      apply_uniform_min_width <- function(col_defs, width) {
-        lapply(col_defs, function(cd) {
-          cd$minWidth <- width
-          cd
-        })
-      }
-
-      bar_column_defs      <- apply_uniform_min_width(bar_column_defs,     min_width_global)
-      yn_column_defs       <- apply_uniform_min_width(yn_column_defs,      min_width_global)
-      numeric_column_defs  <- apply_uniform_min_width(numeric_column_defs, min_width_global)
-      char_column_defs     <- apply_uniform_min_width(char_column_defs,    min_width_global)
-      info_column_defs     <- apply_uniform_min_width(info_column_defs,    min_width_global)
 
       # Build JS array of info column names for popup
       info_cols_js <- paste0("['", paste(info_cols, collapse = "','"), "']")
@@ -449,7 +436,7 @@ mod_feat_fil_server <- function(id, data) {
               minWidth = min_width_global,
               cell = function(value) {
                 if (!is.na(value) && nzchar(value)) {
-                  htmltools::tags$a(
+                  tags$a(
                     href = value,
                     target = "_blank",
                     "Visit website"
@@ -474,6 +461,13 @@ mod_feat_fil_server <- function(id, data) {
         fullWidth     = TRUE,
         striped       = FALSE,
         defaultSorted = "manufacturer",
+        defaultColDef = colDef(
+          footer = function(values, name) {
+            if (nrow(df) > 10)
+              strong(unname(rename_map[name]))
+            else NULL
+          }
+        ),
         style         = list(maxHeight = "1000px", overflowY = "auto"),
 
         # --- Custom click handler for popup details ---
@@ -504,16 +498,85 @@ mod_feat_fil_server <- function(id, data) {
       )
     })
 
-    # --- 9. Download filter settings (Excel, ";" separators) ----
     # --- 10. Download filtered results (Excel) ----
     output$download_data <- downloadHandler(
-      filename = function() paste0("sia_filtered_results_", format(Sys.Date(), "%Y%m%d"), ".xlsx"),
+      filename = function() {
+        paste0("sia_feature_filter_data_", format(Sys.Date(), "%Y%m%d"), ".xlsx")
+      },
       content = function(file) {
-        # Use the filtered data you display in the reactable
+        # Use the same data as the table: filtered + info
         df_out <- filtered_data() %>%
-          left_join(df_sia_shiny_info, by = "device_id")
+          left_join(df_sia_shiny_info, by = "device_id") %>%
+          as.data.frame()
 
-        # Create citation sheet
+        # Optional: format release_year nicely for export
+        if ("release_year" %in% names(df_out)) {
+          df_out$release_year <- format(df_out$release_year, "%Y")
+        }
+
+        citation_text <- data.frame(
+          Citation = c(
+            "Thank you for using the Stress-in-Action Wearable Database!",
+            "If you use the SiA-WD and/or this web app you must cite:",
+            "Schoenmakers M, Saygin M, Sikora M, Vaessen T, Noordzij M, de Geus E.",
+            "Stress in action wearables database: A database of noninvasive wearable monitors with systematic technical, reliability, validity, and usability information.",
+            "Behav Res Methods. 2025 May 13;57(6):171.",
+            "doi: 10.3758/s13428-025-02685-4. PMID: 40360861; PMCID: PMC12075381.",
+            "[Shiny paper coming soon]"
+          ),
+          check.names = FALSE
+        )
+
+        write_xlsx(
+          list(
+            "Filtered_Devices" = df_out,
+            "Citations"         = citation_text
+          ),
+          path = file
+        )
+      },
+      contentType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+    )
+
+
+    # --- 11. Download filter settings (Excel) ----
+    output$download_filter_settings <- downloadHandler(
+      filename = function() {
+        paste0("sia_filter_settings_", format(Sys.Date(), "%Y%m%d"), ".xlsx")
+      },
+      content = function(file) {
+        settings <- list()
+
+        # Sliders: store "min;max"
+        for (var in range_vars) {
+          range_vals <- as.integer(round(input[[var]]))
+          settings[[var]] <- paste(range_vals[1], range_vals[2], sep = ";")
+        }
+
+        # Checkboxes: "YES" if selected, "YES;NO" if not (no restriction)
+        for (var in checkbox_vars) {
+          settings[[var]] <- if (isTRUE(input[[var]])) "yes" else "yes;no"
+        }
+
+        # SelectInputs: chosen values separated by ";"
+        for (var in select_inputs) {
+          settings[[var]] <- paste(input[[var]], collapse = ";")
+        }
+
+        # Release year range (YYYY;YYYY)
+        settings[["release_year"]] <- paste(
+          format(input$release_year[1], "%Y"),
+          format(input$release_year[2], "%Y"),
+          sep = ";"
+        )
+
+        # Exclude NA SiA (same YES / YES;NO logic)
+        settings[["exclude_na_sia"]] <- if (isTRUE(input$exclude_na_sia)) "yes" else "yes;no"
+
+        # Convert list → one-row data.frame
+        df_settings <- data.frame(t(unlist(settings)), check.names = FALSE)
+        names(df_settings) <- names(settings)
+
         citation_df <- data.frame(
           Citation = c(
             "Thank you for using the SiA-WD!",
@@ -527,17 +590,17 @@ mod_feat_fil_server <- function(id, data) {
           check.names = FALSE
         )
 
-        # Write both sheets to Excel
-        writexl::write_xlsx(
+        write_xlsx(
           list(
-            "Filtered results" = df_out,
-            "Citation"         = citation_df
+            "Filter settings" = df_settings,
+            "Citations"        = citation_df
           ),
           path = file
         )
       },
       contentType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
     )
+
 
 
   })
