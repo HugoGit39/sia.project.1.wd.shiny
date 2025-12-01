@@ -268,7 +268,7 @@ mod_feat_fil_server <- function(id, data) {
     ns <- session$ns
 
     # Columns that live in df_sia_shiny_info (everything except device_id)
-    info_cols <- setdiff(names(df_sia_shiny_info), "device_id")
+    info_cols <- setdiff(names(df_sia_shiny_info),c("device_id"))
 
     # --- 1. Variable groups (reuse from global.R) ----
     range_vars   <- setdiff(c(bar_vars, numeric_vars), "weight_gr")
@@ -381,7 +381,8 @@ mod_feat_fil_server <- function(id, data) {
         "model",
         "long_term_all_score",
         "short_term_all_score",
-        "details"
+        "details",
+        "website"
       )
       other_cols <- setdiff(names(df), front_cols)
       df <- df[, c(front_cols, other_cols)]
@@ -411,21 +412,21 @@ mod_feat_fil_server <- function(id, data) {
               sticky = "left",
               style = sticky_style,
               headerStyle = sticky_style,
-              minWidth = min_width_global
+              minWidth = 141
             ),
             model = colDef(
               name = "Model",
               sticky = "left",
               style = sticky_style,
               headerStyle = sticky_style,
-              minWidth = min_width_global
+              minWidth = 141
             ),
             details = colDef(
               name = "Details",
               sortable = FALSE,
               filterable = FALSE,
-              minWidth = min_width_global,
-              cell = function() htmltools::tags$button(
+              minWidth = 141,
+              cell = function() tags$button(
                 "More details",
                 class = "btn btn-sm btn-outline-primary"
               )
@@ -433,7 +434,7 @@ mod_feat_fil_server <- function(id, data) {
             website = colDef(
               name = "Website",
               sortable = FALSE,
-              minWidth = min_width_global,
+              minWidth = 141,
               cell = function(value) {
                 if (!is.na(value) && nzchar(value)) {
                   tags$a(

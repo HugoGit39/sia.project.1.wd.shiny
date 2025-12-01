@@ -261,7 +261,7 @@ mod_prod_fil_server <- function(id, df_sia_shiny_filters) {
           )
         )
 
-        writexl::write_xlsx(
+        write_xlsx(
           list("Selected_Devices" = export_df, "Citation" = citation_text),
           path = file
         )

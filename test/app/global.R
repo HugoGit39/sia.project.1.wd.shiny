@@ -103,8 +103,11 @@ char_vars <- setdiff(
 
 #  * 9 Mandatory fields ---------------------------
 
-fieldsMandatory_data <- c("name","email","manufacturer","model","website","market_status","main_use",
-                          "device_cost","wearable_type","location","weight","size")
+fieldsMandatory_data <- c(
+  "name", "email", "manufacturer", "model",
+  "market_status", "main_use", "device_cost",
+  "wearable_type", "location", "weight_gr", "size_mm"
+)
 
 # IDs that must NOT contain digits or CSV delimiters
 char_no_digit_ids <- c(
@@ -172,7 +175,6 @@ rename_map <- c(
   "usability_evidence_level" = "Usability Evidence Level",
   "validity_and_reliability_evidence_level" = "Validity & Reliability Evidence Level"
 )
-
 
 # * * 10.1 Submit data ---------------------------
 
@@ -390,4 +392,22 @@ disconnected <- tagList(
   p("Just hit refresh to continue", br(),
     "where you left off!", style = "font-size:16px")
 )
+
+# ---- Helper: dropdown + free text -------------------------------------------
+# Helper: dropdown with autocomplete + free text option
+text_or_selectize <- function(inputId, label, df, col) {
+  vals <- sort(unique(na.omit(df[[col]])))
+  selectizeInput(
+    inputId,
+    label,
+    choices = vals,
+    selected = "",  # nothing preselected
+    multiple = FALSE,
+    options = list(
+      create = TRUE,             # allows free text input
+      placeholder = "Click for options or type + press Enter",
+      onInitialize = I('function() { this.clear(); }')  # ensure starts empty
+    )
+  )
+}
 
