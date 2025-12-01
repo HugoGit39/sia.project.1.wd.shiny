@@ -42,9 +42,15 @@ mod_prod_fil_ui <- function(id) {
             style = "text-align: center; margin-bottom: 10px;",
             actionButton(
               inputId = ns("reset_prod_filter"),
-              label = "Reset Product 3",
-              class = "btn btn-danger btn-sm",
-              style = "border-width: 2px;"
+              label = "Reset Filter",
+              status = "danger",
+              outline = TRUE,
+              size = "sm",
+              flat = TRUE,
+              icon = NULL,
+              block = TRUE,
+              width = "50%",
+              style = "border-width: 2px"
             )
           ),
 
@@ -71,12 +77,19 @@ mod_prod_fil_ui <- function(id) {
           # --- Glossary Info + Download Button ----
           div(
             style = "display: flex; justify-content: center; gap: 10px; margin-bottom: 15px;",
-            actionButton(
+            bs4Dash::actionButton(
               inputId = ns("glossary_info"),
-              label = "Table Information",
-              icon = icon("info-circle"),
-              class = "btn btn-outline-secondary btn-sm glossary-info-btn",  # important class for JS hook
-              style = "border-width: 2px;"
+              label   = tagList(
+                icon("info-circle", style = "color: #1c75bc;"),  # SiA blue icon
+                "Table Information"
+              ),
+              status  = "success",      # teal color
+              outline = TRUE,
+              size    = "sm",
+              flat    = TRUE,
+              width   = "20%",
+              class   = "glossary-info-btn",   # <--- ADD THIS BACK
+              style   = "border-width: 2px;"
             ),
             downloadButton(ns("download_data"), "Download Filtered Products")
           ),

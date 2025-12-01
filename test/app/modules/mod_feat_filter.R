@@ -231,12 +231,24 @@ mod_feat_fil_ui <- function(id) {
               style = "display: flex; justify-content: center; gap: 10px; margin-bottom: 15px;",
               actionButton(
                 inputId = ns("glossary_info"),
-                label = "Table Information",
-                icon = icon("info-circle"),
-                class = "btn btn-outline-secondary btn-sm glossary-info-btn",
-                style = "border-width: 2px;"
+                label   = tagList(
+                  icon("info-circle", style = "color: #1c75bc;"),  # SiA blue icon
+                  "Table Information"
+                ),
+                status  = "success",      # teal color
+                outline = TRUE,
+                size    = "sm",
+                flat    = TRUE,
+                width   = "20%",
+                class   = "glossary-info-btn",   # <--- ADD THIS BACK
+                style   = "border-width: 2px;"
               ),
-              downloadButton(ns("download_data"), "Download Filtered Results")
+              downloadButton(
+                outputId = ns("download_data"),
+                label    = "Download Filtered Results",
+                class    = "btn btn-outline-secondary btn-sm",
+                style    = "border-width: 2px;"
+              )
             ),
             reactableOutput(ns("feat_filtered_table")) %>% withSpinner(),
             footer = tags$div(
@@ -497,6 +509,7 @@ mod_feat_fil_server <- function(id, data) {
     })
 
     # --- 10. Download filtered results (Excel) ----
+    # --- 10. Download filtered results (Excel) ----
     output$download_data <- downloadHandler(
       filename = function() {
         paste0("sia_feature_filter_data_", format(Sys.Date(), "%Y%m%d"), ".xlsx")
@@ -535,7 +548,6 @@ mod_feat_fil_server <- function(id, data) {
       },
       contentType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
     )
-
 
     # --- 11. Download filter settings (Excel) ----
     output$download_filter_settings <- downloadHandler(
@@ -598,8 +610,6 @@ mod_feat_fil_server <- function(id, data) {
       },
       contentType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
     )
-
-
 
   })
 }

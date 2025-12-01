@@ -10,7 +10,7 @@
 required_packages <- c(
   "shiny", "bs4Dash", "here", "dplyr", "rlang", "scales", "fresh", "lubridate",
   "shinySearchbar", "emayili", "shinyjs", "sever", "shinycssloaders", "shinyWidgets",
-  "reactablefmtr", "reactable", "htmltools", "htmlwidgets"
+  "reactablefmtr", "reactable", "htmltools", "htmlwidgets", "writexl"
 )
 
 #check if installed and load
