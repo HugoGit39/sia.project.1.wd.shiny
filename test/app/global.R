@@ -105,26 +105,14 @@ char_vars <- setdiff(
 
 #  * 9 Mandatory fields ---------------------------
 
+# 1. data
 fieldsMandatory_data <- c(
   "name", "email", "manufacturer", "model",
   "market_status", "main_use", "device_cost",
   "wearable_type", "location", "weight_gr", "size_mm"
 )
 
-# IDs that must NOT contain digits or CSV delimiters
-char_no_digit_ids <- c(
-  "name","market_status","main_use","wearable_type","location",
-  "other_signals","data_trans_method"
-)
-
-# you already have char_vars defined elsewhere
-csv_only_ids <- union(setdiff(char_vars, char_no_digit_ids), "additional_information")
-
-char_no_digit_mand <- intersect(char_no_digit_ids, fieldsMandatory_data)
-
-csv_delims_pattern <- "[,]"
-
-# * * 9.2 email
+# 2. email
 fieldsMandatory_email <- c("name", "email", "message")
 
 # * 10 Rename table variables ---------------------------
