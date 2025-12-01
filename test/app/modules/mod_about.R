@@ -86,43 +86,63 @@ mod_about_ui <- function(id) {
     )
   ),
   fluidRow(
-    column(width = 4,
-           div(
-           style = "margin-top: 125px;",
-             bs4Card(
-               title = "App Maintenance",
-               status = "secondary",
-               solidHeader = TRUE,
-               width = 12,
-               collapsible = FALSE,
-               headerBorder = FALSE,
-               p("This application is a publication of the department of Biological Psychology at the VU Amsterdam Amsterdam.", style = "text-align: justify;"),
-               p(
-                 a(
-                   href = "https://stress-in-action.nl/hugo-klarenberg/",
-                   target = "_blank",
-                   img(
-                     src = "favicon.ico",
-                     style = "width:25px; height:25px; vertical-align:middle; margin-right:5px;"
-                   )
-                 ),
-                 "Hugo Klarenberg, PhD - Post Doc VU Amsterdam"
-               ),
-               p("Faculty of Behavioural and Human Movement Sciences", br(),
-                 "Department of Biological Psychology", br(),
-                 "Van der Boechorststraat 7", br(),
-                 "1081 BT Amsterdam", br(),
-                 "Email: disc[at]stress-in-action.nl", br(),
-                 "Website: ",
-                   a(
-                     href = "https://vu.nl/en/about-vu/faculties/faculty-of-behavioural-and-movement-sciences/departments/biological-psychology",
-                     target = "_blank",
-                     "Department of Biological Psychology"
-                   )
-                 ),
-               p("We kindly ask you to report bugs or function requests via email.", style = "text-align: justify;")
-               )
-           )
+    column(
+      width = 4,
+      div(
+        style = "margin-top: 125px;",
+        bs4Card(
+          title = "App Maintenance",
+          status = "secondary",
+          solidHeader = TRUE,
+          width = 12,
+          collapsible = FALSE,
+          headerBorder = FALSE,
+          p(
+            "This application is a publication of the department of Biological Psychology at the VU Amsterdam Amsterdam.",
+            style = "text-align: justify;"
+          ),
+          p(
+            # Gauge / SiA icon
+            a(
+              href = "https://stress-in-action.nl/hugo-klarenberg/",
+              target = "_blank",
+              img(
+                src = "favicon.ico",
+                style = "width:25px; height:25px; vertical-align:middle; margin-right:5px;"
+              )
+            ),
+            # LinkedIn icon
+            a(
+              href = "https://www.linkedin.com/in/hugo-k-536a2677/",
+              target = "_blank",
+              img(
+                src = "linkedin_sia.png",
+                style = "width:25px; height:25px; vertical-align:middle; margin-left:5px;",
+                alt = "LinkedIn"
+              )
+            ),
+            br(),
+            "Hugo Klarenberg, PhD - Post Doc VU Amsterdam"
+          ),
+          p(
+            "Faculty of Behavioural and Human Movement Sciences", br(),
+            "Department of Biological Psychology", br(),
+            "Van der Boechorststraat 7", br(),
+            "1081 BT Amsterdam", br(),
+            "Email: disc[at]stress-in-action.nl", br(),
+            "Website: ",
+            a(
+              href = "https://vu.nl/en/about-vu/faculties/faculty-of-behavioural-and-movement-sciences/departments/biological-psychology",
+              target = "_blank",
+              "Department of Biological Psychology"
+            )
+          ),
+          p(
+            "We kindly ask you to report bugs or function requests via email.",
+            style = "text-align: justify;"
+          )
+        )
+      )
     ),
     column(width = 1),
     column(width = 2,
