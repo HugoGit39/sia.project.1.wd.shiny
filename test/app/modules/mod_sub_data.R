@@ -1,8 +1,9 @@
 ############################################################################################
 #
-#  Module for submit data
+# Module for submit data
 #
 # Stress in Action 2025
+#
 ############################################################################################
 
 # Submit Data Module (UI)
@@ -16,127 +17,133 @@ mod_sub_data_ui <- function(id) {
       # -------------------------------------------------------------------
       column(
         width = 4,
-        bs4Card(
-          title = "1. Draft Form",
-          status = "primary",
-          width = 12,
-          solidHeader = TRUE,
-          collapsible = FALSE,
-          div(
-            p(
-              "The draft updates live as you type. Complete the mandatory fields ",
-              strong("*", style = "color: #CC6677;"),
-              " to enable submission.",
-              style = "text-align: justify;"
-            )
-          ),
-          textOutput(ns("status")),
-
-          # ---------------- Your Information ----------------
+        div(
+          style = "
+        max-height: calc(100vh - 100px);  /* adjust if you have navbar/footer */
+        overflow-y: auto;
+      ",
           bs4Card(
-            title = "Your Information",
-            status = "secondary",
+            title = "1. Draft Form",
+            status = "primary",
             width = 12,
+            solidHeader = TRUE,
             collapsible = FALSE,
-            textInput(ns("name"), labelMandatory("Name")),
-            textInput(ns("email"), labelMandatory("Email")),
-            uiOutput(ns("email_error")),
-            textInput(ns("telephone"), "Telephone"),
-            textInput(ns("institution"), "Institution")
-          ),
+            div(
+              p(
+                "The draft updates live as you type. Complete the mandatory fields ",
+                strong("*", style = "color: #CC6677;"),
+                " to enable submission.",
+                style = "text-align: justify;"
+              )
+            ),
+            textOutput(ns("status")),
 
-          # ---------------- General Device Information ----------------
-          bs4Card(
-            title = "General Device Information",
-            status = "secondary",
-            width = 12,
-            collapsible = FALSE,
-            text_or_selectize(ns("manufacturer"), labelMandatory("Manufacturer"), df_sia_shiny_filters, "manufacturer"),
-            uiOutput(ns("manufacturer_csv_error")),
-            textInput(ns("model"), labelMandatory("Model"), placeholder = "Click and type model name"),
-            textInput(ns("website"), labelMandatory("Website"), placeholder = "Click and paste or type URL https://"),
-            dateInput(ns("release_year"), "Release Year"),
-            text_or_selectize(ns("market_status"), labelMandatory("Market Status"), df_sia_shiny_filters, "market_status"),
-            text_or_selectize(ns("main_use"), labelMandatory("Main Use"), df_sia_shiny_filters, "main_use"),
-            numericInput(ns("device_cost"), labelMandatory("Device Cost (€)"), value = NA),
-            text_or_selectize(ns("wearable_type"), labelMandatory("Type"), df_sia_shiny_filters, "wearable_type"),
-            text_or_selectize(ns("location"), labelMandatory("Location"), df_sia_shiny_filters, "location"),
-            numericInput(ns("weight_gr"), labelMandatory("Weight (gr)"), value = NA),
-            textInput(ns("size_mm"), labelMandatory("Size"), placeholder = "Click and write LxWxH or DxH")
-          ),
+            # ---------------- Your Information ----------------
+            bs4Card(
+              title = "Your Information",
+              status = "secondary",
+              width = 12,
+              collapsible = FALSE,
+              textInput(ns("name"), labelMandatory("Name")),
+              textInput(ns("email"), labelMandatory("Email")),
+              uiOutput(ns("email_error")),
+              textInput(ns("telephone"), "Telephone"),
+              textInput(ns("institution"), "Institution")
+            ),
 
-          # ---------------- Technical Specifications ----------------
-          bs4Card(
-            title = "Technical Specifications",
-            status = "secondary",
-            width = 12,
-            collapsible = FALSE,
-            checkboxInput(ns("water_resistance_spec_boel_value"), "Water Resistant", value = FALSE),
-            numericInput(ns("battery_life_spec_num_value"), "Battery Life (hrs)", value = NA),
-            numericInput(ns("charging_duration_spec_num_value"), "Charging Duration (min)", value = NA),
-            checkboxInput(ns("bio_cueing_spec_boel_value"), "Bio Cueing", value = FALSE),
-            checkboxInput(ns("bio_feedback_spec_boel_value"), "Bio Feedback", value = FALSE)
-          ),
+            # ---------------- General Device Information ----------------
+            bs4Card(
+              title = "General Device Information",
+              status = "secondary",
+              width = 12,
+              collapsible = FALSE,
+              text_or_selectize(ns("manufacturer"), labelMandatory("Manufacturer"), df_sia_shiny_filters, "manufacturer"),
+              uiOutput(ns("manufacturer_csv_error")),
+              textInput(ns("model"), labelMandatory("Model"), placeholder = "Click and type model name"),
+              textInput(ns("website"), labelMandatory("Website"), placeholder = "Click and paste or type URL https://"),
+              dateInput(ns("release_year"), "Release Year"),
+              text_or_selectize(ns("market_status"), labelMandatory("Market Status"), df_sia_shiny_filters, "market_status"),
+              text_or_selectize(ns("main_use"), labelMandatory("Main Use"), df_sia_shiny_filters, "main_use"),
+              numericInput(ns("device_cost"), labelMandatory("Device Cost (€)"), value = NA),
+              text_or_selectize(ns("wearable_type"), labelMandatory("Type"), df_sia_shiny_filters, "wearable_type"),
+              text_or_selectize(ns("location"), labelMandatory("Location"), df_sia_shiny_filters, "location"),
+              numericInput(ns("weight_gr"), labelMandatory("Weight (gr)"), value = NA),
+              textInput(ns("size_mm"), labelMandatory("Size"), placeholder = "Click and write LxWxH or DxH")
+            ),
 
-          # ---------------- Signals ----------------
-          bs4Card(
-            title = "Signals",
-            status = "secondary",
-            width = 12,
-            collapsible = FALSE,
-            checkboxInput(ns("accelerometer_available"), "Accelerometer", value = FALSE),
-            checkboxInput(ns("bp_available"), "Blood Pressure", value = FALSE),
-            checkboxInput(ns("ecg_available"), "ECG", value = FALSE),
-            checkboxInput(ns("eda_available"), "EDA", value = FALSE),
-            checkboxInput(ns("eeg_available"), "EEG", value = FALSE),
-            checkboxInput(ns("emg_available"), "EMG", value = FALSE),
-            checkboxInput(ns("gps_available"), "GPS", value = FALSE),
-            checkboxInput(ns("gyroscope_available"), "Gyroscope", value = FALSE),
-            checkboxInput(ns("icg_available"), "ICG", value = FALSE),
-            checkboxInput(ns("ppg_available"), "PPG", value = FALSE),
-            checkboxInput(ns("respiration_available"), "Respiration", value = FALSE),
-            checkboxInput(ns("skin_temperature_available"), "Skin Temperature", value = FALSE)
-          ),
+            # ---------------- Technical Specifications ----------------
+            bs4Card(
+              title = "Technical Specifications",
+              status = "secondary",
+              width = 12,
+              collapsible = FALSE,
+              checkboxInput(ns("water_resistance_spec_boel_value"), "Water Resistant", value = FALSE),
+              numericInput(ns("battery_life_spec_num_value"), "Battery Life (hrs)", value = NA),
+              numericInput(ns("charging_duration_spec_num_value"), "Charging Duration (min)", value = NA),
+              checkboxInput(ns("bio_cueing_spec_boel_value"), "Bio Cueing", value = FALSE),
+              checkboxInput(ns("bio_feedback_spec_boel_value"), "Bio Feedback", value = FALSE)
+            ),
 
-          # ---------------- Data Access ----------------
-          bs4Card(
-            title = "Data Access",
-            status = "secondary",
-            width = 12,
-            collapsible = FALSE,
-            checkboxInput(ns("raw_data_available_spec_boel_value"), "Raw Data Available", value = FALSE),
-            checkboxInput(ns("int_storage_met_spec_boel_value"), "Internal Storage", value = FALSE),
-            checkboxInput(ns("server_data_storage_spec_boel_value"), "Server Storage", value = FALSE),
-            numericInput(ns("dev_storage_cap_mb_spec_num_value"), "Storage Capacity (MB)", value = NA),
-            numericInput(ns("dev_storage_cap_hr_spec_num_value"), "Storage Capacity (hrs)", value = NA),
-            checkboxInput(ns("gdpr_compliance_spec_boel_value"), "GDPR Compliant", value = FALSE),
-            checkboxInput(ns("fda_clearance_spec_boel_value"), "FDA Cleared", value = FALSE),
-            checkboxInput(ns("ce_marking_spec_boel_value"), "CE Marked", value = FALSE)
-          ),
+            # ---------------- Signals ----------------
+            bs4Card(
+              title = "Signals",
+              status = "secondary",
+              width = 12,
+              collapsible = FALSE,
+              checkboxInput(ns("accelerometer_available"), "Accelerometer", value = FALSE),
+              checkboxInput(ns("bp_available"), "Blood Pressure", value = FALSE),
+              checkboxInput(ns("ecg_available"), "ECG", value = FALSE),
+              checkboxInput(ns("eda_available"), "EDA", value = FALSE),
+              checkboxInput(ns("eeg_available"), "EEG", value = FALSE),
+              checkboxInput(ns("emg_available"), "EMG", value = FALSE),
+              checkboxInput(ns("gps_available"), "GPS", value = FALSE),
+              checkboxInput(ns("gyroscope_available"), "Gyroscope", value = FALSE),
+              checkboxInput(ns("icg_available"), "ICG", value = FALSE),
+              checkboxInput(ns("ppg_available"), "PPG", value = FALSE),
+              checkboxInput(ns("respiration_available"), "Respiration", value = FALSE),
+              checkboxInput(ns("skin_temperature_available"), "Skin Temperature", value = FALSE)
+            ),
 
-          # ---------------- Validation, Reliability & Usability ----------------
-          bs4Card(
-            title = "Validation, Reliability & Usability",
-            status = "secondary",
-            width = 12,
-            collapsible = FALSE,
-            numericInput(ns("usability_n_of_studies"), "# Usability Studies", value = NA),
-            numericInput(ns("validity_and_reliability_n_of_studies"), "# Validity & Reliability Studies", value = NA),
-            text_or_selectize(ns("usability_evidence_level"), "Usability Evidence Level", df_sia_shiny_filters, "usability_evidence_level"),
-            text_or_selectize(ns("validity_and_reliability_evidence_level"), "Validity & Reliability Evidence Level", df_sia_shiny_filters, "validity_and_reliability_evidence_level")
-          ),
+            # ---------------- Data Access ----------------
+            bs4Card(
+              title = "Data Access",
+              status = "secondary",
+              width = 12,
+              collapsible = FALSE,
+              checkboxInput(ns("raw_data_available_spec_boel_value"), "Raw Data Available", value = FALSE),
+              checkboxInput(ns("int_storage_met_spec_boel_value"), "Internal Storage", value = FALSE),
+              checkboxInput(ns("server_data_storage_spec_boel_value"), "Server Storage", value = FALSE),
+              numericInput(ns("dev_storage_cap_mb_spec_num_value"), "Storage Capacity (MB)", value = NA),
+              numericInput(ns("dev_storage_cap_hr_spec_num_value"), "Storage Capacity (hrs)", value = NA),
+              checkboxInput(ns("gdpr_compliance_spec_boel_value"), "GDPR Compliant", value = FALSE),
+              checkboxInput(ns("fda_clearance_spec_boel_value"), "FDA Cleared", value = FALSE),
+              checkboxInput(ns("ce_marking_spec_boel_value"), "CE Marked", value = FALSE)
+            ),
 
-          # ---------------- Further Details ----------------
-          bs4Card(
-            title = "Further Details",
-            status = "secondary",
-            width = 12,
-            collapsible = FALSE,
-            textAreaInput(
-              ns("additional_information"),
-              "Additional Information",
-              rows = 4,
-              placeholder = "e.g. charging methods, data transfer methods, water resistance depth, sampling rates, other signals etc."
+            # ---------------- Validation, Reliability & Usability ----------------
+            bs4Card(
+              title = "Validation, Reliability & Usability",
+              status = "secondary",
+              width = 12,
+              collapsible = FALSE,
+              numericInput(ns("usability_n_of_studies"), "# Usability Studies", value = NA),
+              numericInput(ns("validity_and_reliability_n_of_studies"), "# Validity & Reliability Studies", value = NA),
+              text_or_selectize(ns("usability_evidence_level"), "Usability Evidence Level", df_sia_shiny_filters, "usability_evidence_level"),
+              text_or_selectize(ns("validity_and_reliability_evidence_level"), "Validity & Reliability Evidence Level", df_sia_shiny_filters, "validity_and_reliability_evidence_level")
+            ),
+
+            # ---------------- Further Details ----------------
+            bs4Card(
+              title = "Further Details",
+              status = "secondary",
+              width = 12,
+              collapsible = FALSE,
+              textAreaInput(
+                ns("additional_information"),
+                "Additional Information",
+                rows = 4,
+                placeholder = "e.g. charging methods, data transfer methods, water resistance depth, sampling rates, other signals etc."
+              )
             )
           )
         )
@@ -147,33 +154,41 @@ mod_sub_data_ui <- function(id) {
       # -------------------------------------------------------------------
       column(
         width = 4,
-        bs4Card(
-          title = "2. Check Draft Form",
-          status = "primary",
-          width = 12,
-          solidHeader = TRUE,
-          collapsible = FALSE,
-          p("Please verify that provided fields are correct, then slide the toggle to enable submission.",
-            style = "text-align: justify;"),
-          p(
-            switchInput(
-              inputId   = ns("draft_ok"),
-              onLabel   = "YES",
-              offLabel  = "NO",
-              value     = FALSE,
-              size      = "sm",
-              onStatus  = "secondary",
-              offStatus = "primary"
-            )
-          ),
-          p(strong("All required fields complete?")),
+        div(
+          style = "
+      max-height: calc(100vh - 100px);  /* adjust if you have navbar/footer */
+      overflow-y: auto;
+    ",
           bs4Card(
-            title = "Draft Form Output",
+            title = "2. Check Draft Form",
+            status = "primary",
             width = 12,
-            status = "secondary",
             solidHeader = TRUE,
             collapsible = FALSE,
-            reactableOutput(ns("draft_table")) %>% withSpinner()
+            p(
+              "Please verify that provided fields are correct, then slide the toggle to enable submission.",
+              style = "text-align: justify;"
+            ),
+            p(
+              switchInput(
+                inputId   = ns("draft_ok"),
+                onLabel   = "YES",
+                offLabel  = "NO",
+                value     = FALSE,
+                size      = "sm",
+                onStatus  = "secondary",
+                offStatus = "primary"
+              )
+            ),
+            p(strong("All required fields complete?")),
+            bs4Card(
+              title = "Draft Form Output",
+              width = 12,
+              status = "secondary",
+              solidHeader = TRUE,
+              collapsible = FALSE,
+              reactableOutput(ns("draft_table")) %>% withSpinner()
+            )
           )
         )
       ),

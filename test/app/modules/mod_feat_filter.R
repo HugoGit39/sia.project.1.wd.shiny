@@ -1,8 +1,9 @@
 ############################################################################################
 #
-#  Module for feature filter (extensive)
+# Module for feature filter
 #
 # Stress in Action 2025
+#
 #############################################################################################
 
 # Feature Filter Module (UI)
@@ -13,260 +14,259 @@ mod_feat_fil_ui <- function(id) {
     fluidRow(
       column(
         width = 3,
-        bs4Card(
-          title = "Feature Filter",
-          status = "primary",
-          width = 12,
-          collapsible = FALSE,
-          solidHeader = TRUE,
-          div(
-            style = "text-align: center; margin-bottom: 10px;",
-            downloadButton(ns("download_filter_settings"), "Download Filter Settings")
-          ),
-          div(
-            style = "text-align: center; margin-bottom: 10px;",
-            actionButton(
-              inputId = ns("reset_feat_filter"),
-              label = "Reset Filter",
-              status = "danger",
-              outline = TRUE,
-              size = "sm",
-              flat = TRUE,
-              icon = NULL,
-              block = TRUE,
-              width = "50%",
-              style = "border-width: 2px"
-            )
-          ),
-
-          # * SiA Expert Scores ----
-          bs4Card(
-            title = "SiA Expert Score",
-            width = 12,
-            status = "secondary",
-            solidHeader = TRUE,
-            collapsible = FALSE,
-            sliderInput(
-              ns("long_term_all_score"),
-              label = "Long-Term Expert Score",
-              min   = 0,
-              max   = 10,
-              value = c(0, 10),
-              step  = 0.1
-            ),
-            sliderInput(
-              ns("short_term_all_score"),
-              label = "Short-Term Expert Score",
-              min   = 0,
-              max   = 10,
-              value = c(0, 10),
-              step  = 0.1
-            ),
-            div(
-              tags$label("Exclude missing SiA scores"),
-              switchInput(
-                inputId = ns("exclude_na_sia"),
-                onLabel = "YES", offLabel = "NO",
-                value = FALSE, size = "sm",
-                onStatus = "secondary", offStatus = "primary"
-              )
-            )
-          ),
-
-          # * General Device Information ----
-          bs4Card(
-            title = "General Device Information",
-            width = 12,
-            status = "secondary",
-            collapsible = FALSE,
-            selectInput(ns("manufacturer"), "Manufacturer", choices = NULL, multiple = TRUE),
-            selectInput(ns("model"), "Model", choices = NULL, multiple = TRUE),
-            airDatepickerInput(
-              ns("release_year"),
-              "Release Year Range",
-              range = TRUE,
-              view = "years",
-              minView = "years",
-              dateFormat = "yyyy",
-              value = c(min(df_sia_shiny_filters$release_year, na.rm = TRUE),
-                        max(df_sia_shiny_filters$release_year, na.rm = TRUE))
-            ),
-            selectInput(ns("market_status"), "Market Status", choices = NULL, multiple = TRUE),
-            selectInput(ns("main_use"), "Main Use", choices = NULL, multiple = TRUE),
-            sliderInput(
-              ns("device_cost"),
-              label = "Device Cost (€)",
-              min   = 0,
-              max   = max(df_sia_shiny_filters$device_cost, na.rm = TRUE),
-              value = c(0, max(df_sia_shiny_filters$device_cost, na.rm = TRUE)),
-              step  = 1
-            ),
-            selectInput(ns("wearable_type"), "Type", choices = NULL, multiple = TRUE),
-            selectInput(ns("location"), "Location", choices = NULL, multiple = TRUE)
-          ),
-
-          # * Technical Specifications ----
-          bs4Card(
-            title = "Technical Specifications",
-            width = 12,
-            status = "secondary",
-            collapsible = FALSE,
-            prettyCheckbox(ns("water_resistance_spec_boel_value"), label = "Water Resistant", icon = icon("check"), status = "primary"),
-            sliderInput(
-              ns("battery_life_spec_num_value"),
-              label = "Battery Life (hrs)",
-              min   = 0,
-              max   = max(df_sia_shiny_filters$battery_life_spec_num_value, na.rm = TRUE),
-              value = c(0, max(df_sia_shiny_filters$battery_life_spec_num_value, na.rm = TRUE)),
-              step  = 1
-            ),
-            sliderInput(
-              ns("charging_duration_spec_num_value"),
-              label = "Charging Duration (min)",
-              min   = 0,
-              max   = max(df_sia_shiny_filters$charging_duration_spec_num_value, na.rm = TRUE),
-              value = c(0, max(df_sia_shiny_filters$charging_duration_spec_num_value, na.rm = TRUE)),
-              step  = 1
-            ),
-            prettyCheckbox(ns("bio_cueing_spec_boel_value"), label = "Bio Cueing", icon = icon("check"), status = "primary"),
-            prettyCheckbox(ns("bio_feedback_spec_boel_value"), label = "Bio Feedback", icon = icon("check"), status = "primary")
-          ),
-
-          # * Signals ----
-          bs4Card(
-            title = "Signals",
-            width = 12,
-            status = "secondary",
-            collapsible = FALSE,
-            prettyCheckbox(ns("accelerometer_available"), label = "Accelerometer", icon = icon("check"), status = "primary"),
-            prettyCheckbox(ns("bp_available"), label = "Blood Pressure", icon = icon("check"), status = "primary"),
-            prettyCheckbox(ns("ecg_available"), label = "ECG", icon = icon("check"), status = "primary"),
-            prettyCheckbox(ns("eda_available"), label = "EDA", icon = icon("check"), status = "primary"),
-            prettyCheckbox(ns("eeg_available"), label = "EEG", icon = icon("check"), status = "primary"),
-            prettyCheckbox(ns("emg_available"), label = "EMG", icon = icon("check"), status = "primary"),
-            prettyCheckbox(ns("gps_available"), label = "GPS", icon = icon("check"), status = "primary"),
-            prettyCheckbox(ns("gyroscope_available"), label = "Gyroscope", icon = icon("check"), status = "primary"),
-            prettyCheckbox(ns("icg_available"), label = "ICG", icon = icon("check"), status = "primary"),
-            prettyCheckbox(ns("ppg_available"), label = "PPGNo fuckface ", icon = icon("check"), status = "primary"),
-            prettyCheckbox(ns("respiration_available"), label = "Respiration", icon = icon("check"), status = "primary"),
-            prettyCheckbox(ns("skin_temperature_available"), label = "Skin Temperature", icon = icon("check"), status = "primary"),
-            prettyCheckbox(ns("other_signals_available"), label = "Other Signals", icon = icon("check"), status = "primary")
-          ),
-
-          # * Data Access ----
-          bs4Card(
-            title = "Data Access",
-            width = 12,
-            status = "secondary",
-            collapsible = FALSE,
-            prettyCheckbox(ns("raw_data_available_spec_boel_value"), label = "Raw Data Available", icon = icon("check"), status = "primary"),
-            prettyCheckbox(ns("int_storage_met_spec_boel_value"), label = "Internal Storage", icon = icon("check"), status = "primary"),
-            prettyCheckbox(ns("server_data_storage_spec_boel_value"), label = "Server Storage", icon = icon("check"), status = "primary"),
-            sliderInput(
-              ns("dev_storage_cap_mb_spec_num_value"),
-              label = "Storage Capacity (MB)",
-              min   = 0,
-              max   = max(df_sia_shiny_filters$dev_storage_cap_mb_spec_num_value, na.rm = TRUE),
-              value = c(0, max(df_sia_shiny_filters$dev_storage_cap_mb_spec_num_value, na.rm = TRUE)),
-              step  = 1
-            ),
-            sliderInput(
-              ns("dev_storage_cap_hr_spec_num_value"),
-              label = "Storage Capacity (hrs)",
-              min   = 0,
-              max   = max(df_sia_shiny_filters$dev_storage_cap_hr_spec_num_value, na.rm = TRUE),
-              value = c(0, max(df_sia_shiny_filters$dev_storage_cap_hr_spec_num_value, na.rm = TRUE)),
-              step  = 1
-            ),
-            prettyCheckbox(ns("gdpr_compliance_spec_boel_value"), label = "GDPR Compliant", icon = icon("check"), status = "primary"),
-            prettyCheckbox(ns("fda_clearance_spec_boel_value"), label = "FDA Cleared", icon = icon("check"), status = "primary"),
-            prettyCheckbox(ns("ce_marking_spec_boel_value"), label = "CE Marked", icon = icon("check"), status = "primary")
-          ),
-
-          # * Validation, Reliability & Usability ----
-          bs4Card(
-            title = "Validation, Reliability & Usability",
-            width = 12,
-            status = "secondary",
-            collapsible = FALSE,
-            sliderInput(
-              ns("usability_n_of_studies"),
-              label = "# Usability Studies",
-              min   = 0,
-              max   = max(df_sia_shiny_filters$usability_n_of_studies, na.rm = TRUE),
-              value = c(0, max(df_sia_shiny_filters$usability_n_of_studies, na.rm = TRUE)),
-              step  = 1
-            ),
-            sliderInput(
-              ns("validity_and_reliability_n_of_studies"),
-              label = "# Validity & Reliability Studies",
-              min   = 0,
-              max   = max(df_sia_shiny_filters$validity_and_reliability_n_of_studies, na.rm = TRUE),
-              value = c(0, max(df_sia_shiny_filters$validity_and_reliability_n_of_studies, na.rm = TRUE)),
-              step  = 1
-            ),
-            selectInput(ns("usability_evidence_level"), "Usability Evidence Level", choices = NULL, multiple = TRUE),
-            selectInput(ns("validity_and_reliability_evidence_level"), "Validity & Reliability Evidence Level", choices = NULL, multiple = TRUE)
-          )
-        )
-      ),
-
-      # * Filtered results panel ----
-      column(
-        width = 9,
         div(
           style = "
-      position: -webkit-sticky;
-      position: sticky;
-      top: 15px;
-      z-index: 10;
-    ",
+            max-height: calc(100vh - 100px);  /* adjust if you have navbar/footer */
+            overflow-y: auto;
+          ",
           bs4Card(
-            title = "Filtered Results",
+            title = "Feature Filter",
             status = "primary",
             width = 12,
             collapsible = FALSE,
             solidHeader = TRUE,
             div(
-              style = "display: flex; justify-content: center; gap: 10px; margin-bottom: 15px;",
+              style = "text-align: center; margin-bottom: 10px;",
+              downloadButton(ns("download_filter_settings"), "Download Filter Settings")
+            ),
+            div(
+              style = "text-align: center; margin-bottom: 10px;",
               actionButton(
-                inputId = ns("glossary_info"),
-                label   = tagList(
-                  icon("info-circle", style = "color: #1c75bc;"),  # SiA blue icon
-                  "Table Information"
-                ),
-                status  = "success",      # teal color
+                inputId = ns("reset_feat_filter"),
+                label = "Reset Filter",
+                status = "danger",
                 outline = TRUE,
-                size    = "sm",
-                flat    = TRUE,
-                width   = "20%",
-                class   = "glossary-info-btn",   # <--- ADD THIS BACK
-                style   = "border-width: 2px;"
-              ),
-              downloadButton(
-                outputId = ns("download_data"), "Download Filtered Results",
+                size = "sm",
+                flat = TRUE,
+                icon = NULL,
+                block = TRUE,
+                width = "50%",
+                style = "border-width: 2px"
               )
             ),
-            reactableOutput(ns("feat_filtered_table")) %>% withSpinner(),
-            footer = div(
-              "Source: Schoenmakers M, Saygin M, Sikora M, Vaessen T, Noordzij M, de Geus E. ",
-              "Stress in action wearables database: A database of noninvasive wearable monitors with systematic technical, reliability, validity, and usability information. ",
-              em("Behav Res Methods."),
-              " 2025 May 13;57(6):171. doi: ",
-              a(href = "https://link.springer.com/article/10.3758/s13428-025-02685-4",
-                     target = "_blank", "10.3758/s13428-025-02685-4"),
-              "; PMID: 40360861; PMCID: ",
-              a(href = "https://pmc.ncbi.nlm.nih.gov/articles/PMC12075381/",
-                     target = "_blank", "PMC12075381"),
-              style = "font-family: sans-serif; font-size: 10pt; color: #8C8C8C;"
+
+            # * SiA Expert Scores ----
+            bs4Card(
+              title = "SiA Expert Score",
+              width = 12,
+              status = "secondary",
+              solidHeader = TRUE,
+              collapsible = FALSE,
+              sliderInput(
+                ns("long_term_all_score"),
+                label = "Long-Term Expert Score",
+                min   = 0,
+                max   = 10,
+                value = c(0, 10),
+                step  = 0.1
+              ),
+              sliderInput(
+                ns("short_term_all_score"),
+                label = "Short-Term Expert Score",
+                min   = 0,
+                max   = 10,
+                value = c(0, 10),
+                step  = 0.1
+              ),
+              div(
+                tags$label("Exclude missing SiA scores"),
+                switchInput(
+                  inputId = ns("exclude_na_sia"),
+                  onLabel = "YES", offLabel = "NO",
+                  value = FALSE, size = "sm",
+                  onStatus = "secondary", offStatus = "primary"
+                )
+              )
+            ),
+
+            # * General Device Information ----
+            bs4Card(
+              title = "General Device Information",
+              width = 12,
+              status = "secondary",
+              collapsible = FALSE,
+              selectInput(ns("manufacturer"), "Manufacturer", choices = NULL, multiple = TRUE),
+              selectInput(ns("model"), "Model", choices = NULL, multiple = TRUE),
+              airDatepickerInput(
+                ns("release_year"),
+                "Release Year Range",
+                range = TRUE,
+                view = "years",
+                minView = "years",
+                dateFormat = "yyyy",
+                value = c(
+                  min(df_sia_shiny_filters$release_year, na.rm = TRUE),
+                  max(df_sia_shiny_filters$release_year, na.rm = TRUE)
+                )
+              ),
+              selectInput(ns("market_status"), "Market Status", choices = NULL, multiple = TRUE),
+              selectInput(ns("main_use"), "Main Use", choices = NULL, multiple = TRUE),
+              sliderInput(
+                ns("device_cost"),
+                label = "Device Cost (€)",
+                min   = 0,
+                max   = max(df_sia_shiny_filters$device_cost, na.rm = TRUE),
+                value = c(0, max(df_sia_shiny_filters$device_cost, na.rm = TRUE)),
+                step  = 1
+              ),
+              selectInput(ns("wearable_type"), "Type", choices = NULL, multiple = TRUE),
+              selectInput(ns("location"), "Location", choices = NULL, multiple = TRUE)
+            ),
+
+            # * Technical Specifications ----
+            bs4Card(
+              title = "Technical Specifications",
+              width = 12,
+              status = "secondary",
+              collapsible = FALSE,
+              prettyCheckbox(ns("water_resistance_spec_boel_value"), label = "Water Resistant", icon = icon("check"), status = "primary"),
+              sliderInput(
+                ns("battery_life_spec_num_value"),
+                label = "Battery Life (hrs)",
+                min   = 0,
+                max   = max(df_sia_shiny_filters$battery_life_spec_num_value, na.rm = TRUE),
+                value = c(0, max(df_sia_shiny_filters$battery_life_spec_num_value, na.rm = TRUE)),
+                step  = 1
+              ),
+              sliderInput(
+                ns("charging_duration_spec_num_value"),
+                label = "Charging Duration (min)",
+                min   = 0,
+                max   = max(df_sia_shiny_filters$charging_duration_spec_num_value, na.rm = TRUE),
+                value = c(0, max(df_sia_shiny_filters$charging_duration_spec_num_value, na.rm = TRUE)),
+                step  = 1
+              ),
+              prettyCheckbox(ns("bio_cueing_spec_boel_value"), label = "Bio Cueing", icon = icon("check"), status = "primary"),
+              prettyCheckbox(ns("bio_feedback_spec_boel_value"), label = "Bio Feedback", icon = icon("check"), status = "primary")
+            ),
+
+            # * Signals ----
+            bs4Card(
+              title = "Signals",
+              width = 12,
+              status = "secondary",
+              collapsible = FALSE,
+              prettyCheckbox(ns("accelerometer_available"), label = "Accelerometer", icon = icon("check"), status = "primary"),
+              prettyCheckbox(ns("bp_available"), label = "Blood Pressure", icon = icon("check"), status = "primary"),
+              prettyCheckbox(ns("ecg_available"), label = "ECG", icon = icon("check"), status = "primary"),
+              prettyCheckbox(ns("eda_available"), label = "EDA", icon = icon("check"), status = "primary"),
+              prettyCheckbox(ns("eeg_available"), label = "EEG", icon = icon("check"), status = "primary"),
+              prettyCheckbox(ns("emg_available"), label = "EMG", icon = icon("check"), status = "primary"),
+              prettyCheckbox(ns("gps_available"), label = "GPS", icon = icon("check"), status = "primary"),
+              prettyCheckbox(ns("gyroscope_available"), label = "Gyroscope", icon = icon("check"), status = "primary"),
+              prettyCheckbox(ns("icg_available"), label = "ICG", icon = icon("check"), status = "primary"),
+              prettyCheckbox(ns("ppg_available"), label = "PPG", icon = icon("check"), status = "primary"),
+              prettyCheckbox(ns("respiration_available"), label = "Respiration", icon = icon("check"), status = "primary"),
+              prettyCheckbox(ns("skin_temperature_available"), label = "Skin Temperature", icon = icon("check"), status = "primary"),
+              prettyCheckbox(ns("other_signals_available"), label = "Other Signals", icon = icon("check"), status = "primary")
+            ),
+
+            # * Data Access ----
+            bs4Card(
+              title = "Data Access",
+              width = 12,
+              status = "secondary",
+              collapsible = FALSE,
+              prettyCheckbox(ns("raw_data_available_spec_boel_value"), label = "Raw Data Available", icon = icon("check"), status = "primary"),
+              prettyCheckbox(ns("int_storage_met_spec_boel_value"), label = "Internal Storage", icon = icon("check"), status = "primary"),
+              prettyCheckbox(ns("server_data_storage_spec_boel_value"), label = "Server Storage", icon = icon("check"), status = "primary"),
+              sliderInput(
+                ns("dev_storage_cap_mb_spec_num_value"),
+                label = "Storage Capacity (MB)",
+                min   = 0,
+                max   = max(df_sia_shiny_filters$dev_storage_cap_mb_spec_num_value, na.rm = TRUE),
+                value = c(0, max(df_sia_shiny_filters$dev_storage_cap_mb_spec_num_value, na.rm = TRUE)),
+                step  = 1
+              ),
+              sliderInput(
+                ns("dev_storage_cap_hr_spec_num_value"),
+                label = "Storage Capacity (hrs)",
+                min   = 0,
+                max   = max(df_sia_shiny_filters$dev_storage_cap_hr_spec_num_value, na.rm = TRUE),
+                value = c(0, max(df_sia_shiny_filters$dev_storage_cap_hr_spec_num_value, na.rm = TRUE)),
+                step  = 1
+              ),
+              prettyCheckbox(ns("gdpr_compliance_spec_boel_value"), label = "GDPR Compliant", icon = icon("check"), status = "primary"),
+              prettyCheckbox(ns("fda_clearance_spec_boel_value"), label = "FDA Cleared", icon = icon("check"), status = "primary"),
+              prettyCheckbox(ns("ce_marking_spec_boel_value"), label = "CE Marked", icon = icon("check"), status = "primary")
+            ),
+
+            # * Validation, Reliability & Usability ----
+            bs4Card(
+              title = "Validation, Reliability & Usability",
+              width = 12,
+              status = "secondary",
+              collapsible = FALSE,
+              sliderInput(
+                ns("usability_n_of_studies"),
+                label = "# Usability Studies",
+                min   = 0,
+                max   = max(df_sia_shiny_filters$usability_n_of_studies, na.rm = TRUE),
+                value = c(0, max(df_sia_shiny_filters$usability_n_of_studies, na.rm = TRUE)),
+                step  = 1
+              ),
+              sliderInput(
+                ns("validity_and_reliability_n_of_studies"),
+                label = "# Validity & Reliability Studies",
+                min   = 0,
+                max   = max(df_sia_shiny_filters$validity_and_reliability_n_of_studies, na.rm = TRUE),
+                value = c(0, max(df_sia_shiny_filters$validity_and_reliability_n_of_studies, na.rm = TRUE)),
+                step  = 1
+              ),
+              selectInput(ns("usability_evidence_level"), "Usability Evidence Level", choices = NULL, multiple = TRUE),
+              selectInput(ns("validity_and_reliability_evidence_level"), "Validity & Reliability Evidence Level", choices = NULL, multiple = TRUE)
             )
           )
         )
+      ),
+      column(
+        width = 9,
+        bs4Card(
+          title = "Filtered Results",
+          status = "primary",
+          width = 12,
+          collapsible = FALSE,
+          solidHeader = TRUE,
+          div(
+            style = "display: flex; justify-content: center; gap: 10px; margin-bottom: 15px;",
+            actionButton(
+              inputId = ns("glossary_info"),
+              label   = tagList(
+                icon("info-circle", style = "color: #1c75bc;"),
+                "Table Information"
+              ),
+              status  = "success",
+              outline = TRUE,
+              size    = "sm",
+              flat    = TRUE,
+              width   = "20%",
+              class   = "glossary-info-btn",
+              style   = "border-width: 2px;"
+            ),
+            downloadButton(
+              outputId = ns("download_data"),
+              "Download Filtered Results"
+            )
+          ),
+          reactableOutput(ns("feat_filtered_table")) %>% withSpinner(),
+          footer = div(
+            "Source: Schoenmakers M, Saygin M, Sikora M, Vaessen T, Noordzij M, de Geus E. ",
+            "Stress in action wearables database: A database of noninvasive wearable monitors with systematic technical, reliability, validity, and usability information. ",
+            em("Behav Res Methods."),
+            " 2025 May 13;57(6):171. doi: ",
+            a(href = "https://link.springer.com/article/10.3758/s13428-025-02685-4",
+              target = "_blank", "10.3758/s13428-025-02685-4"),
+            "; PMID: 40360861; PMCID: ",
+            a(href = "https://pmc.ncbi.nlm.nih.gov/articles/PMC12075381/",
+              target = "_blank", "PMC12075381"),
+            style = "font-family: sans-serif; font-size: 10pt; color: #8C8C8C;"
+          )
+        )
       )
-
     )
   )
 }
+
 
 # Feature Filter Module (Server)
 mod_feat_fil_server <- function(id, data) {
@@ -470,7 +470,7 @@ mod_feat_fil_server <- function(id, data) {
         defaultSorted = "manufacturer",
         defaultColDef = colDef(
           footer = function(values, name) {
-            if (nrow(df) > 10)
+            if (nrow(df) > 6)
               strong(unname(rename_map[name]))
             else NULL
           }

@@ -33,7 +33,7 @@ html, body {
 .main-header {min-height: 80px}
 
 .dropdown-menu {
-          min-width: 275px !important;  /* Adjust width as needed */
+          min-width: 175px !important;  /* Adjust width as needed */
         }
         .dropdown-menu .dropdown-header {
           white-space: nowrap !important;  /* Prevents wrapping */
@@ -74,7 +74,7 @@ html, body {
   height: 130px;
   overflow: hidden;
   border-radius: 6px;
-  border: 1px solid #ddd;
+  border: 1px solid #fbf7f3;
   display: flex;
   align-items: center;
   justify-content: center;

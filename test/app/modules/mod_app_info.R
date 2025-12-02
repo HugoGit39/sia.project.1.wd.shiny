@@ -1,8 +1,9 @@
 ############################################################################################
 #
-#  Module for app info
+# Module for app info
 #
 # Stress in Action 2025
+#
 #############################################################################################
 
 # App Info Module (UI)
@@ -50,7 +51,7 @@ mod_app_info_ui <- function(id) {
             div(style = "text-align: center; font-size: 18px;",
               p(strong(paste(n_wearables, "Wearables included"), style = "color: #f15a29;"),
                 br(),
-                "see the sidebar", tags$img(src = "controlbar.png", width = "15px", height = "15px"), "at the top right corner for an overview of", br(), "wearables and glossary."
+                "see the ", icon("info-circle", style = "color:#1c75bc;"), " button in the top right for an overview ", br(), "of wearables and glossary."
               )
             )
           )
@@ -81,6 +82,10 @@ mod_app_info_ui <- function(id) {
             "."
           ),
           p(strong("Using this app")),
+          p(
+            "This app is designed for desktop use and is not optimized for mobile devices.",
+            style = "text-align: justify;"
+          ),
           p(
             "Go to the ", strong("Filters"), " section to explore wearables based on your criteria.",
             style = "text-align: justify;"
