@@ -198,7 +198,7 @@ mod_sub_data_ui <- function(id) {
         ),
         div(
           style = "text-align: center;",
-          tags$img(
+          img(
             src = "iStock_submit_data.jpg",
             style = "width: 75%; height: auto; margin-top: 100px; border-radius: 5px;"
           )

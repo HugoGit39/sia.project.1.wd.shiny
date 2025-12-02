@@ -39,7 +39,7 @@ mod_footer_ui <- function(id) {
           )
         )
       ),
-      right = tags$span(style = "color:#1c75bc;",
+      right = span(style = "color:#1c75bc;",
                         "Copyright 2025 | Stress in Action | All rights Reserved")
     )
 }

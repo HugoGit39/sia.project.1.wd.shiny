@@ -5,6 +5,7 @@
 # Stress in Action 2025
 #
 # Author: H. Klarenberg, PhD
+# Email: h.klarenberg@vu.nl
 #
 #############################################################################################
 

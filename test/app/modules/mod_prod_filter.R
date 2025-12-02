@@ -98,18 +98,18 @@ mod_prod_fil_ui <- function(id) {
           reactableOutput(ns("prod_filtered_table")) %>% withSpinner(),
 
           # --- Footer Citation ----
-          footer = tags$div(
+          footer = div(
             "Source: Schoenmakers M, Saygin M, Sikora M, Vaessen T, Noordzij M, de Geus E. ",
             "Stress in action wearables database: A database of noninvasive wearable monitors with systematic technical, reliability, validity, and usability information. ",
-            tags$em("Behav Res Methods."),
+            em("Behav Res Methods."),
             " 2025 May 13;57(6):171. doi: ",
-            tags$a(
+            a(
               href = "https://link.springer.com/article/10.3758/s13428-025-02685-4",
               target = "_blank",
               "10.3758/s13428-025-02685-4"
             ),
             "; PMID: 40360861; PMCID: ",
-            tags$a(
+            a(
               href = "https://pmc.ncbi.nlm.nih.gov/articles/PMC12075381/",
               target = "_blank",
               "PMC12075381"
@@ -202,9 +202,25 @@ mod_prod_fil_server <- function(id, df_sia_shiny_filters) {
             # clickable website link
             if (df_t$Feature_internal[index] == "website" &&
                 !is.na(value) && nzchar(value)) {
-              return(tags$a(href = value, target = "_blank", "Visit website"))
-            }
 
+              thumb <- paste0("https://s.wordpress.com/mshots/v1/", value, "?w=400")
+
+              return(
+                a(
+                  href = value,
+                  target = "_blank",
+                  div(
+                    class = "website-thumb-container",
+                    img(
+                      src     = thumb,
+                      loading = "lazy",
+                      onerror = "this.style.display='none'; this.parentElement.textContent='Preview unavailable';",
+                      class   = "website-thumb-img"
+                    )
+                  )
+                )
+              )
+            }
             rendered <- func_bar_row_defs(value, index, df_t$Feature, bar_vars, rename_map)
             if (!identical(rendered, value)) return(rendered)
 

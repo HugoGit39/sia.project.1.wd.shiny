@@ -15,7 +15,7 @@ mod_about_ui <- function(id) {
       column(
         width = 4,
         div(
-          tags$img(
+          img(
             src = "SiA_lab.jpg",
             style = "max-width: 40%; max-height: 40%; margin-top: 10%; margin-left: 25%"
           )
@@ -57,19 +57,19 @@ mod_about_ui <- function(id) {
             div(
               style = "display:flex; flex-wrap:wrap; align-items:center; justify-content:center; gap:10px; width:100%;",
               span(style = "height:40px; display:inline-flex; align-items:center; flex:0 0 auto;",
-                   tags$img(src = "VU_logo.png",  height = "40px")),
+                   img(src = "VU_logo.png",  height = "40px")),
               span(style = "height:40px; display:inline-flex; align-items:center; flex:0 0 auto;",
-                   tags$img(src = "AUMC_logo.png", height = "40px")),
+                   img(src = "AUMC_logo.png", height = "40px")),
               span(style = "height:40px; display:inline-flex; align-items:center; flex:0 0 auto;",
-                   tags$img(src = "UMCG_logo.png", height = "25px")),
+                   img(src = "UMCG_logo.png", height = "25px")),
               span(style = "height:40px; display:inline-flex; align-items:center; flex:0 0 auto;",
-                   tags$img(src = "RUG_logo.png",  height = "40px")),
+                   img(src = "RUG_logo.png",  height = "40px")),
               span(style = "height:40px; display:inline-flex; align-items:center; flex:0 0 auto;",
-                   tags$img(src = "UU_logo.png",   height = "40px")),
+                   img(src = "UU_logo.png",   height = "40px")),
               span(style = "height:40px; display:inline-flex; align-items:center; flex:0 0 auto;",
-                   tags$img(src = "UT_logo.png",   height = "40px")),
+                   img(src = "UT_logo.png",   height = "40px")),
               span(style = "height:40px; display:inline-flex; align-items:center; flex:0 0 auto;",
-                   tags$img(src = "EMC_logo.png",  height = "40px"))
+                   img(src = "EMC_logo.png",  height = "40px"))
             )
 
           )
@@ -78,7 +78,7 @@ mod_about_ui <- function(id) {
     column(
       width = 4,
       div(
-        tags$img(
+        img(
           src = "SiA_measurements.jpg",
           style = "max-width: 75%; max-height: 75%; margin-top: 20%; margin-left: 15%;"
         )
@@ -102,7 +102,6 @@ mod_about_ui <- function(id) {
             style = "text-align: justify;"
           ),
           p(
-            # Gauge / SiA icon
             a(
               href = "https://stress-in-action.nl/hugo-klarenberg/",
               target = "_blank",
@@ -111,7 +110,6 @@ mod_about_ui <- function(id) {
                 style = "width:25px; height:25px; vertical-align:middle; margin-right:5px;"
               )
             ),
-            # LinkedIn icon
             a(
               href = "https://www.linkedin.com/in/hugo-k-536a2677/",
               target = "_blank",

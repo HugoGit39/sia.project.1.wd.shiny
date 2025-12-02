@@ -22,7 +22,7 @@ mod_app_info_ui <- function(id) {
           solidHeader = TRUE,
           width = 12,
           collapsible = FALSE,
-          tags$img(src = "info_app_beh_paper.png", width = "100%", style = "margin-top: 10px;"),
+          img(src = "info_app_beh_paper.png", width = "100%", style = "margin-top: 10px;"),
           footer = tagList(
             actionButton(
               inputId = "copy_citation_btn",
@@ -128,9 +128,10 @@ mod_app_info_ui <- function(id) {
             collapsible = FALSE,
             headerBorder = FALSE,
             style = "max-height: 300px; overflow-y: auto;",
+            p(strong("December 2025"), br(), "Huge update: all details wearables available plus improved user expierence (hoovering info etc.)"),
             p(strong("September 2025"), br(), "Live release."),
             p(strong("August 2025"), br(), "Tables updated with bars, yes/no and color coded cells."),
-            p(strong("July 2025"), br(), "60 wearables still to be tested."),
+            p(strong("July 2025"), br(), "Submit Data module live."),
             p(strong("June 2025"), br(), "54 wearables included in App."),
             p(strong("May 2025"), br(), "Stress in Action wearables database paper published!"),
             p(strong("March 2025"), br(), "Feature Filter live."),

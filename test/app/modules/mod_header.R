@@ -11,9 +11,9 @@ mod_header_ui <- function(id) {
 
   bs4DashNavbar(
     titleWidth = 220,
-    title = tags$a(
+    title = a(
       href = "https://www.stressinaction.nl", target = "_blank",
-      tags$img(
+      img(
         src = "SiA_Logo_png.png",
         height = "55px",
         style = "margin-top: 10px; margin-bottom: 10px; margin-left: 15px; margin-right: 15px;"

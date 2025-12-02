@@ -60,7 +60,7 @@ mod_article_ui <- function(id) {
                     class = "fa-lg",
                     style = "color: #1c75bc;"
                   ),
-                  tags$img(
+                  img(
                     src = "article_asreview_process.png",
                     style = "max-width: 100%; height: auto; display: block; margin: 0 auto;"
                   )
@@ -91,11 +91,11 @@ mod_article_ui <- function(id) {
                     class = "fa-lg",
                     style = "color: #1c75bc;"
                   ),
-                  tags$img(
+                  img(
                     src = "article_long_term_sia_es.png",
                     style = "max-width: 100%; height: auto; display: block; margin: 0 auto;"
                   ),
-                  tags$img(
+                  img(
                     src = "article_short_term_sia_es.png",
                     style = "max-width: 100%; height: auto; display: block; margin: 0 auto;"
                   )
@@ -137,13 +137,13 @@ mod_article_ui <- function(id) {
           footer = NULL,
           solidHeader = TRUE,
           status = "primary",
-          tags$div(
+          div(
             style = "text-align: center; margin-bottom: 1rem; display: flex; justify-content: center; align-items: center; gap: 1rem;",
             downloadButton(ns("download_pdf"), "Download PDF", class = "btn-primary"),
-            tags$a(
+            a(
               href = "https://link.springer.com/article/10.3758/s13428-025-02685-4",
               target = "_blank",
-              tags$img(
+              img(
                 src = "springer_link.png",
                 height = "40px",  # adjust size as needed
                 alt = "Springer Link"
@@ -165,7 +165,7 @@ mod_article_ui <- function(id) {
           solidHeader = TRUE,
           width = 12,
           collapsible = FALSE,
-          tags$p("Coming soon")
+          p("Coming soon")
         )
       )
     )
