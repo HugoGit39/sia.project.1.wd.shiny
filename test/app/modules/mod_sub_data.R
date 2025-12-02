@@ -340,7 +340,6 @@ mod_sub_data__server <- function(id) {
         ".xlsx"
       ))
       write_xlsx(list("Submission" = df), path = excel_path)
-      stopifnot(file.exists(excel_path))
 
       session$onFlushed(function() {
         runjs(sprintf("document.getElementById('%s').click();", ns("dl_xlsx_submit")))
