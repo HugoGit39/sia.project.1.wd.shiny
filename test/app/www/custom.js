@@ -43,6 +43,8 @@ $(document).ready(function () {
           • Long-Term SiA Score — Weighted technical, usability, and reliability score for extended use (>2 week).<br>
           • Short-Term SiA Score — Weighted technical and validation score for short-term use (≤2 week).<br><br>
 
+          See the Research page for details on scoring, including criteria, procedure involved, and the interrater reliability.<br><br>
+
           <b>General Device Information</b><br>
           • Website — Link to the official device or manufacturer page.<br>
           • Release Year — Year of official device launch.<br>
@@ -92,7 +94,7 @@ $(document).ready(function () {
           • Usability Evidence Level — Evidence quality for usability (external > internal > none).<br>
           • Validity & Reliability Evidence Level — Evidence quality for validation and reliability (external > internal > none).<br><br>
 
-          For full glossary, see sidebar.
+          For full glossary, see sidebar&nbsp;<i class="fa fa-info-circle" style="color:#1c75bc;"></i>
         </div>
       `
     });

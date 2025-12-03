@@ -64,11 +64,11 @@ mod_sub_data_ui <- function(id) {
               dateInput(ns("release_year"), "Release Year"),
               text_or_selectize(ns("market_status"), labelMandatory("Market Status"), df_sia_shiny_filters, "market_status"),
               text_or_selectize(ns("main_use"), labelMandatory("Main Use"), df_sia_shiny_filters, "main_use"),
-              numericInput(ns("device_cost"), labelMandatory("Device Cost (€)"), value = NA),
+              textInput(ns("device_cost"), labelMandatory("Device Cost (€)"), placeholder = "Click and write costs + details"),
               text_or_selectize(ns("wearable_type"), labelMandatory("Type"), df_sia_shiny_filters, "wearable_type"),
               text_or_selectize(ns("location"), labelMandatory("Location"), df_sia_shiny_filters, "location"),
-              numericInput(ns("weight_gr"), labelMandatory("Weight (gr)"), value = NA),
-              textInput(ns("size_mm"), labelMandatory("Size"), placeholder = "Click and write LxWxH or DxH")
+              numericInput(ns("weight_gr"), "Weight (gr)", value = NA),
+              textInput(ns("size_mm"), "Size", placeholder = "Click and write LxWxH or DxH")
             ),
 
             # ---------------- Technical Specifications ----------------
@@ -142,7 +142,7 @@ mod_sub_data_ui <- function(id) {
                 ns("additional_information"),
                 "Additional Information",
                 rows = 4,
-                placeholder = "e.g. charging methods, data transfer methods, water resistance depth, sampling rates, other signals etc."
+                placeholder = "e.g. sampling rates of signals, other signals available or references to existing reliability, validity or usability studies, etc."
               )
             )
           )

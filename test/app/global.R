@@ -116,7 +116,7 @@ char_vars <- setdiff(
 fieldsMandatory_data <- c(
   "name", "email", "manufacturer", "model",
   "market_status", "main_use", "device_cost",
-  "wearable_type", "location", "weight_gr", "size_mm"
+  "wearable_type", "location"
 )
 
 # 2. email
