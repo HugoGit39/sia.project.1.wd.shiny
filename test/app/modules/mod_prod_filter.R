@@ -306,11 +306,16 @@ mod_prod_fil_server <- function(id, df_sia_shiny_filters) {
         )
 
         write_xlsx(
-          list("Selected_Devices" = export_df, "Citation" = citation_text),
+          list(
+            "Selected_Devices" = export_df,
+            "Citations" = citation_text,
+            "Codebook" = df_codebook
+          ),
           path = file
         )
       },
       contentType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
     )
+
   })
 }
