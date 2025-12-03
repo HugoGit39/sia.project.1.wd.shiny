@@ -1,6 +1,8 @@
 ############################################################################################
 #
-#  Function for reactable layout
+# Function for reactable layout
+#
+# Stress in Action 2025
 #
 #############################################################################################
 
@@ -28,10 +30,10 @@ map_to_colors <- function(values, palette) {
 # yes/no cells layout
 cells_yes_no <- function(value) {
   if (is.na(value) || value == "") return("")
-  if (value == "Yes") {
+  if (value == "yes") {
     div(style = "color: #44AA99; font-weight: bold;", "✔ Yes")
   }
-  else if (value == "No") {
+  else if (value == "no") {
     div(style = "color: #882255; font-weight: bold;", "✖ No")
   }
 }

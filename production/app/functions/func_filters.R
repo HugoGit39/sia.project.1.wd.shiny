@@ -1,6 +1,8 @@
 ############################################################################################
 #
-#  Function Feature (extensive) filter
+#  Function Feature filter
+#
+# Stress in Action 2025
 #
 #############################################################################################
 
@@ -11,7 +13,7 @@ range_filter <- function(df, var, input_range) {
 
 # Checkbox filter helper
 checkbox_filter <- function(df, var, input_value) {
-  filter(df, !input_value | .data[[var]] == "Yes")
+  filter(df, !input_value | .data[[var]] == "yes")
 }
 
 # SelectInput filter helper
