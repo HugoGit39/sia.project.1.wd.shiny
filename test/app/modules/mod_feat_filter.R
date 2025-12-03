@@ -527,7 +527,7 @@ mod_feat_fil_server <- function(id, data) {
         # Write Excel with all tabs
         write_xlsx(
           list(
-            "Selected_Devices" = export_df,
+            "Selected Devices" = export_df,
             "Citations"        = df_citations,
             "Codebook"         = df_codebook
           ),
