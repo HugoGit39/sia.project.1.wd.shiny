@@ -55,11 +55,12 @@ source("modules/mod_footer.R")
 source("modules/mod_timeout.R")
 
 #  * 5 load data -----------------------------------------------
-df_sia_shiny_filters <- readRDS("data/df_shiny_sia_wd_filter.rds")
-df_sia_shiny_info    <- readRDS("data/df_shiny_sia_wd_info.rds")
-df_sia_osf           <- readRDS("data/df_osf_sia_wd_shiny.rds")
+df_sia_shiny_filters <- readRDS(here("test", "app", "data", "df_shiny_sia_wd_filter.rds"))
+df_sia_shiny_info <- readRDS(here("test", "app", "data", "df_shiny_sia_wd_info.rds"))
+df_sia_osf <- readRDS(here("test", "app", "data", "df_osf_sia_wd_shiny.rds"))
 
-glos <- readRDS("www/glos.rds")
+glos <- readRDS(here("test", "app", "www","glos.rds"))
+df_codebook <- readRDS(here("test", "app", "www","df_codebook.rds"))
 
 #  * 6 calculate no of wearables for home page -----------------------------------------------
 n_wearables <- nrow(df_sia_shiny_filters)
@@ -112,9 +113,9 @@ char_vars <- setdiff(
 
 # 1. data
 fieldsMandatory_data <- c(
-  "name", "email", "manufacturer", "model",
+  "name", "email", "manufacturer", "model", "release_year",
   "market_status", "main_use", "device_cost",
-  "wearable_type", "location", "weight_gr", "size_mm"
+  "wearable_type", "location"
 )
 
 # 2. email
@@ -142,7 +143,7 @@ rename_map <- c(
   "bio_cueing_spec_boel_value" = "Bio Cueing",
   "bio_feedback_spec_boel_value" = "Bio Feedback",
   "water_resistance_spec_boel_value" = "Water Resistance",
-  "battery_life_spec_num_value" = "Battery Life (h)",
+  "battery_life_spec_num_value" = "Battery Life (hrs)",
   "charging_duration_spec_num_value" = "Charging Duration (min)",
   "accelerometer_available" = "Accelerometer",
   "bp_available" = "Blood Pressure",
@@ -179,7 +180,22 @@ rename_subm <- rename_subm[!rename_subm %in% c("sia_es_long", "sia_es_short")]
 
 rename_subm <- c("name", "email", "telephone", "institution", rename_subm, "additional_information")
 
-#  * 11 Time-out message -----------------------------------------------
+#  * 11 Citations -----------------------------------------------
+
+df_citations <- data.frame(
+  Citation = c(
+    "Thank you for using the SiA-WD!",
+    "If you use the database and/or this web app, you must cite:",
+    "Schoenmakers M, Saygin M, Sikora M, Vaessen T, Noordzij M, de Geus E.",
+    "Stress in action wearables database: A database of noninvasive wearable monitors",
+    "with systematic technical, reliability, validity, and usability information.",
+    "Behav Res Methods. 2025 May 13;57(6):171.",
+    "doi: 10.3758/s13428-025-02685-4."
+  ),
+  check.names = FALSE
+)
+
+#  * 12 Time-out message -----------------------------------------------
 disconnected <- tagList(
   p(strong("Time Out!", style = "color: #1c75bc; font-size:30px")),
   p(tags$img(src = "favicon.ico", height = 100, width = 100)),
@@ -191,4 +207,6 @@ disconnected <- tagList(
   p("Just hit refresh to continue", br(),
     "where you left off!", style = "font-size:16px")
 )
+
+
 
