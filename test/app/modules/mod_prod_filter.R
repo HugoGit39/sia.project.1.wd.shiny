@@ -367,7 +367,7 @@ mod_prod_fil_server <- function(id, df_sia_shiny_filters) {
           list(
             "Selected Devices" = export_df,
             "Citations"        = df_citations,
-            "Codebook"         = df_codebook
+            "Glossary"         = df_codebook
           ),
           path = file
         )
