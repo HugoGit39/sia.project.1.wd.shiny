@@ -144,7 +144,7 @@ rename_map <- c(
   "bio_cueing_spec_boel_value" = "Bio Cueing",
   "bio_feedback_spec_boel_value" = "Bio Feedback",
   "water_resistance_spec_boel_value" = "Water Resistance",
-  "battery_life_spec_num_value" = "Battery Life (h)",
+  "battery_life_spec_num_value" = "Battery Life (hrs)",
   "charging_duration_spec_num_value" = "Charging Duration (min)",
   "accelerometer_available" = "Accelerometer",
   "bp_available" = "Blood Pressure",

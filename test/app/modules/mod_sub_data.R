@@ -70,7 +70,7 @@ mod_sub_data_ui <- function(id) {
               text_or_selectize(ns("wearable_type"), labelMandatory("Type"), df_sia_shiny_filters, "wearable_type"),
               text_or_selectize(ns("location"), labelMandatory("Location"), df_sia_shiny_filters, "location"),
               numericInput(ns("weight_gr"), "Weight (gr)", value = NA),
-              textInput(ns("size_mm"), "Size", placeholder = "Click and write LxWxH or DxH (mm)")
+              textInput(ns("size_mm"), "Size (mm)", placeholder = "Click and write LxWxH or DxH (mm)")
             ),
 
             # ---------------- Technical Specifications ----------------
@@ -128,8 +128,8 @@ mod_sub_data_ui <- function(id) {
               status = "secondary",
               width = 12,
               collapsible = FALSE,
-              numericInput(ns("usability_n_of_studies"), "# Usability Studies", value = NA),
-              numericInput(ns("validity_and_reliability_n_of_studies"), "# Validity & Reliability Studies", value = NA),
+              numericInput(ns("usability_n_of_studies"), "Usability Studies (n)", value = NA),
+              numericInput(ns("validity_and_reliability_n_of_studies"), "Validity & Reliability Studies (n)", value = NA),
               text_or_selectize(ns("usability_evidence_level"), "Usability Evidence Level", df_sia_shiny_filters, "usability_evidence_level"),
               text_or_selectize(ns("validity_and_reliability_evidence_level"), "Validity & Reliability Evidence Level", df_sia_shiny_filters, "validity_and_reliability_evidence_level")
             ),

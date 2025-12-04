@@ -199,7 +199,7 @@ mod_feat_fil_ui <- function(id) {
               collapsible = FALSE,
               sliderInput(
                 ns("usability_n_of_studies"),
-                label = "# Usability Studies",
+                label = "Usability Studies (n)",
                 min   = 0,
                 max   = max(df_sia_shiny_filters$usability_n_of_studies, na.rm = TRUE),
                 value = c(0, max(df_sia_shiny_filters$usability_n_of_studies, na.rm = TRUE)),
@@ -207,7 +207,7 @@ mod_feat_fil_ui <- function(id) {
               ),
               sliderInput(
                 ns("validity_and_reliability_n_of_studies"),
-                label = "# Validity & Reliability Studies",
+                label = "Validity & Reliability Studies (n)",
                 min   = 0,
                 max   = max(df_sia_shiny_filters$validity_and_reliability_n_of_studies, na.rm = TRUE),
                 value = c(0, max(df_sia_shiny_filters$validity_and_reliability_n_of_studies, na.rm = TRUE)),
