@@ -63,7 +63,7 @@ mod_sub_data_ui <- function(id) {
               uiOutput(ns("manufacturer_csv_error")),
               textInput(ns("model"), labelMandatory("Model"), placeholder = "Click and type model name"),
               textInput(ns("website"), "Website", placeholder = "Click and paste or type URL https://"),
-              textInput(ns("release_year"), "Release Year", placeholder = "Click and write Y, Y/M or Y/M/D"),
+              textInput(ns("release_year"), labelMandatory("Release Year"), placeholder = "Click and write Y, Y/M or Y/M/D"),
               text_or_selectize(ns("market_status"), labelMandatory("Market Status"), df_sia_shiny_filters, "market_status"),
               text_or_selectize(ns("main_use"), labelMandatory("Main Use"), df_sia_shiny_filters, "main_use"),
               textInput(ns("device_cost"), labelMandatory("Device Cost (€)"), placeholder = "Click and write costs + details"),
