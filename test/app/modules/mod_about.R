@@ -250,6 +250,29 @@ mod_about_ui <- function(id) {
                      "Magdalena Sikora, PhD student University of Twente"
                    ),
 
+                 # Flavia
+                 p(
+                   a(
+                     href = "https://stress-in-action.nl/",
+                     target = "_blank",
+                     img(
+                       src = "favicon.ico",
+                       style = "width:25px; height:25px; vertical-align:middle; margin-right:5px;"
+                     )
+                   ),
+                   a(
+                     href = "https://www.linkedin.com/in/flavia-ercoli-74580921b/",
+                     target = "_blank",
+                     img(
+                       src = "linkedin_sia.png",
+                       style = "width:25px; height:25px; vertical-align:middle; margin-left:5px;",
+                       alt = "LinkedIn"
+                     )
+                   ),
+                   br(),
+                   "Flavia Ercoli, PhD student VU Amsterdam"
+                 ),
+
                    # Artemis
                    p(
                      a(

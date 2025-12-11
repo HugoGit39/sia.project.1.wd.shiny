@@ -213,6 +213,8 @@ $(document).ready(function () {
           • usability_date_of_last_search<br>
           • validity_and_reliability_date_of_last_search<br><br>
 
+          If relevant, preferred intermediary platform for data extraction and presentation (e.g. Fitrockr, Avicenna)<br><br>
+
           You do <b>not</b> need to provide all of these — any extra details you can share are helpful.
         </div>
       `
