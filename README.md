@@ -1,7 +1,7 @@
 [![Project Status: Active – The project has reached a stable, usable state and is being actively developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
 
 <p align="center">
-  <img src="https://stress-in-action.nl/wp-content/uploads/2023/04/sia-logo.png" alt="SIA Logo">
+  <img src="https://raw.githubusercontent.com/HugoGit39/sia.project.1.wi.data/refs/heads/main/www/siawd_relational_pipeline.png" alt="SIA Pipeline">
 </p>
 
 ## About
