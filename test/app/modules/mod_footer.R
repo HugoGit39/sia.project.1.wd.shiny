@@ -43,7 +43,7 @@ mod_footer_ui <- function(id) {
           href = "https://github.com/HugoGit39/siawd",
           target = "_blank",
           img(
-            src = "sia_hexsticker.png",
+            src = "sia_hexsticker_footer.png",
             style = "width:25px; height:25px; vertical-align:middle; margin-left:10px;",
             alt = "GitHub_golem"
           )
