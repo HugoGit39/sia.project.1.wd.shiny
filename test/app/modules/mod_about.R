@@ -208,7 +208,7 @@ mod_about_ui <- function(id) {
                  inputId = "copy_local_code_btn",
                  label = "Copy Code",
                  icon = icon("copy"),
-                 style = "background-color: #f15a29; color: white; margin-top: 5px;"
+                 style = "background-color: #1c75bc; color: white; margin-top: 5px;"
                )
              )
              )

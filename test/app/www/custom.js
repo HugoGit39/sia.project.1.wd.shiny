@@ -1,5 +1,112 @@
 /* 1. App info*/
 
+/* Layout message box. */
+
+function showSiAMessage(message, title = "Info") {
+
+  let modal = document.getElementById('sia-message-modal');
+
+  if (!modal) {
+    modal = document.createElement('div');
+    modal.id = 'sia-message-modal';
+    modal.style.position = 'fixed';
+    modal.style.top = '0';
+    modal.style.left = '0';
+    modal.style.width = '100%';
+    modal.style.height = '100%';
+    modal.style.backgroundColor = 'rgba(0,0,0,0.35)';
+    modal.style.zIndex = '9999';
+    modal.style.display = 'flex';
+    modal.style.alignItems = 'center';
+    modal.style.justifyContent = 'center';
+    modal.style.fontFamily = 'inherit';
+
+    const box = document.createElement('div');
+    box.id = 'sia-message-box';
+    box.style.backgroundColor = 'white';
+    box.style.maxWidth = '420px';
+    box.style.width = '90%';
+    box.style.maxHeight = '80%';
+    box.style.padding = '16px 18px 12px 18px';
+    box.style.borderRadius = '8px';
+    box.style.boxShadow = '0 2px 10px rgba(0,0,0,0.3)';
+    box.style.display = 'flex';
+    box.style.flexDirection = 'column';
+    box.style.position = 'relative';
+    box.style.fontFamily = 'inherit';
+
+    const header = document.createElement('div');
+    header.style.display = 'flex';
+    header.style.justifyContent = 'flex-start';
+    header.style.alignItems = 'center';
+
+    const h = document.createElement('h4');
+    h.id = 'sia-message-title';
+    h.style.margin = '0';
+    h.style.paddingRight = '40px';
+
+    header.appendChild(h);
+    box.appendChild(header);
+
+    const body = document.createElement('div');
+    body.id = 'sia-message-body';
+    body.style.marginTop = '10px';
+    body.style.whiteSpace = 'pre-wrap';
+    body.style.overflowY = 'auto';
+    body.style.flex = '1';
+    body.style.lineHeight = '1.3';
+    body.style.fontFamily = 'inherit';
+
+    box.appendChild(body);
+
+    // ---- footer with SiA blue Close button (bottom-right) ----
+    const footer = document.createElement('div');
+    footer.style.display = 'flex';
+    footer.style.justifyContent = 'flex-end';
+    footer.style.marginTop = '12px';
+
+    const closeBtn = document.createElement('button');
+    closeBtn.type = 'button';
+    closeBtn.id = 'sia-message-close';
+    closeBtn.textContent = 'Close';
+    closeBtn.style.padding = '6px 16px';
+    closeBtn.style.borderRadius = '4px';
+    closeBtn.style.border = '1px solid #1c75bc';
+    closeBtn.style.background = '#1c75bc';
+    closeBtn.style.color = 'white';
+    closeBtn.style.cursor = 'pointer';
+    closeBtn.style.fontSize = '14px';
+    closeBtn.style.fontFamily = 'inherit';
+    closeBtn.style.fontWeight = '500';
+    closeBtn.style.boxShadow = '0 2px 4px rgba(0,0,0,0.15)';
+
+    // remove black focus outline / tap highlight
+    closeBtn.style.outline = 'none';
+    closeBtn.style.boxShadow = '0 2px 4px rgba(0,0,0,0.15)';
+    closeBtn.style.webkitTapHighlightColor = 'transparent';
+    closeBtn.onfocus = function () { this.blur(); };
+
+    closeBtn.onclick = function () {
+      modal.style.display = 'none';
+    };
+
+    footer.appendChild(closeBtn);
+    box.appendChild(footer);
+
+    modal.appendChild(box);
+    document.body.appendChild(modal);
+
+    // Close when clicking outside the box
+    modal.addEventListener('click', function (e) {
+      if (e.target === modal) modal.style.display = 'none';
+    });
+  }
+
+  document.getElementById('sia-message-title').textContent = title;
+  document.getElementById('sia-message-body').textContent  = message;
+  modal.style.display = 'flex';
+}
+
 /* This function sets up the citation copy button. */
 
 document.addEventListener("DOMContentLoaded", function () {
@@ -8,11 +115,12 @@ document.addEventListener("DOMContentLoaded", function () {
     btn.onclick = function () {
       const citation = `Schoenmakers M, Saygin M, Sikora M, Vaessen T, Noordzij M, de Geus E. Stress in action wearables database: A database of noninvasive wearable monitors with systematic technical, reliability, validity, and usability information. Behav Res Methods. 2025 May 13;57(6):171. doi: 10.3758/s13428-025-02685-4. PMID: 40360861; PMCID: PMC12075381.`;
       navigator.clipboard.writeText(citation).then(() => {
-        alert("Citations copied to clipboard!");
+        showSiAMessage("Citations copied to clipboard!", "Success");
       });
     };
   }
 });
+
 
 /* LICENSE information */
 
@@ -352,11 +460,12 @@ remotes::install_github("HugoGit39/siawd")
 siawd::run_app()`;
 
       navigator.clipboard.writeText(code).then(() => {
-        alert("Code copied to clipboard!");
+        showSiAMessage("Code copied to clipboard!", "Success");
       });
     };
   }
 });
+
 
 /* 6. Contact*/
 
@@ -364,12 +473,6 @@ siawd::run_app()`;
 Shiny.addCustomMessageHandler("emailSubmitted", function(message) {
   alert(message);
 });
-
-
-
-
-
-
 
 
 
