@@ -485,8 +485,9 @@ siawd::run_app()`;
 
 // Email submited
 Shiny.addCustomMessageHandler("emailSubmitted", function(message) {
-  alert(message);
+  showSiAMessage(message, "Email submitted", "Succes");
 });
+
 
 
 
