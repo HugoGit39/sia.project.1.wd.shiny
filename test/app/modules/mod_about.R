@@ -188,7 +188,7 @@ mod_about_ui <- function(id) {
 
                p("You can also run the SiA-WD web app locally on your workstation. It behaves the same way as installing and running a regular R-package."),
 
-               tags$div(
+               div(
                  style = "background: #f6f8fa; border: 1px solid #d0d7de; border-radius: 6px; padding: 10px; margin-top: 10px; font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace; font-size: 12px;",
                  HTML(paste0(
                    "# Install the SIA-WD golem package from GitHub<br/>",
@@ -198,12 +198,18 @@ mod_about_ui <- function(id) {
                ),
                p("Great! You are all set to run the SiA-WD app:"),
 
-               tags$div(
+               div(
                  style = "background: #f6f8fa; border: 1px solid #d0d7de; border-radius: 6px; padding: 10px; margin-top: 10px; font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace; font-size: 12px;",
                  HTML("siawd::run_app()")
                ),
 
-               p("Be aware: you’ll need to update once in a while to ensure you’re using the most recent database.")
+               p("Be aware: you’ll need to update once in a while to ensure you’re using the most recent database."),
+               footer = actionButton(
+                 inputId = "copy_local_code_btn",
+                 label = "Copy Code",
+                 icon = icon("copy"),
+                 style = "background-color: #f15a29; color: white; margin-top: 5px;"
+               )
              )
              )
            ),
@@ -218,7 +224,8 @@ mod_about_ui <- function(id) {
                  collapsible = FALSE,
                  headerBorder = FALSE,
                  p("The goal of RT2 is to develop increasingly sophisticated versions of a cutting-edge, low-burden, ecologically valid ambulatory assessment toolkit to quantify stress in daily life, and to design, test, and iteratively improve stress interventions using that toolkit."), style = "text-align: justify;",
-                   # Myrte
+                 p("Current team members:"),
+                 # Myrte
                    p(
                      a(
                        href = "https://stress-in-action.nl/myrte-schoenmakers/",

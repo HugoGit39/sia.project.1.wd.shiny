@@ -24,7 +24,7 @@ mod_app_info_ui <- function(id) {
           width = 12,
           collapsible = FALSE,
           img(src = "info_app_beh_paper.png", width = "100%", style = "margin-top: 10px;"),
-          footer = tags$div(
+          footer = div(
             class = "d-flex justify-content-between align-items-center",
             actionButton(
               inputId = "copy_citation_btn",
@@ -42,11 +42,10 @@ mod_app_info_ui <- function(id) {
               outline = TRUE,
               size    = "sm",
               flat    = TRUE,
-              width   = "20%",
+              width   = "30%",
               class   = "license-info-btn",
               style   = "border-width: 2px;"
             )
-
           )
         )
       ),

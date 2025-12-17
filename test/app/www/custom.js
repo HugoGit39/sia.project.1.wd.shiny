@@ -14,7 +14,7 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 });
 
-/* LICENSE information popover */
+/* LICENSE information */
 
 $(document).ready(function () {
 
@@ -35,7 +35,6 @@ $(document).ready(function () {
         <div id='license-popover'
              style='max-height:260px; overflow-y:auto; overflow-x:hidden;
                     text-align:left; line-height:1.3; width:500px; padding-right:6px;'>
-          <b>License</b><br><br>
 
           This Shiny app and its included data are licensed under the
           <b>Creative Commons Attribution–NonCommercial–NoDerivatives 4.0 International License (CC BY-NC-ND 4.0)</b>.<br><br>
@@ -338,6 +337,26 @@ Shiny.addCustomMessageHandler("dataSubmitted", function(message) {
 /* 4. Research*/
 
 /* 5. About*/
+
+/* This function sets up the local install/run code copy button. */
+
+document.addEventListener("DOMContentLoaded", function () {
+  const btn = document.getElementById("copy_local_code_btn");
+  if (btn) {
+    btn.onclick = function () {
+      const code = `# Install the SIA-WD golem package from GitHub
+install.packages("remotes")
+remotes::install_github("HugoGit39/siawd")
+
+# Run the app
+siawd::run_app()`;
+
+      navigator.clipboard.writeText(code).then(() => {
+        alert("Code copied to clipboard!");
+      });
+    };
+  }
+});
 
 /* 6. Contact*/
 
