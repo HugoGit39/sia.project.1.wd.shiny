@@ -102,7 +102,21 @@ function showSiAMessage(message, title = "Info") {
     });
   }
 
-  document.getElementById('sia-message-title').textContent = title;
+  const titleEl = document.getElementById('sia-message-title');
+titleEl.textContent = '';
+
+if (title === 'Success') {
+  const tick = document.createElement('span');
+  tick.textContent = '✔';
+  tick.style.color = '#44AA99';   // green
+  tick.style.marginRight = '6px';
+  tick.style.fontWeight = '700';
+
+  titleEl.appendChild(tick);
+}
+
+titleEl.appendChild(document.createTextNode(title));
+
   document.getElementById('sia-message-body').textContent  = message;
   modal.style.display = 'flex';
 }
