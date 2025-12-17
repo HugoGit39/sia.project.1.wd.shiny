@@ -24,13 +24,29 @@ mod_app_info_ui <- function(id) {
           width = 12,
           collapsible = FALSE,
           img(src = "info_app_beh_paper.png", width = "100%", style = "margin-top: 10px;"),
-          footer = tagList(
+          footer = tags$div(
+            class = "d-flex justify-content-between align-items-center",
             actionButton(
               inputId = "copy_citation_btn",
               label = "Copy Citations",
               icon = icon("copy"),
               style = "background-color: #f15a29; color: white; margin-top: 5px;"
+            ),
+            actionButton(
+              inputId = ns("license_info"),
+              label   = tagList(
+                icon("info-circle", style = "color: #1c75bc;"),
+                "LICENSE"
+              ),
+              status  = "success",
+              outline = TRUE,
+              size    = "sm",
+              flat    = TRUE,
+              width   = "20%",
+              class   = "license-info-btn",
+              style   = "border-width: 2px;"
             )
+
           )
         )
       ),
@@ -78,9 +94,9 @@ mod_app_info_ui <- function(id) {
           p(strong("Terms of citation")),
           p(
             "When using the wearables database and/or this web app, you must cite the two papers listed under ",
-            strong("Papers to Cite", style = "color: #f15a29;"),
+            strong("Papers to Cite"),
             " and/or ",
-            strong("Research", style = "color: #1c75bc;"),"."
+            strong("Research"),"."
           ),
           p(strong("Using this app")),
           p(
@@ -134,15 +150,7 @@ mod_app_info_ui <- function(id) {
             collapsible = FALSE,
             headerBorder = FALSE,
             style = "max-height: 300px; overflow-y: auto;",
-            p(strong("December 2025"), br(), "Substantial update: all details wearables available plus improved user expierence (hoovering info etc.)."),
-            p(strong("September 2025"), br(), "Live release."),
-            p(strong("August 2025"), br(), "Tables updated with bars, yes/no and color coded cells."),
-            p(strong("July 2025"), br(), "Submit Data module live."),
-            p(strong("June 2025"), br(), "54 wearables included in App."),
-            p(strong("May 2025"), br(), "Stress in Action wearables database paper published!"),
-            p(strong("March 2025"), br(), "Feature Filter live."),
-            p(strong("February 2025"), br(), "Product Filter live."),
-            p(strong("January 2025"), br(), "Test version (MVP) live.")
+            updates
           )
         )
       ),

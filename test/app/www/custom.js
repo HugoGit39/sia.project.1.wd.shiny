@@ -14,6 +14,84 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 });
 
+/* LICENSE information popover */
+
+$(document).ready(function () {
+
+  setTimeout(function () {
+    var button = $('.license-info-btn');
+    var timer;
+
+    button.popover({
+      html: true,
+      trigger: 'manual',
+      placement: 'bottom',
+      container: 'body',
+      sanitize: false,
+      template:
+        '<div class="popover" role="tooltip" style="max-width:520px !important;">' +
+        '<div class="arrow"></div><h3 class="popover-header"></h3><div class="popover-body"></div></div>',
+      content: `
+        <div id='license-popover'
+             style='max-height:260px; overflow-y:auto; overflow-x:hidden;
+                    text-align:left; line-height:1.3; width:500px; padding-right:6px;'>
+          <b>License</b><br><br>
+
+          This Shiny app and its included data are licensed under the
+          <b>Creative Commons Attribution–NonCommercial–NoDerivatives 4.0 International License (CC BY-NC-ND 4.0)</b>.<br><br>
+
+          <b>You are free to:</b><br>
+          • <b>Share</b> — copy and redistribute the material in any medium or format.<br>
+          • <b>Use</b> — the data for research or educational purposes.<br><br>
+
+          <b>Under the following terms:</b><br>
+          • <b>Attribution</b> — You must give appropriate credit and cite the following papers:<br>
+          &nbsp;&nbsp;1. Schoenmakers M, Saygin M, Sikora M, Vaessen T, Noordzij M, de Geus E.<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;"Stress in Action Wearables Database: A database of noninvasive wearable monitors<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;with systematic technical, reliability, validity, and usability information."<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;Behavior Research Methods (2025). doi:10.3758/s13428-025-02685-4<br>
+          &nbsp;&nbsp;2. Klarenberg H. et al. (2025). "Stress in Action Wearables Shiny App."<br><br>
+
+          • <b>NonCommercial</b> — You may not use the data for commercial purposes, including selling, advertising, or incorporating it into paid products or services.<br><br>
+
+          • <b>NoDerivatives</b> — You may not modify, transform, or build upon the data, nor distribute modified versions.<br><br>
+
+          <b>Full legal text:</b><br>
+          <a href='https://creativecommons.org/licenses/by-nc-nd/4.0/legalcode' target='_blank'>
+            https://creativecommons.org/licenses/by-nc-nd/4.0/legalcode
+          </a>
+        </div>
+      `
+    });
+
+    // Show popover on hover
+    button.on('mouseenter', function () {
+      clearTimeout(timer);
+      var btn = $(this);
+      btn.popover('show');
+
+      // Keep open when hovering the popover
+      $(document).on('mouseenter', '#license-popover', function () {
+        clearTimeout(timer);
+      });
+      $(document).on('mouseleave', '#license-popover', function () {
+        timer = setTimeout(function () { btn.popover('hide'); }, 200);
+      });
+    });
+
+    // Hide on mouseleave
+    button.on('mouseleave', function () {
+      var btn = $(this);
+      timer = setTimeout(function () {
+        if (!$('#license-popover:hover').length) {
+          btn.popover('hide');
+        }
+      }, 200);
+    });
+
+  }, 800);
+});
+
 /* 2. Filters*/
 
 // Product
