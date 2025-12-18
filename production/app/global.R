@@ -62,6 +62,8 @@ df_sia_osf           <- readRDS("data/df_osf_sia_wd_shiny.rds")
 glos        <- readRDS("www/glos.rds")
 df_codebook <- readRDS("www/df_codebook.rds")
 
+updates <- readRDS("www/updates.rds")
+
 #  * 6 calculate no of wearables for home page -----------------------------------------------
 n_wearables <- nrow(df_sia_shiny_filters)
 
