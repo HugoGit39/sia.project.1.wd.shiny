@@ -22,7 +22,7 @@ generate_alpha_palette <- function(base_color = "#1c75bc", steps = 100) {
 # map numeric to color
 map_to_colors <- function(values, palette) {
   ranks <- rank(values, na.last = "keep", ties.method = "average")
-  scaled <- scales::rescale(ranks, to = c(1, length(palette)), na.rm = TRUE)
+  scaled <- rescale(ranks, to = c(1, length(palette)), na.rm = TRUE)
   index <- round(scaled)
   palette[index]
 }

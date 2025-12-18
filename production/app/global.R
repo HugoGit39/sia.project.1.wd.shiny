@@ -13,7 +13,7 @@
 
 # list of required packages
 required_packages <- c(
-  "shiny", "bs4Dash", "here", "dplyr", "rlang", "scales", "fresh", "lubridate",
+  "shiny", "bs4Dash", "dplyr", "rlang", "scales", "fresh", "lubridate",
   "shinySearchbar", "emayili", "shinyjs", "sever", "shinycssloaders", "shinyWidgets",
   "reactablefmtr", "reactable", "htmltools", "htmlwidgets", "writexl"
 )
@@ -182,18 +182,36 @@ rename_subm <- c("name", "email", "telephone", "institution", rename_subm, "addi
 
 #  * 11 Citations -----------------------------------------------
 
-df_citations <- data.frame(
-  Citation = c(
-    "Thank you for using the SiA-WD!",
-    "If you use the database and/or this web app, you must cite:",
-    "Schoenmakers M, Saygin M, Sikora M, Vaessen T, Noordzij M, de Geus E.",
-    "Stress in action wearables database: A database of noninvasive wearable monitors",
-    "with systematic technical, reliability, validity, and usability information.",
-    "Behav Res Methods. 2025 May 13;57(6):171.",
-    "doi: 10.3758/s13428-025-02685-4."
+df_license <- data.frame(
+  License = c(
+    "This Shiny app and its included data are licensed under the",
+    "Creative Commons Attribution–NonCommercial–NoDerivatives 4.0 International License (CC BY-NC-ND 4.0).",
+    "",
+    "You are free to:",
+    "- Share — copy and redistribute the material in any medium or format.",
+    "- Use — the data for research or educational purposes.",
+    "",
+    "Under the following terms:",
+    "- Attribution — You must give appropriate credit and cite the following papers:",
+    "  1. Schoenmakers M, Saygin M, Sikora M, Vaessen T, Noordzij M, de Geus E.",
+    "     \"Stress in Action Wearables Database: A database of noninvasive wearable monitors",
+    "     with systematic technical, reliability, validity, and usability information.\"",
+    "     Behavior Research Methods (2025). doi:10.3758/s13428-025-02685-4",
+    "  2. Klarenberg H. et al. (2025). \"Stress in Action Wearables Shiny App.\"",
+    "",
+    "- NonCommercial — You may not use the data for commercial purposes,",
+    "  including selling, advertising, or incorporating it into paid products or services.",
+    "",
+    "- NoDerivatives — You may not modify, transform, or build upon the data,",
+    "  nor distribute modified versions.",
+    "",
+    "Full legal text:",
+    "https://creativecommons.org/licenses/by-nc-nd/4.0/legalcode"
   ),
-  check.names = FALSE
+  check.names = FALSE,
+  stringsAsFactors = FALSE
 )
+
 
 #  * 12 Time-out message -----------------------------------------------
 disconnected <- tagList(

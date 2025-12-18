@@ -231,7 +231,7 @@ mod_sub_data_ui <- function(id) {
             style = "text-align: justify;"),
           p(actionButton(ns("submit_final"), "Submit", disabled = TRUE)),
           downloadLink(ns("dl_xlsx_submit"), "", style = "display:none;"),
-          p("A copy will be downloaded automatically when submitting. We will reach out to you to discuss it in more detail.",
+          p("A copy will be downloaded automatically when submitting. We may reach out to you to discuss it in more detail.",
             style = "text-align: justify;")
         ),
         div(

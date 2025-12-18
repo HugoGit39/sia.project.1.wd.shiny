@@ -38,10 +38,26 @@ mod_footer_ui <- function(id) {
             style = "width:25px; height:25px; vertical-align:middle; margin-left:10px;",
             alt = "GitHub"
           )
+        ),
+        a(
+          href = "https://github.com/HugoGit39/siawd",
+          target = "_blank",
+          img(
+            src = "sia_hexsticker_footer.png",
+            style = "width:25px; height:25px; vertical-align:middle; margin-left:10px;",
+            alt = "GitHub_golem"
+          )
         )
       ),
-      right = span(style = "color:#1c75bc;",
-                        "Copyright 2025 | Stress in Action | All rights Reserved")
+      right = tagList(
+        span("© 2025–2035 Stress in Action |", style = "color:#1c75bc;"),
+        a(
+          href   = "https://creativecommons.org/licenses/by-nc-nd/4.0/",
+          target = "_blank",
+          style  = "color:#1c75bc; text-decoration:none;",
+          "Licensed under CC BY-NC-ND 4.0"
+        )
+      )
     )
 }
 

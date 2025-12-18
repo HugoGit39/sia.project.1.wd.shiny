@@ -142,34 +142,77 @@ mod_about_ui <- function(id) {
             style = "text-align: justify;"
           )
         )
+      ),
+      div(
+          style = "margin-top: 50px;",
+          p(img(
+            src = "iStock_about.jpg",
+            style = "display: block; margin: 0 auto; max-width: 25%; height: auto; border-radius: 5px;"
+          )),
+          div(
+            class = "d-flex justify-content-center",
+            bs4Card(
+              title = "Image Credits",
+              status = "primary",
+              solidHeader = TRUE,
+              width = 8,
+              collapsible = FALSE,
+              headerBorder = FALSE,
+              p("All background images used in this application are sourced from iStock under a paid license.", style = "text-align: justify;"),
+              p("Photographer:", br(), "Daniel de la Hoz"),
+              p("Website: ",
+                a(
+                  href = "https://www.istockphoto.com/nl/portfolio/Hoverphoto",
+                  target = "_blank",
+                  "iStock profile"
+                )
+              )
+            )
+          )
       )
     ),
-    column(width = 1),
-    column(width = 2,
+    column(width = 4,
            div(
-             style = "margin-top: 50px;",
-             p(img(src = "iStock_about.jpg", style = "max-width: 100%; height: auto; border-radius: 5px;")),
-               bs4Card(
-                 title = "Image Credits",
-                 status = "primary",
-                 solidHeader = TRUE,
-                 width = 12,
-                 collapsible = FALSE,
-                 headerBorder = FALSE,
-                 p("All background images used in this application are sourced from iStock under a paid license.", style = "text-align: justify;"),
-                 p("Photographer:", br(),
-                   "Daniel de la Hoz"),
-                 p("Website: ",
-                   a(
-                     href = "https://www.istockphoto.com/nl/portfolio/Hoverphoto",
-                     target = "_blank",
-                     "iStock profile"
-                   )
-                 )
+             style = "margin-top: 120px;",
+             p(img(src = "sia_hexsticker.png", style = "display: block; margin: 0 auto; max-width: 35%; height: auto; border-radius: 5px;"))
+             ),
+           div(
+             style = "margin-top: 120px;",
+             bs4Card(
+               title = "Run App Locally",
+               status = "primary",
+               solidHeader = TRUE,
+               width = 12,
+               collapsible = FALSE,
+               headerBorder = FALSE,
+
+               p("You can also run the SiA-WD web app locally on your workstation. It behaves the same way as installing and running a regular R-package."),
+
+               div(
+                 style = "background: #f6f8fa; border: 1px solid #d0d7de; border-radius: 6px; padding: 10px; margin-top: 10px; font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace; font-size: 12px;",
+                 HTML(paste0(
+                   "# Install the SIA-WD golem package from GitHub<br/>",
+                   "install.packages(&quot;remotes&quot;)<br/>",
+                   "remotes::install_github(&quot;HugoGit39/siawd&quot;)"
+                 ))
+               ),
+               p("Great! You are all set to run the SiA-WD app:"),
+
+               div(
+                 style = "background: #f6f8fa; border: 1px solid #d0d7de; border-radius: 6px; padding: 10px; margin-top: 10px; font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace; font-size: 12px;",
+                 HTML("siawd::run_app()")
+               ),
+
+               p("Be aware: you’ll need to update once in a while to ensure you’re using the most recent database."),
+               footer = actionButton(
+                 inputId = "copy_local_code_btn",
+                 label = "Copy Code",
+                 icon = icon("copy"),
+                 style = "background-color: #1c75bc; color: white; margin-top: 5px;"
                )
              )
+             )
            ),
-    column(width = 1),
     column(width = 4,
            div(
              style = "margin-top: 50px;",
@@ -181,7 +224,8 @@ mod_about_ui <- function(id) {
                  collapsible = FALSE,
                  headerBorder = FALSE,
                  p("The goal of RT2 is to develop increasingly sophisticated versions of a cutting-edge, low-burden, ecologically valid ambulatory assessment toolkit to quantify stress in daily life, and to design, test, and iteratively improve stress interventions using that toolkit."), style = "text-align: justify;",
-                   # Myrte
+                 p("Current team members:"),
+                 # Myrte
                    p(
                      a(
                        href = "https://stress-in-action.nl/myrte-schoenmakers/",
@@ -249,6 +293,29 @@ mod_about_ui <- function(id) {
                      br(),
                      "Magdalena Sikora, PhD student University of Twente"
                    ),
+
+                 # Flavia
+                 p(
+                   a(
+                     href = "https://stress-in-action.nl/",
+                     target = "_blank",
+                     img(
+                       src = "favicon.ico",
+                       style = "width:25px; height:25px; vertical-align:middle; margin-right:5px;"
+                     )
+                   ),
+                   a(
+                     href = "https://www.linkedin.com/in/flavia-ercoli-74580921b/",
+                     target = "_blank",
+                     img(
+                       src = "linkedin_sia.png",
+                       style = "width:25px; height:25px; vertical-align:middle; margin-left:5px;",
+                       alt = "LinkedIn"
+                     )
+                   ),
+                   br(),
+                   "Flavia Ercoli, PhD student VU Amsterdam"
+                 ),
 
                    # Artemis
                    p(
