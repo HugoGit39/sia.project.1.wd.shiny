@@ -453,7 +453,7 @@ $(document).ready(function () {
 
 // Data submited
 Shiny.addCustomMessageHandler("dataSubmitted", function(message) {
-  alert(message);
+  showSiAMessage("Data submitted, thank you!", "Success");
 });
 
 /* 4. Research*/
@@ -485,7 +485,7 @@ siawd::run_app()`;
 
 // Email submited
 Shiny.addCustomMessageHandler("emailSubmitted", function(message) {
-  showSiAMessage(message, "Email submitted", "Succes");
+  showSiAMessage("Email submitted", "Success");
 });
 
 
