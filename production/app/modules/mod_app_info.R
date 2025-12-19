@@ -42,7 +42,6 @@ mod_app_info_ui <- function(id) {
               outline = TRUE,
               size    = "sm",
               flat    = TRUE,
-              width   = "30%",
               class   = "license-info-btn",
               style   = "border-width: 2px;"
             )
