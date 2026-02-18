@@ -145,12 +145,21 @@ In line with open science principles, curated exports of the SiA-WD database are
 
 The accompanying Shiny application was built under R version 4.4.1 and relies on open-source R packages available via CRAN or GitHub, including shiny [@rstudio2012shiny], bs4Dash [@rinterface2018bs4dash], fresh [@dreamrs2019fresh], shinyWidgets [@dreamrs2017shinywidgets], shinycssloaders [@attali2017shinycssloaders], shinyjs [@attali2015shinyjs], sever [@coene2020sever], shinySearchbar [@norris2020shinysearchbar], dplyr [@tidyverse2012dplyr], lubridate [@tidyverse2009lubridate], rlang [@rlib2016rlang], scales [@rlib2010scales], reactable [@lin2019reactable], reactablefmtr [@cuilla2021reactablefmtr], htmltools [@rstudio2014htmltools], htmlwidgets [@vaidyanathan2014htmlwidgets], and writexl [@ooms2017writexl].
 
+# Research Impact Statement
+
+SiA-WD shows early uptake in the ambulatory research community. The underlying publication by Schoenmakers et al. (2025) was cited five times within six months.
+
+The database was featured in the Society for Ambulatory Assessment newsletter and presented at the 2025 Society for Ambulatory Assessment Conference [@saygin2025saa], indicating international visibility.
+
+SiA's Scientific Advisory Board of the Stress in Action consortium has strongly endorsed SiA-WD as a necessary infrastructure for improving transparency and methodological rigor in wearable research [@sia_sab2025].
+
 # AI usage disclosure
-ChatGPT (GPT-5.2) was used during software development for assistance with CSS and JavaScript layout implementation and during manuscript preparation for spelling corrections and formatting adjustments.
+
+ChatGPT (GPT-5.1/2) was used during software development for assistance with CSS and JavaScript layout implementation and during manuscript preparation for spelling corrections and formatting adjustments.
 
 All scientific content, conceptual design, database construction, application architecture and interpretation were developed by the authors. All AI-assisted edits were reviewed and verified by the authors for accuracy and clarity.
 
-The software has been thoroughly reviewed by the authors of Schoenmakers et al. (2025).
+The software has been thoroughly reviewed by the authors of Schoenmakers et al. (2025)[@schoenmakers2025siawd].
 
 # Acknowledgements
 
