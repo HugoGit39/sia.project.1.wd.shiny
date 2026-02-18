@@ -137,6 +137,34 @@ The Local version, Golem based source code, is publicly available in the followi
 
 [siawd](https://github.com/HugoGit39/siawd)
 
+## Repository structure
+
+```bash
+sia.project.1.ws.shiny/
+├─ test/
+│  ├─ app/           
+│		├─ data/
+│		├─ functions/
+│		├─ modules/
+│		├─ www/
+│		├─ .Renviron 
+│		├─ app.R
+│		├─ global.R
+├─ production/
+│  ├─ app/           
+│		├─ data/
+│		├─ functions/
+│		├─ modules/
+│		├─ www/
+│		├─ .Renviron 
+│		├─ app.R
+│		├─ global.R                          
+├─ .gitignore
+├─ sia.project.1.wd.shiny.Rproj
+└─ README.md
+└─ LICENSE
+```
+
 ## Support
 
 <p align="justify">
