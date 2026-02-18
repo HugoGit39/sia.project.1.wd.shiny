@@ -151,7 +151,7 @@ SiA-WD shows early uptake in the ambulatory research community. The underlying p
 
 The database was featured in the Society for Ambulatory Assessment newsletter and presented at the 2025 Society for Ambulatory Assessment Conference [@saygin2025saa], indicating international visibility.
 
-SiA's Scientific Advisory Board of the Stress in Action consortium has strongly endorsed SiA-WD as a necessary infrastructure for improving transparency and methodological rigor in wearable research [@sia_sab2025].
+The Scientific Advisory Board of the Stress in Action consortium has strongly endorsed SiA-WD as a necessary infrastructure for improving transparency and methodological rigor in wearable research [@sia_sab2025].
 
 # AI usage disclosure
 
