@@ -183,7 +183,7 @@ rename_subm <- rename_subm[!rename_subm %in% c("sia_es_long", "sia_es_short")]
 
 rename_subm <- c("name", "email", "telephone", "institution", rename_subm, "additional_information")
 
-#  * 11 Citations -----------------------------------------------
+#  * 11 License -----------------------------------------------
 
 df_license <- data.frame(
   License = c(
