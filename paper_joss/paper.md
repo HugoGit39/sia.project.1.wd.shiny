@@ -1,5 +1,5 @@
 ---
-title: "SiA-WD: An R Shiny Application for Systematic Evaluation of Wearables in Behavioural and Stress Research"
+title: "SiA-WD: An R Shiny Application for Systematic Evaluation of Wearables in Behavioural and Stress Researchh"
 tags:
   - R
   - Shiny
