@@ -1,5 +1,5 @@
 ---
-title: "SiA-WD: An R Shiny Application for Systematic Evaluation of Wearables in Behavioural and Stress Researchh"
+title: "SiA-WD: An R Shiny Application for Systematic Evaluation of Wearables in Behavioural and Stress Research"
 tags:
   - R
   - Shiny
@@ -144,6 +144,13 @@ Figure 4 – Overview of the SiA-WD relational data pipeline: (1) source data fr
 In line with open science principles, curated exports of the SiA-WD database are publicly disseminated via the Open Science Framework and are available at https://osf.io/umgvp/.
 
 The accompanying Shiny application was built under R version 4.4.1 and relies on open-source R packages available via CRAN or GitHub, including shiny [@rstudio2012shiny], bs4Dash [@rinterface2018bs4dash], fresh [@dreamrs2019fresh], shinyWidgets [@dreamrs2017shinywidgets], shinycssloaders [@attali2017shinycssloaders], shinyjs [@attali2015shinyjs], sever [@coene2020sever], shinySearchbar [@norris2020shinysearchbar], dplyr [@tidyverse2012dplyr], lubridate [@tidyverse2009lubridate], rlang [@rlib2016rlang], scales [@rlib2010scales], reactable [@lin2019reactable], reactablefmtr [@cuilla2021reactablefmtr], htmltools [@rstudio2014htmltools], htmlwidgets [@vaidyanathan2014htmlwidgets], and writexl [@ooms2017writexl].
+
+# AI usage disclosure
+ChatGPT (GPT-5.2) was used during software development for assistance with CSS and JavaScript layout implementation and during manuscript preparation for spelling corrections and formatting adjustments.
+
+All scientific content, conceptual design, database construction, application architecture and interpretation were developed by the authors. All AI-assisted edits were reviewed and verified by the authors for accuracy and clarity.
+
+The software has been thoroughly reviewed by the authors of Schoenmakers et al. (2025).
 
 # Acknowledgements
 
