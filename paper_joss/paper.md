@@ -20,17 +20,17 @@ bibliography: paper.bib
 
 # Summary
 
-SiA-WD is an open-source R Shiny application for selecting physiological wearables from the Stress in Action Wearables Database (SiA-WD). Based on peer-reviewed research by Schoenmakers et al. [@schoenmakers2025siawd], the application enables users to explore and compare an extensive range of devices using two modules: a Product Filter for side-by-side comparisons and a Feature Filter including 43 filter options across six categories: SiA Expert Scores, General Device Information, Technical Specifications, Signals Measured, Data Access and Validation, and Reliability & Usability. Maintained by the Stress in Action consortium and supported by community contributions, the database will be continuously updated throughout the next decade. SiA-WD improves transparency, reproducibility, and efficiency in device selection and is freely accessible at https://wearables.stress-in-action.nl or can be run locally as a golem-based Shiny application.
+SiA-WD is an open-source R Shiny application for selecting physiological wearables from the Stress in Action Wearables Database (SiA-WD). Based on peer-reviewed research by Schoenmakers et al. [@schoenmakers2025siawd], the application enables users to explore and compare an extensive range of devices using two modules: a Product Filter for side-by-side comparisons and a Feature Filter including 43 filter options across six categories: SiA Expert Scores, General Device Information, Technical Specifications, Signals Measured, Data Access and Validation and Reliability & Usability. Maintained by the Stress in Action consortium and supported by community contributions, the database will be continuously updated throughout the next decade. SiA-WD improves transparency, reproducibility and efficiency in device selection and is freely accessible at https://wearables.stress-in-action.nl or can be run locally as a golem-based Shiny application.
 
 # Statement of Need
 
-Ambulatory wearable devices are widely used across psychology, medicine, and behavioural science to monitor physiological signals in daily life [@patel2012rehabilitation; @pevnicks2018update; @patel2021hospital]. These devices allow continuous measurement of activity, heart rate, skin conductance, and related physiological processes [@majumder2017wearable; @peake2018critical]. While wearable technology has advanced rapidly, researchers face growing challenges in selecting appropriate devices for stress research.
+Ambulatory wearable devices are widely used across psychology, medicine and behavioural science to monitor physiological signals in daily life [@patel2012rehabilitation; @pevnicks2018update; @patel2021hospital]. These devices allow continuous measurement of activity, heart rate, skin conductance and related physiological processes [@majumder2017wearable; @peake2018critical]. While wearable technology has advanced rapidly, researchers face growing challenges in selecting appropriate devices for stress research.
 
-Device selection often involves manually comparing technical specifications, recorded signals, and the scientific literature on validity, reliability, and usability—an effort-intensive and error-prone process [@giurgiu2022quality; @haddad2020ecological]. Existing reviews and online listings are typically static, incomplete, outdated, or focused on consumer rather than scientific use cases [@iqbal2016review; @paredes2022chimera; @vijayan2021review; @lu2023remote].
+Device selection often involves manually comparing technical specifications, recorded signals and the scientific literature on validity, reliability and usability—an effort-intensive and error-prone process [@giurgiu2022quality; @haddad2020ecological]. Existing reviews and online listings are typically static, incomplete, outdated, or focused on consumer rather than scientific use cases [@iqbal2016review; @paredes2022chimera; @vijayan2021review; @lu2023remote].
 
-To address these limitations, Schoenmakers et al. developed the Stress in Action Wearables Database (SiA-WD) [@schoenmakers2025siawd], a curated, open-access resource designed to support evidence-based selection of physiological wearables in behavioural and stress research. The database is described in a peer-reviewed publication in *Behavior Research Methods* and is openly available via the Open Science Framework (https://osf.io/umgvp/). It includes detailed device metadata, systematic literature reviews, and expert scores covering more than 100 devices relevant to stress-related physiology. The database will be updated for at least a decade (2023–2033).
+To address these limitations, Schoenmakers et al. developed the Stress in Action Wearables Database (SiA-WD) [@schoenmakers2025siawd], a curated, open-access resource designed to support evidence-based selection of physiological wearables in behavioural and stress research. The database is described in a peer-reviewed publication in *Behavior Research Methods* and is openly available via the Open Science Framework (https://osf.io/umgvp/). It includes detailed device metadata, systematic literature reviews and expert scores covering more than 100 devices relevant to stress-related physiology. The database will be updated for at least a decade (2023–2033).
 
-Delivered through an interactive R Shiny application, the tool allows users to explore, filter, and compare devices dynamically. Unlike static summaries, this interface supports flexible and reproducible workflows for study planning, cohort selection, and grant preparation. By reducing the effort required to make informed device choices, SiA-WD supports methodological rigor and transparency in stress-related physiological research.
+Delivered through an interactive R Shiny application, the tool allows users to explore, filter and compare devices dynamically. Unlike static summaries, this interface supports flexible and reproducible workflows for study planning, cohort selection and grant preparation. By reducing the effort required to make informed device choices, SiA-WD supports methodological rigor and transparency in stress-related physiological research.
 
 # Overview
 
@@ -38,7 +38,7 @@ The Shiny application provides two complementary modes of exploration: Product C
 
 ## Product Filter
 
-The Product Filter module allows users to compare up to three wearable devices side by side. Each product is selected in two steps: choosing a manufacturer, followed by selecting a model associated with that manufacturer. Once one or more products are selected, the app generates a transposed comparison table in which rows display device features and columns correspond to the selected devices. This layout enables direct, feature-by-feature comparison of general specifications, recorded signals, usability ratings, and validation data.
+The Product Filter module allows users to compare up to three wearable devices side by side. Each product is selected in two steps: choosing a manufacturer, followed by selecting a model associated with that manufacturer. Once one or more products are selected, the app generates a transposed comparison table in which rows display device features and columns correspond to the selected devices. This layout enables direct, feature-by-feature comparison of general specifications, recorded signals, usability ratings and validation data.
 
 Users may optionally clear a selected device using the Reset Filter button or export the current comparison table using the Download Filtered Products button.
 
@@ -135,16 +135,16 @@ SiA-WD is built using R (v4.4.1) and Shiny [@rstudio2012shiny] and is deployed a
 
 The software architecture consists of four main components:
 
-- User interface: Implemented with shiny [@rstudio2012shiny] and bs4Dash [@rinterface2018bs4dash], with styling and theming via fresh [@dreamrs2019fresh]. Enhanced inputs and UI behavior are supported by shinyWidgets [@dreamrs2017shinywidgets], shinyjs [@attali2015shinyjs], shinycssloaders [@attali2017shinycssloaders], sever [@coene2020sever], and shinySearchbar [@norris2020shinysearchbar].
+- User interface: Implemented with shiny [@rstudio2012shiny] and bs4Dash [@rinterface2018bs4dash], with styling and theming via fresh [@dreamrs2019fresh]. Enhanced inputs and UI behavior are supported by shinyWidgets [@dreamrs2017shinywidgets], shinyjs [@attali2015shinyjs], shinycssloaders [@attali2017shinycssloaders], sever [@coene2020sever] and shinySearchbar [@norris2020shinysearchbar].
 
-- Interactive comparison tables: Rendered using reactable [@lin2019reactable] and reactablefmtr [@cuilla2021reactablefmtr], enabling dynamic column generation, conditional formatting, and transposed side-by-side device comparisons. Rendering is supported by htmltools [@rstudio2014htmltools] and htmlwidgets [@vaidyanathan2014htmlwidgets].
+- Interactive comparison tables: Rendered using reactable [@lin2019reactable] and reactablefmtr [@cuilla2021reactablefmtr], enabling dynamic column generation, conditional formatting and transposed side-by-side device comparisons. Rendering is supported by htmltools [@rstudio2014htmltools] and htmlwidgets [@vaidyanathan2014htmlwidgets].
 
-- Data manipulation and filtering: Implemented using dplyr [@tidyverse2012dplyr], rlang [@rlib2016rlang], lubridate [@tidyverse2009lubridate], and scales [@rlib2010scales]. Multiple reactive expressions apply numeric and categorical constraints while dynamically updating dependent inputs to maintain valid filter combinations.
+- Data manipulation and filtering: Implemented using dplyr [@tidyverse2012dplyr], rlang [@rlib2016rlang], lubridate [@tidyverse2009lubridate] and scales [@rlib2010scales]. Multiple reactive expressions apply numeric and categorical constraints while dynamically updating dependent inputs to maintain valid filter combinations.
 
 - Export functionality: Filtered results and comparison tables can be exported in Excel format using writexl [@ooms2017writexl].
 
 The application loads preprocessed RDS files as input data generated from a separate reproducible relational pipeline (see Data Sources and Dependencies). In addition to the live deployment, SiA-WD is available as a golem-based R package at https://github.com/HugoGit39/siawd
-for local installation and execution.
+for local installation and execution via:
  
 install.packages("remotes")
 remotes::install_github("HugoGit39/siawd")
@@ -172,7 +172,7 @@ The software has been thoroughly reviewed by the authors of Schoenmakers et al. 
 
 # Acknowledgements
 
-We thank Myrte Schoenmakers, Melissa Saygin, and Artemis Stefani (Vrije Universiteit Amsterdam), and Magdalena Sikora and Matthijs Noordzij (University of Twente) for user experience input and testing of SiA-WD.
+We thank Myrte Schoenmakers, Melissa Saygin and Artemis Stefani (Vrije Universiteit Amsterdam) and Magdalena Sikora and Matthijs Noordzij (University of Twente) for user experience input and testing of SiA-WD.
 
 # Funding
 
