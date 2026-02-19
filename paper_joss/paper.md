@@ -50,57 +50,17 @@ Figure 1 – Overview of the Product Filter with output based on three selected 
 
 The Feature Filter provides a more exploratory approach. Researchers can filter the database using up to 41 variables, grouped into six thematic categories. The filters are modular and interactively update to ensure only valid combinations are selectable.
 
-**SiA Expert Score** 
-- Long-term score  
-- Short-term score  
-- Exclusion of devices with missing scores  
+- SiA Expert Scores, including short- and long-term suitability ratings and exclusion of devices with missing scores.
 
-**General Device Information** 
-- Manufacturer  
-- Model  
-- Release year  
-- Market status  
-- Intended use  
-- Cost  
-- Device type  
-- Wear location  
+- General Device Information, such as manufacturer, release year, intended use, cost, device type, and wear location.
 
-**Technical Specifications** 
-- Water resistance  
-- Battery life  
-- Charging duration  
-- Bio-cueing support  
-- Biofeedback support  
+- Technical Specifications, including battery life, water resistance, charging characteristics, and biofeedback or bio-cueing capabilities.
 
-**Signals Measured** 
-- Accelerometer  
-- Blood pressure  
-- Electrocardiography (ECG)  
-- Electrodermal activity (EDA)  
-- Electroencephalography (EEG)  
-- Electromyography (EMG)  
-- Global positioning system (GPS)  
-- Gyroscope  
-- Impedance cardiography (ICG)  
-- Photoplethysmography (PPG)  
-- Respiration  
-- Skin temperature  
-- Other measured signals  
+- Signals Measured, covering major physiological and movement signals (e.g., ECG, EDA, PPG, respiration, accelerometry, GPS, and related sensors).
 
-**Data Access** 
-- Raw data availability  
-- Internal storage  
-- Server-based storage  
-- Storage capacity (MB)  
-- Storage duration (hours)  
-- General Data Protection Regulation (GDPR) compliance  
-- Conformité Européenne (CE) marking  
-- Food and Drug Administration (FDA) clearance  
+- Data Access, including raw data availability, storage type and capacity, and regulatory compliance (e.g., GDPR, CE, FDA).
 
-**Reliability, Validation & Usability** 
-- Number of studies  
-- Validation levels  
-- Usability ratings  
+- Reliability, Validation & Usability, including number of validation studies, validation levels, and usability ratings.  
 
 ![](figure_2.png)
 
