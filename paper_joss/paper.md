@@ -147,7 +147,7 @@ The accompanying Shiny application was built under R version 4.4.1 and relies on
 
 # Research Impact Statement
 
-SiA-WD shows early uptake in the ambulatory research community. The underlying publication by Schoenmakers et al. (2025) was cited five times within six months.
+SiA-WD shows early uptake in the ambulatory research community [@psychonomic2025wearabledatabase]. The underlying publication by Schoenmakers et al. (2025) was cited five times within six months.
 
 The database was featured in the Society for Ambulatory Assessment newsletter and presented at the 2025 Society for Ambulatory Assessment Conference [@saygin2025saa], indicating international visibility.
 
