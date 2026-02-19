@@ -119,20 +119,6 @@ Community contributions are encouraged through a Submit section that enables use
 
 Figure 3 – Submission form showing all mandatory fields completed, enabling submission.
 
-# Deployment
-
-The SiA-WD Shiny application is deployed as a publicly accessible web-based tool at https://wearables.stress-in-action.nl. The application is hosted on a dedicated virtual machine maintained by Vrije Universiteit Amsterdam, running Linux Ubuntu 24.04 LTS with Shiny Server and Nginx.
-
-Users who wish to run the application locally can do so using the golem-based framework on which the app is built.
-
-install.packages("remotes")
-remotes::install_github("HugoGit39/siawd")
-
-After installation, the application can be started with:
-
-siawd::run_app()
-Periodic updates are required to ensure access to the most recent database and application functionality.
-
 # Data Sources
 
 The SiA-WD database is generated through a reproducible relational data pipeline implemented in a public GitHub repository (https://github.com/HugoGit39/sia.project.1.wd.data). The pipeline follows the methodological framework described by Schoenmakers et al. [@schoenmakers2025siawd] and applies reproducible research principles for relational database construction [@picardi2024reproducible].
@@ -161,7 +147,15 @@ Data manipulation and filtering: Implemented using dplyr [@tidyverse2012dplyr], 
 Export functionality: Filtered results and comparison tables can be exported in Excel format using writexl [@ooms2017writexl].
 
 The application loads preprocessed RDS files as input data generated from a separate reproducible relational pipeline (see Data Sources and Dependencies). In addition to the live deployment, SiA-WD is available as a golem-based R package at https://github.com/HugoGit39/siawd
- for local installation and execution.
+for local installation and execution.
+ 
+install.packages("remotes")
+remotes::install_github("HugoGit39/siawd")
+
+After installation, the application can be started with:
+
+siawd::run_app()
+Periodic updates are required to ensure access to the most recent database and application functionality.
 
 # Research Impact Statement
 
