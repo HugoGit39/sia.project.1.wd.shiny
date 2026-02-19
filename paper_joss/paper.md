@@ -20,7 +20,7 @@ bibliography: paper.bib
 
 # Summary
 
-SiA-WD is an open-source R Shiny application for selecting physiological wearables from the Stress in Action Wearables Database (SiA-WD). Based on peer-reviewed research by Schoenmakers et al. [@schoenmakers2025siawd], the application enables users to explore and compare an extensive range of devices using two modules: a Product Filter for side-by-side comparisons and a Feature Filter including 43 filter options across six categories: SiA Expert Scores, General Device Information, Technical Specifications, Signals Measured, Data Access and Validation and Reliability & Usability. Maintained by the Stress in Action consortium and supported by community contributions, the database will be continuously updated throughout the next decade. SiA-WD improves transparency, reproducibility and efficiency in device selection and is freely accessible at https://wearables.stress-in-action.nl or can be run locally as a golem-based Shiny application.
+SiA-WD is an open-source R Shiny application for selecting physiological wearables from the Stress in Action Wearables Database (SiA-WD). Based on peer-reviewed research by Schoenmakers et al. (2025) [@schoenmakers2025siawd], the application enables users to explore and compare an extensive range of devices using two modules: a Product Filter for side-by-side comparisons and a Feature Filter including 43 filter options across six categories: SiA Expert Scores, General Device Information, Technical Specifications, Signals Measured, Data Access and Validation and Reliability & Usability. Maintained by the Stress in Action consortium and supported by community contributions, the database will be continuously updated throughout the next decade. SiA-WD improves transparency, reproducibility and efficiency in device selection and is freely accessible at https://wearables.stress-in-action.nl or can be run locally as a golem-based Shiny application.
 
 # Statement of Need
 
@@ -128,7 +128,7 @@ ChatGPT (GPT-5.1/2) was used during software development for assistance with CSS
 
 All scientific content, conceptual design, database construction, application architecture and interpretation were developed by the authors. All AI-assisted edits were reviewed and verified by the authors for accuracy and clarity.
 
-The software has been thoroughly reviewed by the authors of Schoenmakers et al. (2025)[@schoenmakers2025siawd].
+The software has been thoroughly reviewed by the authors of Schoenmakers et al. (2025) [@schoenmakers2025siawd].
 
 # Acknowledgements
 
