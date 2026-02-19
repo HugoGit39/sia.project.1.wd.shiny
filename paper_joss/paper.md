@@ -50,17 +50,17 @@ Figure 1 – Overview of the Product Filter with output based on three selected 
 
 The Feature Filter provides a more exploratory approach. Researchers can filter the database using up to 41 variables, grouped into six thematic categories. The filters are modular and interactively update to ensure only valid combinations are selectable.
 
-- SiA Expert Scores, including short- and long-term suitability ratings and exclusion of devices with missing scores.
+- **SiA Expert Scores**: including short- and long-term suitability ratings and exclusion of devices with missing scores.
 
-- General Device Information, such as manufacturer, release year, intended use, cost, device type, and wear location.
+- **General Device Information**: such as manufacturer, release year, intended use, cost, device type, and wear location.
 
-- Technical Specifications, including battery life, water resistance, charging characteristics, and biofeedback or bio-cueing capabilities.
+- **Technical Specifications**: including battery life, water resistance, charging characteristics, and biofeedback or bio-cueing capabilities.
 
-- Signals Measured, covering major physiological and movement signals (e.g., ECG, EDA, PPG, respiration, accelerometry, GPS, and related sensors).
+- **Signals Measured**: covering major physiological and movement signals (e.g., ECG, EDA, PPG, respiration, accelerometry, GPS, and related sensors).
 
-- Data Access, including raw data availability, storage type and capacity, and regulatory compliance (e.g., GDPR, CE, FDA).
+- **Data Access**: including raw data availability, storage type and capacity, and regulatory compliance (e.g., GDPR, CE, FDA).
 
-- Reliability, Validation & Usability, including number of validation studies, validation levels, and usability ratings.  
+- **Reliability**: Validation & Usability, including number of validation studies, validation levels, and usability ratings.  
 
 ![](figure_2.png)
 
