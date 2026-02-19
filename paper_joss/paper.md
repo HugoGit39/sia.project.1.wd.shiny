@@ -102,7 +102,6 @@ The Feature Filter provides a more exploratory approach. Researchers can filter 
 - Validation levels  
 - Usability ratings  
 
-
 ![](figure_2.png)
 
 Figure 2 – Results of the Feature Filter with a Long-Term SiA score ≥ 7, excluding devices with missing Long- and Short-Term SiA scores.
@@ -128,8 +127,6 @@ The SiA-WD database is generated through a reproducible relational data pipeline
 Figure 4 – Overview of the SiA-WD relational data pipeline: (1) source data frames linked by device key identifiers; (2) relational merging of source tables; (3) generation of Shiny-ready data frames (RDS) and OSF-compatible data frames (Excel); (4) construction of the SiA-WD Shiny applications (live and local golem-based versions); and (5) public publication.
 
 In line with open science principles, curated exports of the SiA-WD database are publicly disseminated via the Open Science Framework and are available at https://osf.io/umgvp/.
-
-The accompanying Shiny application was built under R version 4.4.1 and relies on open-source R packages available via CRAN or GitHub, including shiny [@rstudio2012shiny], bs4Dash [@rinterface2018bs4dash], fresh [@dreamrs2019fresh], shinyWidgets [@dreamrs2017shinywidgets], shinycssloaders [@attali2017shinycssloaders], shinyjs [@attali2015shinyjs], sever [@coene2020sever], shinySearchbar [@norris2020shinysearchbar], dplyr [@tidyverse2012dplyr], lubridate [@tidyverse2009lubridate], rlang [@rlib2016rlang], scales [@rlib2010scales], reactable [@lin2019reactable], reactablefmtr [@cuilla2021reactablefmtr], htmltools [@rstudio2014htmltools], htmlwidgets [@vaidyanathan2014htmlwidgets], and writexl [@ooms2017writexl].
 
 # Software Design
 
