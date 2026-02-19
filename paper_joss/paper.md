@@ -133,7 +133,7 @@ After installation, the application can be started with:
 siawd::run_app()
 Periodic updates are required to ensure access to the most recent database and application functionality.
 
-# Data Sources and Dependencies
+# Data Sources
 
 The SiA-WD database is generated through a reproducible relational data pipeline implemented in a public GitHub repository (https://github.com/HugoGit39/sia.project.1.wd.data). The pipeline follows the methodological framework described by Schoenmakers et al. [@schoenmakers2025siawd] and applies reproducible research principles for relational database construction [@picardi2024reproducible].
 
@@ -144,6 +144,24 @@ Figure 4 – Overview of the SiA-WD relational data pipeline: (1) source data fr
 In line with open science principles, curated exports of the SiA-WD database are publicly disseminated via the Open Science Framework and are available at https://osf.io/umgvp/.
 
 The accompanying Shiny application was built under R version 4.4.1 and relies on open-source R packages available via CRAN or GitHub, including shiny [@rstudio2012shiny], bs4Dash [@rinterface2018bs4dash], fresh [@dreamrs2019fresh], shinyWidgets [@dreamrs2017shinywidgets], shinycssloaders [@attali2017shinycssloaders], shinyjs [@attali2015shinyjs], sever [@coene2020sever], shinySearchbar [@norris2020shinysearchbar], dplyr [@tidyverse2012dplyr], lubridate [@tidyverse2009lubridate], rlang [@rlib2016rlang], scales [@rlib2010scales], reactable [@lin2019reactable], reactablefmtr [@cuilla2021reactablefmtr], htmltools [@rstudio2014htmltools], htmlwidgets [@vaidyanathan2014htmlwidgets], and writexl [@ooms2017writexl].
+
+# Software Design
+
+SiA-WD is built using R (v4.4.1) and Shiny [@rstudio2012shiny] and is deployed as a publicly accessible web-based tool at https://wearables.stress-in-action.nl
+. The application is hosted on a dedicated virtual machine maintained by Vrije Universiteit Amsterdam, running Linux Ubuntu 24.04 LTS with Shiny Server and Nginx.
+
+The software architecture consists of four main components:
+
+User interface: Implemented with shiny [@rstudio2012shiny] and bs4Dash [@rinterface2018bs4dash], with styling and theming via fresh [@dreamrs2019fresh]. Enhanced inputs and UI behavior are supported by shinyWidgets [@dreamrs2017shinywidgets], shinyjs [@attali2015shinyjs], shinycssloaders [@attali2017shinycssloaders], sever [@coene2020sever], and shinySearchbar [@norris2020shinysearchbar].
+
+Interactive comparison tables: Rendered using reactable [@lin2019reactable] and reactablefmtr [@cuilla2021reactablefmtr], enabling dynamic column generation, conditional formatting, and transposed side-by-side device comparisons. Rendering is supported by htmltools [@rstudio2014htmltools] and htmlwidgets [@vaidyanathan2014htmlwidgets].
+
+Data manipulation and filtering: Implemented using dplyr [@tidyverse2012dplyr], rlang [@rlib2016rlang], lubridate [@tidyverse2009lubridate], and scales [@rlib2010scales]. Multiple reactive expressions apply numeric and categorical constraints while dynamically updating dependent inputs to maintain valid filter combinations.
+
+Export functionality: Filtered results and comparison tables can be exported in Excel format using writexl [@ooms2017writexl].
+
+The application loads preprocessed RDS files as input data generated from a separate reproducible relational pipeline (see Data Sources and Dependencies). In addition to the live deployment, SiA-WD is available as a golem-based R package at https://github.com/HugoGit39/siawd
+ for local installation and execution.
 
 # Research Impact Statement
 
