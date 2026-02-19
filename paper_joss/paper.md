@@ -135,13 +135,13 @@ SiA-WD is built using R (v4.4.1) and Shiny [@rstudio2012shiny] and is deployed a
 
 The software architecture consists of four main components:
 
-User interface: Implemented with shiny [@rstudio2012shiny] and bs4Dash [@rinterface2018bs4dash], with styling and theming via fresh [@dreamrs2019fresh]. Enhanced inputs and UI behavior are supported by shinyWidgets [@dreamrs2017shinywidgets], shinyjs [@attali2015shinyjs], shinycssloaders [@attali2017shinycssloaders], sever [@coene2020sever], and shinySearchbar [@norris2020shinysearchbar].
+- User interface: Implemented with shiny [@rstudio2012shiny] and bs4Dash [@rinterface2018bs4dash], with styling and theming via fresh [@dreamrs2019fresh]. Enhanced inputs and UI behavior are supported by shinyWidgets [@dreamrs2017shinywidgets], shinyjs [@attali2015shinyjs], shinycssloaders [@attali2017shinycssloaders], sever [@coene2020sever], and shinySearchbar [@norris2020shinysearchbar].
 
-Interactive comparison tables: Rendered using reactable [@lin2019reactable] and reactablefmtr [@cuilla2021reactablefmtr], enabling dynamic column generation, conditional formatting, and transposed side-by-side device comparisons. Rendering is supported by htmltools [@rstudio2014htmltools] and htmlwidgets [@vaidyanathan2014htmlwidgets].
+- Interactive comparison tables: Rendered using reactable [@lin2019reactable] and reactablefmtr [@cuilla2021reactablefmtr], enabling dynamic column generation, conditional formatting, and transposed side-by-side device comparisons. Rendering is supported by htmltools [@rstudio2014htmltools] and htmlwidgets [@vaidyanathan2014htmlwidgets].
 
-Data manipulation and filtering: Implemented using dplyr [@tidyverse2012dplyr], rlang [@rlib2016rlang], lubridate [@tidyverse2009lubridate], and scales [@rlib2010scales]. Multiple reactive expressions apply numeric and categorical constraints while dynamically updating dependent inputs to maintain valid filter combinations.
+- Data manipulation and filtering: Implemented using dplyr [@tidyverse2012dplyr], rlang [@rlib2016rlang], lubridate [@tidyverse2009lubridate], and scales [@rlib2010scales]. Multiple reactive expressions apply numeric and categorical constraints while dynamically updating dependent inputs to maintain valid filter combinations.
 
-Export functionality: Filtered results and comparison tables can be exported in Excel format using writexl [@ooms2017writexl].
+- Export functionality: Filtered results and comparison tables can be exported in Excel format using writexl [@ooms2017writexl].
 
 The application loads preprocessed RDS files as input data generated from a separate reproducible relational pipeline (see Data Sources and Dependencies). In addition to the live deployment, SiA-WD is available as a golem-based R package at https://github.com/HugoGit39/siawd
 for local installation and execution.
