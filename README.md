@@ -190,23 +190,25 @@ sia.project.1.ws.shiny/
 `Stress in Action` website: [https://stress-in-action.nl](https://stress-in-action.nl)
 
 - <a href="https://stress-in-action.nl/terms-of-use/">Stress in Action Terms of Use</a> – Copyright holder
-- `{shiny}` – https://github.com/rstudio/shiny  
 - `{bs4Dash}` – https://github.com/RinteRface/bs4Dash  
 - `{dplyr}` – https://github.com/tidyverse/dplyr  
-- `{rlang}` – https://github.com/r-lib/rlang  
-- `{scales}` – https://github.com/r-lib/scales  
-- `{fresh}` – https://github.com/dreamRs/fresh  
-- `{lubridate}` – https://github.com/tidyverse/lubridate  
-- `{shinySearchbar}` – https://github.com/jsdnrs/shiny-searchbar  
 - `{emayili}` – https://github.com/datawookie/emayili  
-- `{shinyjs}` – https://github.com/daattali/shinyjs  
-- `{sever}` – https://github.com/JohnCoene/sever  
-- `{shinycssloaders}` – https://github.com/andrewsali/shinycssloaders  
-- `{shinyWidgets}` – https://github.com/dreamRs/shinyWidgets  
-- `{reactablefmtr}` – https://github.com/kcuilla/reactablefmtr  
-- `{reactable}` – https://github.com/glin/reactable  
+- `{fresh}` – https://github.com/dreamRs/fresh  
+- `{here}` – https://github.com/r-lib/here  
 - `{htmltools}` – https://github.com/rstudio/htmltools  
 - `{htmlwidgets}` – https://github.com/ramnathv/htmlwidgets  
+- `{lubridate}` – https://github.com/tidyverse/lubridate  
+- `{purrr}` – https://github.com/tidyverse/purrr  
+- `{reactable}` – https://github.com/glin/reactable  
+- `{reactablefmtr}` – https://github.com/kcuilla/reactablefmtr  
+- `{rlang}` – https://github.com/r-lib/rlang  
+- `{scales}` – https://github.com/r-lib/scales  
+- `{sever}` – https://github.com/JohnCoene/sever  
+- `{shiny}` – https://github.com/rstudio/shiny  
+- `{shinycssloaders}` – https://github.com/andrewsali/shinycssloaders  
+- `{shinyjs}` – https://github.com/daattali/shinyjs  
+- `{shinySearchbar}` – https://github.com/jsdnrs/shiny-searchbar  
+- `{shinyWidgets}` – https://github.com/dreamRs/shinyWidgets  
 - `{writexl}` – https://github.com/ropensci/writexl
 
 
