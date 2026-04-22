@@ -33,6 +33,12 @@ To address these limitations, Schoenmakers et al. developed the Stress in Action
 
 Delivered through an interactive R Shiny application, the tool allows users to explore, filter and compare devices dynamically. Unlike static summaries, this interface supports flexible and reproducible workflows for study planning, cohort selection and grant preparation. By reducing the effort required to make informed device choices, SiA-WD supports methodological rigor and transparency in stress-related physiological research.
 
+# State of the Field
+
+The closest comparable resources are consumer-facing blog websites such as DC Rainmaker [@rainmaker2025dcrainmaker], which provide feature comparisons for a general audience but are not software tools, are not grounded in scientific validation methodology, do not report reliability or validity data, and are not designed for research-grade decision-making. Scientific comparisons of wearable devices exist only in peer-reviewed publications, which are static by nature: they cannot be interactively filtered and are never updated after publication.
+
+No existing open-source interactive platform combines peer-reviewed validation data with dynamic filtering for stress and behavioural research. Contributing to an existing tool was therefore not feasible — the absence of any such infrastructure made building SiA-WD necessary. Its foundation in the peer-reviewed SiA-WD database [@schoenmakers2025siawd] and its decade-long update commitment (2023–2033) represent a scholarly contribution that no static review or consumer tool can provide.
+
 # Overview
 
 The Shiny application provides two complementary modes of exploration: Product Comparison and Feature-Based Filtering, plus a Submit section where users can suggest new wearables to be added or existing data to be updated.
