@@ -6,10 +6,21 @@
 #
 #############################################################################################
 
-# Owner is read at call time, so an installed package follows the setting too.
-# Default stress-in-action; a personal .Renviron can set SIA_GITHUB_OWNER=HugoGit39.
+# Links point to the GitHub owner this copy came from, so HugoGit39 copies link to
+# HugoGit39 and stress-in-action copies (and the live server) to stress-in-action.
+github_owner <- function(default = "stress-in-action") {
+  # A git clone: owner of its origin remote
+  url <- tryCatch(
+    suppressWarnings(system2("git", c("-C", shQuote(getwd()), "config", "--get", "remote.origin.url"),
+                             stdout = TRUE, stderr = FALSE)),
+    error = function(e) character(0)
+  )
+  if (length(url) == 1 && grepl("github\\.com[:/]", url)) {
+    return(sub(".*github\\.com[:/]([^/]+)/.*", "\\1", url))
+  }
+  default
+}
+
 github_url <- function(repo) {
-  owner <- Sys.getenv("SIA_GITHUB_OWNER", "stress-in-action")
-  if (!nzchar(owner)) owner <- "stress-in-action"
-  paste0("https://github.com/", owner, "/", repo)
+  paste0("https://github.com/", github_owner(), "/", repo)
 }

@@ -193,7 +193,7 @@ mod_about_ui <- function(id) {
                  HTML(paste0(
                    "# Install the SIA-WD golem package from GitHub<br/>",
                    "install.packages(&quot;remotes&quot;)<br/>",
-                   "remotes::install_github(&quot;stress-in-action/siawd&quot;)"
+                   "remotes::install_github(&quot;", github_owner(), "/siawd&quot;)"
                  ))
                ),
                p("Great! You are all set to run the SiA-WD app:"),
@@ -208,7 +208,8 @@ mod_about_ui <- function(id) {
                  inputId = "copy_local_code_btn",
                  label = "Copy Code",
                  icon = icon("copy"),
-                 style = "background-color: #1c75bc; color: white; margin-top: 5px;"
+                 style = "background-color: #1c75bc; color: white; margin-top: 5px;",
+                 `data-owner` = github_owner()
                )
              )
              )

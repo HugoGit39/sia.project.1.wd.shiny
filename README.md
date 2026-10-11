@@ -135,7 +135,7 @@
 
 The Local version, Golem based source code, is publicly available in the following GitHub repository:
 
-[siawd](https://github.com/stress-in-action/siawd)
+[siawd](../../../siawd)
 
 ## Repository structure
 
@@ -168,7 +168,7 @@ sia.project.1.ws.shiny/
 ## Support
 
 <p align="justify">
-  If you encounter a bug, please <a href="https://github.com/stress-in-action/sia.project.1.wd.shiny/issues">submit an issue</a>.
+  If you encounter a bug, please <a href="../../issues">submit an issue</a>.
 </p>
 
 <p align="justify">
