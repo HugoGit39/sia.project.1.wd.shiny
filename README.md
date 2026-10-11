@@ -140,7 +140,7 @@ The Local version, Golem based source code, is publicly available in the followi
 ## Repository structure
 
 ```bash
-sia.project.1.ws.shiny/
+sia.project.1.wd.shiny/
 ├─ test/
 │  ├─ app/           
 │		├─ data/
