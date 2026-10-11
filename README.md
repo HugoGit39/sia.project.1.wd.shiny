@@ -161,8 +161,9 @@ sia.project.1.wd.shiny/
 │		├─ global.R                          
 ├─ .gitignore
 ├─ sia.project.1.wd.shiny.Rproj
-└─ README.md
-└─ LICENSE
+├─ README.md
+├─ LICENSE
+└─ DATA_LICENSE.md
 ```
 
 ## Support
