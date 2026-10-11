@@ -40,6 +40,7 @@ source(here("test", "app", "functions", "func_row_defs.R"))
 source(here("test", "app", "functions", "func_mandatory_fields.R"))
 source(here("test", "app", "functions", "func_reset_fields.R"))
 source(here("test", "app", "functions", "func_submit_data.R"))
+source(here("test", "app", "functions", "func_github_url.R"))
 
 # * 4 Load modules -----------------------------------------------------------
 

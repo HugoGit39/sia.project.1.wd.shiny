@@ -31,7 +31,7 @@ mod_footer_ui <- function(id) {
           )
         ),
         a(
-          href = "https://github.com/HugoGit39/project.1.sia.wi.alt",
+          href = github_url("sia.project.1.wd.shiny"),
           target = "_blank",
           img(
             src = "github-sign_sia.png",
@@ -40,7 +40,7 @@ mod_footer_ui <- function(id) {
           )
         ),
         a(
-          href = "https://github.com/HugoGit39/siawd",
+          href = github_url("siawd"),
           target = "_blank",
           img(
             src = "sia_hexsticker_footer.png",
@@ -50,7 +50,7 @@ mod_footer_ui <- function(id) {
         )
       ),
       right = tagList(
-        span("© 2025–2035 Stress in Action |", style = "color:#1c75bc;"),
+        span("© 2023–2033 Stress in Action |", style = "color:#1c75bc;"),
         a(
           href   = "https://creativecommons.org/licenses/by-nc-nd/4.0/",
           target = "_blank",
